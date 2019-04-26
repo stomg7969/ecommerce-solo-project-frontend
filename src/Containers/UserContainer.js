@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import UserLogin from "../Components/UserLogin";
 import UserSignup from "../Components/UserSignup";
 import UserProfile from "../Components/UserProfile";
 
 class UserContainer extends Component {
+  componentDidMount() {
+    this.props.history.push("/user/login");
+  }
   render() {
     return (
       <div className="WILL BE DELETED">
@@ -13,7 +16,7 @@ class UserContainer extends Component {
           <div id="user-container">
             <Switch>
               <Route path="/user/new" component={UserSignup} />
-              <Route path="/user" component={UserLogin} />
+              <Route path="/user/login" component={UserLogin} />
             </Switch>
           </div>
           <div className="loggedIn">
@@ -30,7 +33,7 @@ class UserContainer extends Component {
   }
 }
 
-export default UserContainer;
+export default withRouter(UserContainer);
 
 // user clicked login button from the menu
 // if local storage is not there, give login view, if new customer? give link to signup page

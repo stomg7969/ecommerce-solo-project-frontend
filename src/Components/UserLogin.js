@@ -32,7 +32,7 @@ class UserLogin extends React.Component {
         if (data.message) {
           alert(data.message);
           this.setState({ name: "", password: "" });
-          this.props.history.push("/user");
+          this.props.history.push("/user/login");
         } else {
           this.props.currentUser(data);
           localStorage.setItem("user_token", data.jwt);
