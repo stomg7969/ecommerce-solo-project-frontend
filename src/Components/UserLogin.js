@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-// copied from my auth lab. must be modified
+import { connect } from "react-redux";
+
 class UserLogin extends React.Component {
   state = {
-    name: "",
+    username: "",
     password: ""
   };
   // listens to changes and sets states
@@ -13,7 +14,7 @@ class UserLogin extends React.Component {
   // listens to submit and lets user log in
   submitListener = e => {
     e.preventDefault();
-    const { name, password } = this.state;
+    const { username, password } = this.state;
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
@@ -22,7 +23,7 @@ class UserLogin extends React.Component {
       },
       body: JSON.stringify({
         user: {
-          name: name,
+          username: username,
           password: password
         }
       })
@@ -31,10 +32,11 @@ class UserLogin extends React.Component {
       .then(data => {
         if (data.message) {
           alert(data.message);
-          this.setState({ name: "", password: "" });
+          this.setState({ username: "", password: "" });
           this.props.history.push("/user/login");
         } else {
-          this.props.currentUser(data);
+          // this.props.currentUser(data);
+          this.props.dispatch({ type: "save_active_user", user: data.user });
           localStorage.setItem("user_token", data.jwt);
           this.props.history.push("/");
         }
@@ -42,7 +44,7 @@ class UserLogin extends React.Component {
   };
 
   render() {
-    const { name, password } = this.state;
+    const { username, password } = this.state;
     return (
       <div>
         <h3>Login</h3>
@@ -50,8 +52,8 @@ class UserLogin extends React.Component {
           <label>Name</label>
           <input
             type="text"
-            name="name"
-            value={name}
+            name="username"
+            value={username}
             onChange={this.changeListener}
           />
           <br />
@@ -63,7 +65,7 @@ class UserLogin extends React.Component {
             onChange={this.changeListener}
           />
           <br />
-          <button>Login(don't click yet)</button>
+          <button>Login</button>
         </form>
         <Link to="/user/new">
           {" "}
@@ -74,4 +76,4 @@ class UserLogin extends React.Component {
   }
 }
 
-export default withRouter(UserLogin);
+export default withRouter(connect()(UserLogin));

@@ -7,11 +7,26 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-const initialState = {};
+const initialState = {
+  activeUser: {}
+};
 
 const reducer = (state = initialState, action) => {
-  console.log("state", state, "action", action);
-  return state;
+  console.log(
+    "%c index.js file",
+    "color: aqua",
+    "state",
+    state,
+    "action",
+    action
+  );
+  switch (action.type) {
+    case "save_active_user":
+      return { activeUser: action.user };
+    // return { ...state, activeUser: action.user };
+    default:
+      return state;
+  }
 };
 
 const store = createStore(reducer);

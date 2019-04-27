@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-// copied from my auth lab. must be modified
+import { connect } from "react-redux";
+
 class UserSignup extends React.Component {
   state = {
-    name: "",
+    username: "",
     email: "",
     password: ""
   };
@@ -14,7 +15,7 @@ class UserSignup extends React.Component {
   // listens to submit and lets user signup
   submitListener = e => {
     e.preventDefault();
-    const { name, email, password } = this.state;
+    const { username, email, password } = this.state;
     fetch("http://localhost:3000/api/v1/users", {
       method: "POST",
       headers: {
@@ -23,7 +24,7 @@ class UserSignup extends React.Component {
       },
       body: JSON.stringify({
         user: {
-          name: name,
+          username: username,
           email: email,
           password: password
         }
@@ -31,14 +32,15 @@ class UserSignup extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
-        this.props.currentUser(data);
+        // this.props.currentUser(data);
+        this.props.dispatch({ type: "save_active_user", user: data.user });
         localStorage.setItem("user_token", data.jwt);
         this.props.history.push("/");
       });
   };
 
   render() {
-    const { name, email, password } = this.state;
+    const { username, email, password } = this.state;
     return (
       <div>
         <h3>Create Account</h3>
@@ -46,8 +48,8 @@ class UserSignup extends React.Component {
           <label>Name</label>
           <input
             type="text"
-            name="name"
-            value={name}
+            name="username"
+            value={username}
             onChange={this.changeListener}
           />
           <br />
@@ -71,7 +73,7 @@ class UserSignup extends React.Component {
           <br />
           <button>Signup (don't click yet)</button>
         </form>
-        <Link to="/user">
+        <Link to="/user/login">
           <span>login</span>
         </Link>
       </div>
@@ -79,4 +81,14 @@ class UserSignup extends React.Component {
   }
 }
 
-export default withRouter(UserSignup);
+const mapStateToProps = state => {
+  // state gives me access to the initialState
+  // connect gives me an access to dispatch function.
+  // If I don't need any state, I don't need mapStateToProps.
+  console.log("state from REDUX", state);
+  return {
+    name: "nate"
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(UserSignup));

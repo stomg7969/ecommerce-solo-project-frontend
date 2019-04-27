@@ -11,8 +11,9 @@ class UserProfile extends Component {
     console.log(
       "%c IN USER PROFILE",
       "background: #222; color: yellow",
-      "jwt decoded: "
-      // decoded
+      "jwt decoded: ",
+      jwt,
+      token
     );
   }
   // profile page. has a button that calls PasswordUpdate component

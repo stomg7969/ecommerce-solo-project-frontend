@@ -5,9 +5,6 @@ import UserSignup from "../Components/UserSignup";
 import UserProfile from "../Components/UserProfile";
 
 class UserContainer extends Component {
-  componentDidMount() {
-    this.props.history.push("/user/login");
-  }
   render() {
     return (
       <div className="WILL BE DELETED">
