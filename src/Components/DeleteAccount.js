@@ -28,9 +28,7 @@ const DeleteAccount = props => {
     <div>
       <h4>delete confirmation message here</h4>
       <button onClick={() => confirmDeleteListener()}>Yes</button>
-      <button onClick={() => this.props.history.push("/user/profile")}>
-        No
-      </button>
+      <button onClick={() => props.history.push("/user/profile")}>No</button>
     </div>
   );
 };
