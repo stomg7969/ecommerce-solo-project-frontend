@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { SAVE_USER } from "../Types";
 
 class UserSignup extends React.Component {
   state = {
@@ -32,10 +33,16 @@ class UserSignup extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
-        // this.props.currentUser(data);
-        this.props.dispatch({ type: "save_active_user", user: data.user });
-        localStorage.setItem("user_token", data.jwt);
-        this.props.history.push("/");
+        if (data.message) {
+          alert(data.message);
+          this.setState({ username: "", password: "" });
+          this.props.history.push("/user/new");
+        } else {
+          // this.props.currentUser(data);
+          this.props.dispatch({ type: SAVE_USER, user: data.user });
+          localStorage.setItem("user_token", data.jwt);
+          this.props.history.push("/");
+        }
       });
   };
 

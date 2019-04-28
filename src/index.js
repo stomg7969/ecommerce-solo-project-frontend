@@ -5,6 +5,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
+import { SAVE_USER, STORE_PRODUCTS } from "./Types";
 import * as serviceWorker from "./serviceWorker";
 
 const initialState = {
@@ -22,9 +23,9 @@ const reducer = (state = initialState, action) => {
     action
   );
   switch (action.type) {
-    case "save_active_user":
+    case SAVE_USER:
       return { ...state, activeUser: action.user };
-    case "store_products":
+    case STORE_PRODUCTS:
       return { ...state, products: action.products };
     default:
       return state;

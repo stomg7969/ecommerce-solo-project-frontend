@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { SAVE_USER } from "../Types";
 
 class UserLogin extends React.Component {
   state = {
@@ -36,7 +37,7 @@ class UserLogin extends React.Component {
           this.props.history.push("/user/login");
         } else {
           // this.props.currentUser(data);
-          this.props.dispatch({ type: "save_active_user", user: data.user });
+          this.props.dispatch({ type: SAVE_USER, user: data.user });
           localStorage.setItem("user_token", data.jwt);
           this.props.history.push("/");
         }
