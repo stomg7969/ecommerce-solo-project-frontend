@@ -68,12 +68,35 @@ img {
   right: 19px;
 }
 /* ****************************************************** */
+/* Products */
+#product-container {
+  border-style: solid;
+  text-align: center;
+  /* margin: 1%; */
+  /* margin-left: 20%; */
+}
+#product-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-style: groove;
+  text-align: center;
+  margin: 1%;
+}
+#product-card {
+  border-style: groove;
+  text-align: center;
+}
+.product-image {
+  width: 250px;
+}
+/* ****************************************************** */
 /* Container that wraps searching, filtering, and sorting */
 #user-input {
   border-style: ridge;
   text-align: center;
   margin: 1%;
-  margin-left: 20%;
+  /* margin-left: 20%; */
   display: flex;
   /* justify-content: space-around; */
   flex-direction: column;
@@ -107,24 +130,6 @@ img {
 .price-sort h5 {
   /* background-color: rgb(239, 234, 225); */
   margin: 0.5em;
-}
-/* ****************************************************** */
-/* Products */
-#product-container {
-  border-style: solid;
-  text-align: center;
-  margin: 1%;
-  margin-left: 20%;
-}
-#product-list {
-  border-style: groove;
-  text-align: center;
-  margin: 1%;
-}
-#product-card {
-  border-style: groove;
-  text-align: center;
-  margin: 1%;
 }
 /* ****************************************************** */
 /* Filtering */

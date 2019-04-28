@@ -8,7 +8,8 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 const initialState = {
-  activeUser: {}
+  activeUser: {},
+  products: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,8 +23,9 @@ const reducer = (state = initialState, action) => {
   );
   switch (action.type) {
     case "save_active_user":
-      return { activeUser: action.user };
-    // return { ...state, activeUser: action.user };
+      return { ...state, activeUser: action.user };
+    case "store_products":
+      return { ...state, products: action.products };
     default:
       return state;
   }

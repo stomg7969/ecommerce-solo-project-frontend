@@ -3,13 +3,30 @@ import React, { Component } from "react";
 // import ProductShowContainer from '../Containers/ProductShowContainer'
 
 class ProductCard extends Component {
+  state = {
+    productImgClicked: false
+  };
+
+  clickListener = () => {
+    this.setState(prevState => ({
+      productImgClicked: !prevState.productImgClicked
+    }));
+  };
+
   render() {
+    const { product } = this.props;
     return (
-      <div id="product-list">
-        <div id="product-card">
-          {/* each card has a link to product show page */}
-          <h3>Product Card</h3>
-        </div>
+      <div id="product-card">
+        {/* each card has a link to product show page */}
+        <h5>{product.name}</h5>
+        <img
+          className="product-image"
+          src={
+            !this.state.productImgClicked ? product.imgFront : product.imgBack
+          }
+          alt="moonya front img"
+          onClick={this.clickListener}
+        />
       </div>
     );
   }
