@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 
-class DeleteAccount extends Component {
-  confirmDeleteListener = () => {
+const DeleteAccount = props => {
+  const confirmDeleteListener = () => {
     const jwt = require("jsonwebtoken");
     const token = localStorage.getItem("user_token");
     const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
@@ -15,36 +15,24 @@ class DeleteAccount extends Component {
     }).then(r => {
       if (!r.ok) {
         console.log(r);
-        this.props.history.push("/user/profile");
+        props.history.push("/user/profile");
       } else {
         localStorage.removeItem("user_token");
         alert("Deleted, bye bye");
-        this.props.history.push("/");
+        props.history.push("/");
       }
     });
   };
 
-  render() {
-    return (
-      <div>
-        <h4>delete confirmation message here</h4>
-        <button onClick={this.confirmDeleteListener}>Yes</button>
-        <button onClick={() => this.props.history.push("/user/profile")}>
-          No
-        </button>
-      </div>
-    );
-  }
-}
-// const DeleteAccount = () => {
-//   return (
-//     <div>
-//       <h4>delete confirmation message here</h4>
-//       <button onClick={() => confirmListener()} name='yes'>Yes</button>
-//       <button onClick={() => confirmListener()} name='no'>No</button>
-//       <p>if yes, delete, if no, go back</p>
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <h4>delete confirmation message here</h4>
+      <button onClick={() => confirmDeleteListener()}>Yes</button>
+      <button onClick={() => this.props.history.push("/user/profile")}>
+        No
+      </button>
+    </div>
+  );
+};
 
 export default withRouter(DeleteAccount);
