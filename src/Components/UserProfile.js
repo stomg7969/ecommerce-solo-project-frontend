@@ -1,35 +1,41 @@
 import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import PasswordUpdate from "./PasswordUpdate";
+import DeleteAccount from "./DeleteAccount";
 // copied from my auth lab. must be modified
 class UserProfile extends Component {
   componentDidMount() {
     const jwt = require("jsonwebtoken");
     const token = localStorage.getItem("user_token");
-    // const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
+    const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
     //
     console.log(
       "%c IN USER PROFILE",
       "background: #222; color: yellow",
       "jwt decoded: ",
-      jwt,
-      token
+      decoded
     );
   }
   // profile page. has a button that calls PasswordUpdate component
   render() {
     return (
-      <div>
-        <h3>profile</h3>
+      <div id="user-profile">
+        <h3>profile info here</h3>
         <Switch>
           <Route path="/user/profile/update" component={PasswordUpdate} />
+          <Route path="/user/profile/delete" component={DeleteAccount} />
           <Route
             path="/user/profile"
             render={() => {
               return (
-                <Link to="/user/profile/update">
-                  <button>Change PW</button>
-                </Link>
+                <div id="profile-update">
+                  <Link to="/user/profile/update">
+                    <button>Change PW</button>
+                  </Link>
+                  <Link to="/user/profile/delete">
+                    <button>Delete Accout</button>
+                  </Link>
+                </div>
               );
             }}
           />

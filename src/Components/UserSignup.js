@@ -17,7 +17,7 @@ class UserSignup extends React.Component {
   submitListener = e => {
     e.preventDefault();
     const { username, email, password } = this.state;
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch(`${process.env.REACT_APP_HOST}/api/v1/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ class UserSignup extends React.Component {
             onChange={this.changeListener}
           />
           <br />
-          <button>Signup (don't click yet)</button>
+          <button>Signup</button>
         </form>
         <Link to="/user/login">
           <span>login</span>

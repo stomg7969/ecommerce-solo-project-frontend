@@ -31,7 +31,3 @@ class UserContainer extends Component {
 }
 
 export default withRouter(UserContainer);
-
-// user clicked login button from the menu
-// if local storage is not there, give login view, if new customer? give link to signup page
-// if localstoreage exists, then show user profile with CRUD link

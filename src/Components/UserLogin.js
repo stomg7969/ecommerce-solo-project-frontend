@@ -16,7 +16,7 @@ class UserLogin extends React.Component {
   submitListener = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch(`${process.env.REACT_APP_HOST}/api/v1/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

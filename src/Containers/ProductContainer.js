@@ -8,7 +8,7 @@ class ProductContainer extends Component {
     const token = localStorage.getItem("user_token");
     // token and authorization is unnecessary because users are able to see
     // all products even when not logged in.
-    fetch("http://localhost:3000/products", {
+    fetch(`${process.env.REACT_APP_HOST}/products`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`

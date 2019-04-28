@@ -23,8 +23,9 @@ class PasswordUpdate extends Component {
       const jwt = require("jsonwebtoken");
       const token = localStorage.getItem("user_token");
       const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
+      console.log("%c Updated info submitted", "color: green", decoded);
 
-      fetch(`http://localhost:3000/api/v1/users/${decoded.user_id}`, {
+      fetch(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +47,7 @@ class PasswordUpdate extends Component {
   render() {
     const { currentPW, newPW, confirmPW } = this.state;
     return (
-      <div>
+      <div id="update-form">
         <form onSubmit={this.submitListener}>
           {/* input type is text for testing purpose */}
           <input

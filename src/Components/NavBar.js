@@ -12,14 +12,12 @@ class NavBar extends React.Component {
     if (localStorage.getItem("user_token")) {
       // use 'jsonwebtoken' to easily get user_id and username
       // but this will never run if website start without localStorage
-      const jwt = require("jsonwebtoken");
+      // const jwt = require("jsonwebtoken");
       const token = localStorage.getItem("user_token");
-      const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
-      console.log("%c CDM in NavBar.js", "color: green", decoded);
+      // const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
 
-      // const token = localStorage.getItem("user_token");
-      // GET request to always store 'this' user object to Redux store
-      fetch("http://localhost:3000/api/v1/profile", {
+      // GET request to always store this user object to Redux store
+      fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -27,7 +25,7 @@ class NavBar extends React.Component {
       })
         .then(r => r.json())
         .then(data => {
-          this.setState({ activeUsername: decoded.username });
+          this.setState({ activeUsername: data.user.username });
           this.props.dispatch({ type: SAVE_USER, user: data.user });
         });
     }
@@ -42,6 +40,7 @@ class NavBar extends React.Component {
     return (
       <div id="menu">
         <h4>Menu Bar here</h4>
+        {/* if I use username from Redux store, it breaks. To make this work without Redux, I need to pass up username from login/signup to App, then pass down to NavBar (not hard but not using Redux) */}
         {localStorage.getItem("user_token") ? (
           <h6>Hello, {this.state.activeUsername}</h6>
         ) : null}
@@ -77,8 +76,3 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(connect(mapStateToProps)(NavBar));
-// if (localStorage.getItem("user_token")) {
-//   const jwt = require("jsonwebtoken");
-//   const token = localStorage.getItem("user_token");
-//   const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
-// }
