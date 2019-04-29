@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, Link, withRouter } from "react-router-dom";
+import box from "../Assets/square_box.png";
+import backImg from "../Assets/go_back.png";
 import UserLogin from "../Components/UserLogin";
 import UserSignup from "../Components/UserSignup";
 import UserProfile from "../Components/UserProfile";
@@ -7,23 +9,24 @@ import UserProfile from "../Components/UserProfile";
 class UserContainer extends Component {
   render() {
     return (
-      <div className="WILL BE DELETED">
-        <div className="notLoggedin">
-          <h2>User profile comps here</h2>
-          <div id="user-container">
-            <Switch>
-              <Route path="/user/new" component={UserSignup} />
-              <Route path="/user/login" component={UserLogin} />
-            </Switch>
-          </div>
-          <div className="loggedIn">
-            {/* <Link to="/">
-              <span> |Landing Page| </span>
-            </Link> */}
-            <Switch>
-              <Route path="/user/profile" component={UserProfile} />
-            </Switch>
-          </div>
+      <div>
+        <img
+          src={backImg}
+          alt="go-back button"
+          className="top-right go-back"
+          onClick={() => this.props.history.push("/")}
+        />
+        <Link to="/cart">
+          <img id="cart-image" src={box} alt="box noun project" />
+          <span id="cart-number">0</span>
+        </Link>
+        <h2>User profile comps here</h2>
+        <div id="user-container">
+          <Switch>
+            <Route path="/user/new" component={UserSignup} />
+            <Route path="/user/login" component={UserLogin} />
+            <Route path="/user/profile" component={UserProfile} />
+          </Switch>
         </div>
       </div>
     );

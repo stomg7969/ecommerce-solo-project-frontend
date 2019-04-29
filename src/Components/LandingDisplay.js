@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 import landingPicture from "../Assets/moonya landing picture.jpg";
 import magnifier from "../Assets/noun_magnifier.png";
+import box from "../Assets/square_box.png";
+import NavBar from "./NavBar";
 import UserInputContainer from "../Containers/UserInputContainer";
 import ProductContainer from "../Containers/ProductContainer";
 
 class LandingDisplay extends Component {
   state = {
-    userContainerClicked: false,
     userInputContainerClicked: false
   };
   // toggles User search/filter/sort component when clicked
@@ -18,6 +20,12 @@ class LandingDisplay extends Component {
   render() {
     return (
       <Fragment>
+        <NavBar />
+
+        <Link to="/cart">
+          <img id="cart-image" src={box} alt="box noun project" />
+          <span id="cart-number">0</span>
+        </Link>
         <div id="landing-page">
           <h1>Moonya Ecommerce</h1>
           <img src={landingPicture} alt="moonya" />

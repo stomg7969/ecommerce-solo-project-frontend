@@ -30,7 +30,7 @@ img {
 }
 /* ****************************************************** */
 /* Navigation menue */
-#menu {
+.top-right {
   border-style: double;
   text-align: center;
   background-color: #fcf7e4;
@@ -40,6 +40,17 @@ img {
   top: 0;
   left: 0;
   width: 10em;
+}
+.top-right.go-back {
+  border-style: double;
+  text-align: center;
+  background-color: #fcf7e4;
+  /* margin: 1%;
+  margin-right: 80%; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 3em;
 }
 .navbar-name {
   margin: 5%;
@@ -87,8 +98,18 @@ img {
   border-style: groove;
   text-align: center;
 }
+#product-showpage {
+  display: flex;
+  justify-content: space-around;
+}
+#showpage-img {
+  margin-top: 10%;
+}
 .product-image {
   width: 250px;
+}
+.product {
+  margin: 10px auto;
 }
 /* ****************************************************** */
 /* Container that wraps searching, filtering, and sorting */

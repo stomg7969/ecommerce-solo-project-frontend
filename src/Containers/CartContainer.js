@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import backImg from "../Assets/go_back.png";
 
 class CartContainer extends Component {
   render() {
     return (
       <div id="cart">
+        <img
+          src={backImg}
+          alt="go-back button"
+          className="top-right go-back"
+          onClick={() => this.props.history.push("/")}
+        />
         {/* <Link to="/">
           <span> |Landing Page| </span>
         </Link> */}
@@ -14,7 +21,7 @@ class CartContainer extends Component {
           {/* this maybe another component */}
         </div>
         <div>
-          <p>total amount, shipping info slection, and more</p>
+          <p>total amount, shipping info selection, and more</p>
           {/* this maybe another component */}
         </div>
       </div>
@@ -22,4 +29,4 @@ class CartContainer extends Component {
   }
 }
 
-export default CartContainer;
+export default withRouter(CartContainer);

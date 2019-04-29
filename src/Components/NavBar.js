@@ -37,13 +37,8 @@ class NavBar extends React.Component {
   };
 
   render() {
-    console.log(
-      "%c THIS IS THE LOG in NavBar",
-      "background-color: black",
-      this.props
-    );
     return (
-      <div id="menu">
+      <div className="top-right button">
         <h4>Menu Bar here</h4>
         {localStorage.getItem("user_token") ? (
           <h6>
