@@ -17,33 +17,37 @@ class UserSignup extends React.Component {
   submitListener = e => {
     e.preventDefault();
     const { username, email, password } = this.state;
-    fetch(`${process.env.REACT_APP_HOST}/api/v1/users`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user: {
-          username: username,
-          email: email,
-          password: password
-        }
+    if (username === "" || email === "" || password === "") {
+      alert("make your input");
+    } else {
+      fetch(`${process.env.REACT_APP_HOST}/api/v1/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          user: {
+            username: username,
+            email: email,
+            password: password
+          }
+        })
       })
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message);
-          this.setState({ username: "", password: "" });
-          this.props.history.push("/user/new");
-        } else {
-          // this.props.currentUser(data);
-          this.props.dispatch({ type: SAVE_USER, user: data.user });
-          localStorage.setItem("user_token", data.jwt);
-          this.props.history.push("/");
-        }
-      });
+        .then(r => r.json())
+        .then(data => {
+          if (data.message) {
+            alert(data.message);
+            this.setState({ username: "", password: "" });
+            this.props.history.push("/user/new");
+          } else {
+            // this.props.currentUser(data);
+            this.props.dispatch({ type: SAVE_USER, user: data.user });
+            localStorage.setItem("user_token", data.jwt);
+            this.props.history.push("/");
+          }
+        });
+    }
   };
 
   render() {

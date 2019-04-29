@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
-import { ADD_TO_CART } from "../Types";
+import { STORE_PRODUCTS, ADD_TO_CART } from "../Types";
 // withRouter for going back to page
 class ProductCard extends Component {
   state = {
@@ -11,6 +11,15 @@ class ProductCard extends Component {
     quantity: 0,
     size: ""
   };
+
+  componentDidMount() {
+    console.log("am i mounting");
+    fetch(`${process.env.REACT_APP_HOST}/products`)
+      .then(r => r.json())
+      .then(products =>
+        this.props.dispatch({ type: STORE_PRODUCTS, products: products })
+      );
+  }
 
   clickListener = () => {
     this.setState(prevState => ({
@@ -22,6 +31,7 @@ class ProductCard extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   // Customers can still order without loggin in. This function is called from this.submitListener => body
+  // right now, 'null' does not work.
   getUserId = () => {
     if (localStorage.getItem("user_token")) {
       const jwt = require("jsonwebtoken");
@@ -95,7 +105,7 @@ class ProductCard extends Component {
           <div>
             <img
               src={this.state.imgClicked ? product.imgBack : product.imgFront}
-              atl="product image"
+              alt="product image"
               className="product-image"
             />
           </div>

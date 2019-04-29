@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-// import box from "./Assets/square_box.png";
+import { STORE_PRODUCTS } from "./Types";
 import "./App.css";
-// import NavBar from "./Components/NavBar";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
 import UserContainer from "./Containers/UserContainer";
 import ProductShowContainer from "./Containers/ProductShowContainer";
 
 class App extends Component {
+  componentDidMount() {
+    // token and authorization is unnecessary because users are able to see
+    // all products even when not logged in.
+    fetch(`${process.env.REACT_APP_HOST}/products`)
+      .then(r => r.json())
+      .then(products =>
+        this.props.dispatch({ type: STORE_PRODUCTS, products: products })
+      );
+  }
+
   render() {
     return (
       <div id="app-outter-div">
@@ -25,16 +34,21 @@ class App extends Component {
           <Route
             path="/products/:id"
             render={routerProps => {
-              const id = parseInt(routerProps.match.params.id);
-              const product = this.props.products.find(
-                product => product.id === id
-              );
-              console.log(
-                "%c Before show page",
-                "color: white; background-color: black",
-                product
-              );
-              return <ProductShowContainer product={product} />;
+              console.log("routerProps", routerProps);
+              if (this.props.products.length > 0) {
+                const id = parseInt(routerProps.match.params.id);
+                const product = this.props.products.find(
+                  product => product.id === id
+                );
+                console.log(
+                  "%c Before show page",
+                  "color: white; background-color: black",
+                  product
+                );
+                return <ProductShowContainer product={product} />;
+              } else {
+                return <h1>Loading</h1>;
+              }
             }}
           />
           <Route path="/" component={LandingDisplay} />
