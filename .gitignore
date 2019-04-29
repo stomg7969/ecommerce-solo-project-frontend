@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# For practice purpose, I also hid hosting url. => http://localhost:3000
 .env
