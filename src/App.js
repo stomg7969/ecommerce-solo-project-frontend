@@ -34,14 +34,13 @@ class App extends Component {
           <Route
             path="/products/:id"
             render={routerProps => {
-              console.log("routerProps", routerProps);
               if (this.props.products.length > 0) {
                 const id = parseInt(routerProps.match.params.id);
                 const product = this.props.products.find(
                   product => product.id === id
                 );
                 console.log(
-                  "%c Before show page",
+                  "%c Before calling show page(APP.js)",
                   "color: white; background-color: black",
                   product
                 );

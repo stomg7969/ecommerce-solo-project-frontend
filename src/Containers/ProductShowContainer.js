@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
-import { STORE_PRODUCTS, ADD_TO_CART } from "../Types";
+import { ADD_TO_CART } from "../Types";
 // withRouter for going back to page
 class ProductCard extends Component {
   state = {
@@ -11,15 +11,6 @@ class ProductCard extends Component {
     quantity: 0,
     size: ""
   };
-
-  componentDidMount() {
-    console.log("am i mounting");
-    fetch(`${process.env.REACT_APP_HOST}/products`)
-      .then(r => r.json())
-      .then(products =>
-        this.props.dispatch({ type: STORE_PRODUCTS, products: products })
-      );
-  }
 
   clickListener = () => {
     this.setState(prevState => ({
@@ -62,13 +53,26 @@ class ProductCard extends Component {
         })
       })
         .then(r => r.json())
-        .then(newOrder => {
-          alert("added to cart");
-          this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+        .then(data => {
+          this.props.dispatch({ type: ADD_TO_CART, order: data });
           this.setState({
             quantity: 0,
             size: ""
           });
+          console.log(data.id, this.props.product.id, quantity, size);
+          fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: JSON.stringify({
+              order_id: data.id,
+              product_id: this.props.product.id,
+              quantity: quantity,
+              size: size
+            })
+          }).then(r => r.json());
         });
     }
   };
@@ -76,61 +80,62 @@ class ProductCard extends Component {
   render() {
     const { product } = this.props;
     return (
-      <div id="product-showpage">
-        <img
-          src={backImg}
-          alt="go-back button"
-          className="top-right go-back"
-          onClick={() => this.props.history.push("/")}
-        />
-        <Link to="/cart">
-          <img id="cart-image" src={box} alt="box noun project" />
-          <span id="cart-number">0</span>
-        </Link>
-        {/* each card has a link to product show page */}
-        <div className="product details">
-          <h2>{product.name}</h2>
-          <h2>${product.price}</h2>
-          <strong>Color: </strong>
-          <p>{product.color}</p>
-          <br />
-          <strong>Gender: </strong>
-          <p>{product.gender}</p>
-          <br />
-          <strong>Material: </strong>
-          <p>{product.material.join(", ")}</p>
-          <br />
-        </div>
-        <div id="showpage-img">
-          <div>
-            <img
-              src={this.state.imgClicked ? product.imgBack : product.imgFront}
-              alt="product image"
-              className="product-image"
-            />
+      <Fragment>
+        <div id="product-showpage">
+          <img
+            src={backImg}
+            alt="go-back button"
+            className="top-right go-back"
+            onClick={() => this.props.history.push("/")}
+          />
+          <Link to="/cart">
+            <img id="cart-image" src={box} alt="box noun project" />
+            <span id="cart-number">0</span>
+          </Link>
+          {/* each card has a link to product show page */}
+          <div className="product details">
+            <h2>{product.name}</h2>
+            <h2>${product.price}</h2>
+            <strong>Category: </strong>
+            <p>{product.category}</p>
+            <strong>Color: </strong>
+            <p>{product.color}</p>
+            <strong>Gender: </strong>
+            <p>{product.gender}</p>
+            <strong>Material: </strong>
+            <p>{product.material.join(", ")}</p>
           </div>
-          <div>
-            <span onClick={this.clickListener}>Flip the image</span>
+          <div id="showpage-img">
+            <div>
+              <img
+                src={this.state.imgClicked ? product.imgBack : product.imgFront}
+                alt="product images"
+                className="product-image"
+              />
+            </div>
+          </div>
+          <div className="customer-input">
+            <form onSubmit={this.submitListener}>
+              <select name="size" onChange={this.changeListener}>
+                <option value="">Select size:</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+              </select>
+              <input
+                type="number"
+                name="quantity"
+                value={this.state.quantity}
+                onChange={this.changeListener}
+              />
+              <button>Add to Cart</button>
+            </form>
           </div>
         </div>
-        <div className="customer-input">
-          <form onSubmit={this.submitListener}>
-            <select name="size" onChange={this.changeListener}>
-              <option value="">Select size:</option>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-            </select>
-            <input
-              type="number"
-              name="quantity"
-              value={this.state.quantity}
-              onChange={this.changeListener}
-            />
-            <button>Add to Cart</button>
-          </form>
+        <div>
+          <span onClick={this.clickListener}>Flip the image</span>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

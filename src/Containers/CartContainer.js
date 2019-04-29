@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import backImg from "../Assets/go_back.png";
 
 class CartContainer extends Component {
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_HOST}/order-details`)
+      .then(r => r.json())
+      .then(console.log);
+  }
+
   render() {
     return (
       <div id="cart">
@@ -29,4 +36,15 @@ class CartContainer extends Component {
   }
 }
 
-export default withRouter(CartContainer);
+const mapStateToProps = state => {
+  console.log(
+    "%c mapStateToProps Cart",
+    "color: brown; background-color: black",
+    state.orders
+  );
+  return {
+    orders: state.orders
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(CartContainer));

@@ -112,6 +112,9 @@ img {
 .product {
   margin: 10px auto;
 }
+.customer-input {
+  margin-top: 5%;
+}
 /* ****************************************************** */
 /* Container that wraps searching, filtering, and sorting */
 #user-input {
