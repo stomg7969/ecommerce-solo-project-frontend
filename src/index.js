@@ -15,11 +15,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   console.log(
-    "%c index.js file",
-    "color: aqua",
-    "state",
-    state,
-    "action",
+    "%c REDUCER TRIGGERED",
+    "color: aqua; background-color: black",
     action
   );
   switch (action.type) {

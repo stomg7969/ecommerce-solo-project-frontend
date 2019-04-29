@@ -37,12 +37,21 @@ class NavBar extends React.Component {
   };
 
   render() {
+    console.log(
+      "%c THIS IS THE LOG in NavBar",
+      "background-color: black",
+      this.props
+    );
     return (
       <div id="menu">
         <h4>Menu Bar here</h4>
-        {/* if I use username from Redux store, it breaks. To make this work without Redux, I need to pass up username from login/signup to App, then pass down to NavBar (not hard but not using Redux) */}
         {localStorage.getItem("user_token") ? (
-          <h6>Hello, {this.state.activeUsername}</h6>
+          <h6>
+            Hello,{" "}
+            {this.props.activeUsername
+              ? this.props.activeUsername.username
+              : null}
+          </h6>
         ) : null}
         <div className="navbar-name">
           <Link to="/">
@@ -69,7 +78,11 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("%c mapStateToProps NavBar", "color: orange", state.activeUser);
+  console.log(
+    "%c mapStateToProps NavBar",
+    "color: orange; background-color: black",
+    state.activeUser
+  );
   return {
     activeUsername: state.activeUser
   };
