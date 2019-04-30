@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { STORE_PRODUCTS, SAVE_USER } from "./Types";
+import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
 import "./App.css";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
@@ -29,6 +29,13 @@ class App extends Component {
       })
         .then(r => r.json())
         .then(data => {
+          const pendingOrder = data.user.orders.filter(
+            order => order.status === "pending"
+          );
+          this.props.dispatch({
+            type: RENDER_ITEM_AMOUNT,
+            itemNum: pendingOrder[0].details.length
+          });
           this.props.dispatch({ type: SAVE_USER, user: data.user });
         });
     }

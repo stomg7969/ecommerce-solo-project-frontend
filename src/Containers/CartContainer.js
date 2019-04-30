@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import backImg from "../Assets/go_back.png";
@@ -9,27 +9,68 @@ class CartContainer extends Component {
     cart: {},
     shipping_method: "",
     paid: false,
-    totalAmount: 0.0
+    totalAmount: 0.0,
+    haveCartInfo: false
   };
 
   componentDidMount() {
-    const pendingCart = this.props.userOrders.find(
-      order => order.status === "pending"
+    console.log(
+      "CDM",
+      "currentUser",
+      this.props.currentUser,
+      "products",
+      this.props.products,
+      "userOrderDetail",
+      this.props.userOrder,
+      "Cart in State",
+      this.state.cart
     );
-    if (pendingCart) {
-      this.setState({ cart: pendingCart });
+    if (this.props.currentUser.orders && !this.state.haveCartInfo) {
+      console.log("RUNNING THIS?");
+      const pendingCart = this.props.currentUser.orders.filter(
+        order => order.status === "pending"
+      );
+      this.setState(
+        { cart: pendingCart, haveCartInfo: true },
+        console.log("state of cart is updated")
+      );
     }
   }
+  componentDidUpdate() {
+    console.log(
+      "CDU",
+      "currentUser",
+      this.props.currentUser,
+      "products",
+      this.props.products,
+      "userOrderDetail",
+      this.props.userOrder,
+      "Cart in State",
+      this.state.cart
+    );
+    if (this.props.currentUser.orders && !this.state.haveCartInfo) {
+      console.log("RUNNING THIS?");
+      const pendingCart = this.props.currentUser.orders.filter(
+        order => order.status === "pending"
+      );
+      this.setState(
+        { cart: pendingCart, haveCartInfo: true },
+        console.log("state of cart is updated")
+      );
+    }
+  }
+
   // trying to display total amount to pay
   addToTotal = num => {
     this.setState(prevState => ({ totalAmount: prevState + num }));
   };
 
   render() {
-    console.log("CartContainer: CART", this.state.cart);
+    console.log("CartContainer: CART", this.state.cart[0]);
+
     let foundProduct;
-    if (this.state.cart.details) {
-      foundProduct = this.state.cart.details.map(detail => {
+    if (this.state.cart[0]) {
+      foundProduct = this.state.cart[0].details.map(detail => {
         return (
           <CartProduct
             key={detail.id}
@@ -39,6 +80,18 @@ class CartContainer extends Component {
           />
         );
       });
+    } else {
+      return (
+        <Fragment>
+          <img
+            src={backImg}
+            alt="go-back button"
+            className="top-right go-back"
+            onClick={() => this.props.history.push("/")}
+          />
+          <h1>Add items to cart</h1>
+        </Fragment>
+      );
     }
     return (
       <div id="cart">
@@ -48,6 +101,9 @@ class CartContainer extends Component {
           className="top-right go-back"
           onClick={() => this.props.history.push("/")}
         />
+        {this.props.userOrder.id ? (
+          <span>{this.props.userOrder.product.name} added</span>
+        ) : null}
         <h2>Cart here</h2>
         <div>{foundProduct}</div>
         <div>
@@ -75,13 +131,13 @@ const mapStateToProps = state => {
     "%c mapStateToProps Cart",
     "color: brown; background-color: black",
     state.activeUser,
-    state.userOrders,
-    state.products
+    state.products,
+    state.userOrders
   );
   return {
     currentUser: state.activeUser,
-    userOrders: state.userOrders,
-    products: state.products
+    products: state.products,
+    userOrder: state.userOrder
   };
 };
 

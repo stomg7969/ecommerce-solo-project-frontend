@@ -2,7 +2,7 @@ import React from "react";
 
 const CartProduct = props => {
   const eachProduct = props.products.find(
-    product => product.id === props.detail.id
+    product => product.id === props.detail.product_id
   );
   return (
     <div>

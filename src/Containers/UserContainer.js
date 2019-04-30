@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
 import UserLogin from "../Components/UserLogin";
@@ -18,7 +19,9 @@ class UserContainer extends Component {
         />
         <Link to="/cart">
           <img id="cart-image" src={box} alt="box noun project" />
-          <span id="cart-number">0</span>
+          <span id="cart-number">
+            {this.props.itemNum ? this.props.itemNum : 0}
+          </span>
         </Link>
         <h2>User profile comps here</h2>
         <div id="user-container">
@@ -33,4 +36,10 @@ class UserContainer extends Component {
   }
 }
 
-export default withRouter(UserContainer);
+const mapStateToProps = state => {
+  return {
+    itemNum: state.numOfCartItems
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(UserContainer));

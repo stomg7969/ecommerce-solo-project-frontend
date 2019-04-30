@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import landingPicture from "../Assets/moonya landing picture.jpg";
 import magnifier from "../Assets/noun_magnifier.png";
 import box from "../Assets/square_box.png";
@@ -24,7 +25,9 @@ class LandingDisplay extends Component {
 
         <Link to="/cart">
           <img id="cart-image" src={box} alt="box noun project" />
-          <span id="cart-number">0</span>
+          <span id="cart-number">
+            {this.props.itemNum ? this.props.itemNum : 0}
+          </span>
         </Link>
         <div id="landing-page">
           <h1>Moonya Ecommerce</h1>
@@ -47,4 +50,10 @@ class LandingDisplay extends Component {
 //   return ();
 // };
 
-export default LandingDisplay;
+const mapStateToProps = state => {
+  return {
+    itemNum: state.numOfCartItems
+  };
+};
+
+export default connect(mapStateToProps)(LandingDisplay);

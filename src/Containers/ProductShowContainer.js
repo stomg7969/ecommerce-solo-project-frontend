@@ -47,23 +47,54 @@ class ProductCard extends Component {
       );
       if (pendingOrder) {
         console.log("pendingOrder :", pendingOrder);
-        fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify({
-            order_id: pendingOrder.id,
-            product_id: this.props.product.id,
-            quantity: quantity,
-            size: size
+        const userToken = localStorage.getItem("user_token");
+        // look through each detail product, check if product id and size are the same, if, then update
+        const foundDetail = pendingOrder.details.find(
+          detail =>
+            detail.product_id === this.props.product.id && detail.size === size
+        );
+        if (foundDetail) {
+          const detailQuantity = foundDetail.quantity;
+          const detailId = foundDetail.id;
+          console.log("PATCHING", detailQuantity, quantity);
+          fetch(
+            `${process.env.REACT_APP_HOST}/api/v1/add_to_cart/${detailId}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${userToken}`
+              },
+              body: JSON.stringify({
+                quantity: parseInt(detailQuantity) + parseInt(quantity)
+              })
+            }
+          )
+            .then(r => r.json())
+            .then(newOrder => {
+              this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+            });
+        } else {
+          console.log("POSTING");
+          fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: JSON.stringify({
+              order_id: pendingOrder.id,
+              product_id: this.props.product.id,
+              quantity: quantity,
+              size: size
+            })
           })
-        })
-          .then(r => r.json())
-          .then(newOrder => {
-            this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
-          });
+            .then(r => r.json())
+            .then(newOrder => {
+              this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+            });
+        }
       } else {
         console.log("no pendingOrder");
         fetch(`${process.env.REACT_APP_HOST}/orders`, {
@@ -116,7 +147,9 @@ class ProductCard extends Component {
           />
           <Link to="/cart">
             <img id="cart-image" src={box} alt="box noun project" />
-            <span id="cart-number">0</span>
+            <span id="cart-number">
+              {this.props.itemNum ? this.props.itemNum : 0}
+            </span>
           </Link>
           {/* each card has a link to product show page */}
           <div className="product details">
@@ -168,7 +201,8 @@ class ProductCard extends Component {
 // extra components for stretch
 const mapStateToProps = state => {
   return {
-    currentUser: state.activeUser
+    currentUser: state.activeUser,
+    itemNum: state.numOfCartItems
   };
 };
 export default withRouter(connect(mapStateToProps)(ProductCard));

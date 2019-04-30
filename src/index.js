@@ -5,13 +5,19 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import { SAVE_USER, STORE_PRODUCTS, ADD_TO_CART } from "./Types";
+import {
+  SAVE_USER,
+  STORE_PRODUCTS,
+  ADD_TO_CART,
+  RENDER_ITEM_AMOUNT
+} from "./Types";
 import * as serviceWorker from "./serviceWorker";
 
 const initialState = {
   activeUser: {},
   products: [],
-  userOrders: []
+  userOrder: {},
+  numOfCartItems: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +32,9 @@ const reducer = (state = initialState, action) => {
     case STORE_PRODUCTS:
       return { ...state, products: action.products };
     case ADD_TO_CART:
-      return { ...state, userOrders: action.order };
+      return { ...state, userOrder: action.order };
+    case RENDER_ITEM_AMOUNT:
+      return { ...state, numOfCartItems: action.itemNum };
     default:
       return state;
   }
