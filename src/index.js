@@ -11,7 +11,7 @@ import * as serviceWorker from "./serviceWorker";
 const initialState = {
   activeUser: {},
   products: [],
-  orders: []
+  userOrders: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
     case STORE_PRODUCTS:
       return { ...state, products: action.products };
     case ADD_TO_CART:
-      return { ...state, orders: [...state.orders, action.order] };
+      return { ...state, userOrders: [...state.userOrders, action.userOrders] };
     default:
       return state;
   }

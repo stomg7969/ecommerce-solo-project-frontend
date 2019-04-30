@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
-import { ADD_TO_CART } from "../Types";
+// import { ADD_TO_CART } from "../Types";
 // withRouter for going back to page
 class ProductCard extends Component {
   state = {
@@ -11,6 +11,7 @@ class ProductCard extends Component {
     quantity: 0,
     size: ""
   };
+  // componentDidMount() {}
 
   clickListener = () => {
     this.setState(prevState => ({
@@ -33,47 +34,65 @@ class ProductCard extends Component {
       return null;
     }
   };
-
+  // right now, only logged in users can use the site.
+  // stretch goal is non-logged in users can also shop.
+  // When click add to cart button, unless the user has pending order, system will create a pending order and add order details into that order.
   submitListener = e => {
     e.preventDefault();
     const { quantity, size } = this.state;
     if (quantity < 1 || size === "") {
       alert("check your input");
     } else {
-      console.log("GOING INTO USER CART", this.state);
-      fetch(`${process.env.REACT_APP_HOST}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          user_id: this.getUserId(),
-          status: "pending"
+      const pendingOrder = this.props.currentUser.orders.find(
+        order => order.status === "pending"
+      );
+      if (pendingOrder) {
+        console.log("pendingOrder :", pendingOrder);
+        fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            order_id: pendingOrder.id,
+            product_id: this.props.product.id,
+            quantity: quantity,
+            size: size
+          })
+        }).then(r => r.json());
+      } else {
+        console.log("no pendingOrder");
+        fetch(`${process.env.REACT_APP_HOST}/orders`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            user_id: this.getUserId(),
+            status: "pending"
+          })
         })
-      })
-        .then(r => r.json())
-        .then(data => {
-          this.props.dispatch({ type: ADD_TO_CART, order: data });
-          this.setState({
-            quantity: 0,
-            size: ""
+          .then(r => r.json())
+          .then(data => {
+            // this.props.dispatch({ type: ADD_TO_CART, order: data });
+            // not using Redux for cart because it needs to be persisting.
+            fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+              },
+              body: JSON.stringify({
+                order_id: data.id,
+                product_id: this.props.product.id,
+                quantity: quantity,
+                size: size
+              })
+            }).then(r => r.json());
           });
-          console.log(data.id, this.props.product.id, quantity, size);
-          fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json"
-            },
-            body: JSON.stringify({
-              order_id: data.id,
-              product_id: this.props.product.id,
-              quantity: quantity,
-              size: size
-            })
-          }).then(r => r.json());
-        });
+      }
     }
   };
 
@@ -140,4 +159,9 @@ class ProductCard extends Component {
   }
 }
 // extra components for stretch
-export default withRouter(connect()(ProductCard));
+const mapStateToProps = state => {
+  return {
+    currentUser: state.activeUser
+  };
+};
+export default withRouter(connect(mapStateToProps)(ProductCard));
