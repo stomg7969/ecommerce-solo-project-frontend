@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import PasswordUpdate from "./PasswordUpdate";
 import DeleteAccount from "./DeleteAccount";
-// copied from my auth lab. must be modified
+import UserOrdersList from "./UserOrdersList";
+
 class UserProfile extends Component {
   componentDidMount() {
     const jwt = require("jsonwebtoken");
@@ -25,6 +27,10 @@ class UserProfile extends Component {
           <Route path="/user/profile/update" component={PasswordUpdate} />
           <Route path="/user/profile/delete" component={DeleteAccount} />
           <Route
+            path="/user/profile/orders"
+            render={() => <UserOrdersList orders={this.props.orders} />}
+          />
+          <Route
             path="/user/profile"
             render={() => {
               return (
@@ -34,6 +40,9 @@ class UserProfile extends Component {
                   </Link>
                   <Link to="/user/profile/delete">
                     <button>Delete Accout</button>
+                  </Link>
+                  <Link to="/user/profile/orders">
+                    <span>See All my orders</span>
                   </Link>
                 </div>
               );
@@ -45,4 +54,10 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfile;
+const mapStateToProps = state => {
+  return {
+    orders: state.activeUser.orders
+  };
+};
+
+export default connect(mapStateToProps)(UserProfile);
