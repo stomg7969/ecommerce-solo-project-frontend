@@ -13,9 +13,9 @@ class CartContainer extends Component {
     haveCartInfo: false
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     console.log(
-      "CDM",
+      "CDUUUUU",
       "currentUser",
       this.props.currentUser,
       "products",
@@ -32,13 +32,13 @@ class CartContainer extends Component {
       );
       this.setState(
         { cart: pendingCart, haveCartInfo: true },
-        console.log("state of cart is updated")
+        console.log("state of cart is updated from CDU")
       );
     }
   }
-  componentDidUpdate() {
+  componentDidMount() {
     console.log(
-      "CDU",
+      "CDMMMMM",
       "currentUser",
       this.props.currentUser,
       "products",
@@ -50,13 +50,23 @@ class CartContainer extends Component {
     );
     if (this.props.currentUser.orders && !this.state.haveCartInfo) {
       console.log("RUNNING THIS?");
-      const pendingCart = this.props.currentUser.orders.filter(
-        order => order.status === "pending"
-      );
-      this.setState(
-        { cart: pendingCart, haveCartInfo: true },
-        console.log("state of cart is updated")
-      );
+      const token = localStorage.getItem("user_token");
+      fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(r => r.json())
+        .then(data => {
+          const pendingCart = data.user.orders.filter(
+            order => order.status === "pending"
+          );
+          this.setState(
+            { cart: pendingCart, haveCartInfo: true },
+            console.log("state of cart is updated from CDM")
+          );
+        });
     }
   }
 
@@ -66,8 +76,6 @@ class CartContainer extends Component {
   };
 
   render() {
-    console.log("CartContainer: CART", this.state.cart[0]);
-
     let foundProduct;
     if (this.state.cart[0]) {
       foundProduct = this.state.cart[0].details.map(detail => {

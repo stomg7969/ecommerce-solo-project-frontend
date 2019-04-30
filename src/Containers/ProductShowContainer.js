@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
-import { ADD_TO_CART } from "../Types";
+import { ADD_TO_CART, ADD_ONE } from "../Types";
 
 class ProductCard extends Component {
   state = {
@@ -53,6 +53,7 @@ class ProductCard extends Component {
           detail =>
             detail.product_id === this.props.product.id && detail.size === size
         );
+        console.log("SAME THING", foundDetail);
         if (foundDetail) {
           const detailQuantity = foundDetail.quantity;
           const detailId = foundDetail.id;
@@ -93,6 +94,7 @@ class ProductCard extends Component {
             .then(r => r.json())
             .then(newOrder => {
               this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+              this.props.dispatch({ type: ADD_ONE });
             });
         }
       } else {
