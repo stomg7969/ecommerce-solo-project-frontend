@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import { SAVE_USER, STORE_PRODUCTS } from "./Types";
+import { SAVE_USER, STORE_PRODUCTS, ADD_TO_CART } from "./Types";
 import * as serviceWorker from "./serviceWorker";
 
 const initialState = {
@@ -22,13 +22,11 @@ const reducer = (state = initialState, action) => {
   );
   switch (action.type) {
     case SAVE_USER:
-      return {
-        ...state,
-        activeUser: action.user,
-        userOrders: action.user.orders
-      };
+      return { ...state, activeUser: action.user };
     case STORE_PRODUCTS:
       return { ...state, products: action.products };
+    case ADD_TO_CART:
+      return { ...state, userOrders: action.order };
     default:
       return state;
   }

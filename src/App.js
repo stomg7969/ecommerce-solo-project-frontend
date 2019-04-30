@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { STORE_PRODUCTS } from "./Types";
+import { STORE_PRODUCTS, SAVE_USER } from "./Types";
 import "./App.css";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
@@ -17,6 +17,21 @@ class App extends Component {
       .then(products =>
         this.props.dispatch({ type: STORE_PRODUCTS, products: products })
       );
+
+    if (localStorage.getItem("user_token")) {
+      const token = localStorage.getItem("user_token");
+      // GET request to always store this user object to Redux store
+      fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(r => r.json())
+        .then(data => {
+          this.props.dispatch({ type: SAVE_USER, user: data.user });
+        });
+    }
   }
 
   render() {

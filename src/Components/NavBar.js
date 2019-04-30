@@ -1,36 +1,9 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { SAVE_USER } from "../Types";
+// import { SAVE_USER } from "../Types";
 
 class NavBar extends React.Component {
-  state = {
-    activeUsername: ""
-  };
-
-  componentDidMount() {
-    if (localStorage.getItem("user_token")) {
-      // use 'jsonwebtoken' to easily get user_id and username
-      // but this will never run if website start without localStorage
-      // const jwt = require("jsonwebtoken");
-      const token = localStorage.getItem("user_token");
-      // const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
-
-      // GET request to always store this user object to Redux store
-      fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then(r => r.json())
-        .then(data => {
-          this.setState({ activeUsername: data.user.username });
-          this.props.dispatch({ type: SAVE_USER, user: data.user });
-        });
-    }
-  }
-
   clickListener = () => {
     localStorage.removeItem("user_token");
     this.props.history.push("/");
@@ -43,9 +16,7 @@ class NavBar extends React.Component {
         {localStorage.getItem("user_token") ? (
           <h6>
             Hello,{" "}
-            {this.props.activeUsername
-              ? this.props.activeUsername.username
-              : null}
+            {this.props.activeUser ? this.props.activeUser.username : null}
           </h6>
         ) : null}
         <div className="navbar-name">
@@ -79,7 +50,7 @@ const mapStateToProps = state => {
     state.activeUser
   );
   return {
-    activeUsername: state.activeUser
+    activeUser: state.activeUser
   };
 };
 

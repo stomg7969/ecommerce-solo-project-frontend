@@ -3,15 +3,14 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
-// import { ADD_TO_CART } from "../Types";
-// withRouter for going back to page
+import { ADD_TO_CART } from "../Types";
+
 class ProductCard extends Component {
   state = {
     imgClicked: false,
     quantity: 0,
     size: ""
   };
-  // componentDidMount() {}
 
   clickListener = () => {
     this.setState(prevState => ({
@@ -60,7 +59,11 @@ class ProductCard extends Component {
             quantity: quantity,
             size: size
           })
-        }).then(r => r.json());
+        })
+          .then(r => r.json())
+          .then(newOrder => {
+            this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+          });
       } else {
         console.log("no pendingOrder");
         fetch(`${process.env.REACT_APP_HOST}/orders`, {
@@ -90,7 +93,11 @@ class ProductCard extends Component {
                 quantity: quantity,
                 size: size
               })
-            }).then(r => r.json());
+            })
+              .then(r => r.json())
+              .then(newOrder => {
+                this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+              });
           });
       }
     }
