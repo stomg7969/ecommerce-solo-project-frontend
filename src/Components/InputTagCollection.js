@@ -3,7 +3,14 @@ import React, { Component } from "react";
 class InputTagCollection extends Component {
   render() {
     console.log(this.props.tags);
-    const { search, price, filter } = this.props.tags;
+    const {
+      search,
+      price,
+      color,
+      gender,
+      material,
+      category
+    } = this.props.tags;
     return (
       <div id="chosen-tags">
         {search.inputTerm.length ? (
@@ -31,7 +38,7 @@ class InputTagCollection extends Component {
           </div>
         ) : null}
         {/* ************** COLOR ************** */}
-        {filter.white ? (
+        {color.white ? (
           <div
             className="collection white"
             data-name="white"
@@ -40,7 +47,7 @@ class InputTagCollection extends Component {
             <h6 data-name="white">WHITE</h6>
           </div>
         ) : null}
-        {filter.black ? (
+        {color.black ? (
           <div
             className="collection black"
             data-name="balue"
@@ -49,7 +56,7 @@ class InputTagCollection extends Component {
             <h6 data-name="black">BLACK</h6>
           </div>
         ) : null}
-        {filter.brown ? (
+        {color.brown ? (
           <div
             className="collection brown"
             data-name="brown"
@@ -58,7 +65,7 @@ class InputTagCollection extends Component {
             <h6 data-name="brown">BROWN</h6>
           </div>
         ) : null}
-        {filter.navy ? (
+        {color.navy ? (
           <div
             className="collection navy"
             data-name="navy"
@@ -67,7 +74,7 @@ class InputTagCollection extends Component {
             <h6 data-name="navy">NAVY</h6>
           </div>
         ) : null}
-        {filter.blue ? (
+        {color.blue ? (
           <div
             className="collection blue"
             data-name="blue"
@@ -76,7 +83,7 @@ class InputTagCollection extends Component {
             <h6 data-name="blue">BLUE</h6>
           </div>
         ) : null}
-        {filter.yellow ? (
+        {color.yellow ? (
           <div
             className="collection yellow"
             data-name="yellow"
@@ -85,7 +92,7 @@ class InputTagCollection extends Component {
             <h6 data-name="yellow">YELLOW</h6>
           </div>
         ) : null}
-        {filter.pink ? (
+        {color.pink ? (
           <div
             className="collection pink"
             data-name="pink"
@@ -94,7 +101,7 @@ class InputTagCollection extends Component {
             <h6 data-name="pink">PINK</h6>
           </div>
         ) : null}
-        {filter.purple ? (
+        {color.purple ? (
           <div
             className="collection purple"
             data-name="purple"
@@ -103,7 +110,7 @@ class InputTagCollection extends Component {
             <h6 data-name="purple">PURPLE</h6>
           </div>
         ) : null}
-        {filter.beige ? (
+        {color.beige ? (
           <div
             className="collection beige"
             data-name="beige"
@@ -112,7 +119,7 @@ class InputTagCollection extends Component {
             <h6 data-name="beige">BEIGE</h6>
           </div>
         ) : null}
-        {filter.red ? (
+        {color.red ? (
           <div
             className="collection red"
             data-name="red"
@@ -121,7 +128,7 @@ class InputTagCollection extends Component {
             <h6 data-name="red">RED</h6>
           </div>
         ) : null}
-        {filter.green ? (
+        {color.green ? (
           <div
             className="collection green"
             data-name="green"
@@ -131,7 +138,7 @@ class InputTagCollection extends Component {
           </div>
         ) : null}
         {/* ************** GENDER ************** */}
-        {filter.boy ? (
+        {gender.boy ? (
           <div
             className="collection"
             data-name="boy"
@@ -140,7 +147,7 @@ class InputTagCollection extends Component {
             <h6 data-name="boy">BOY</h6>
           </div>
         ) : null}
-        {filter.girl ? (
+        {gender.girl ? (
           <div
             className="collection"
             data-name="girl"
@@ -150,7 +157,7 @@ class InputTagCollection extends Component {
           </div>
         ) : null}
         {/* ************** MATERIAL ************** */}
-        {filter.modal ? (
+        {material.modal ? (
           <div
             className="collection"
             data-name="modal"
@@ -159,7 +166,7 @@ class InputTagCollection extends Component {
             <h6 data-name="modal">MODAL</h6>
           </div>
         ) : null}
-        {filter.cotton ? (
+        {material.cotton ? (
           <div
             className="collection"
             data-name="cotton"
@@ -168,7 +175,7 @@ class InputTagCollection extends Component {
             <h6 data-name="cotton">COTTON</h6>
           </div>
         ) : null}
-        {filter.spandex ? (
+        {material.spandex ? (
           <div
             className="collection"
             data-name="spandex"
@@ -177,7 +184,7 @@ class InputTagCollection extends Component {
             <h6 data-name="spandex">SPANDEX</h6>
           </div>
         ) : null}
-        {filter.tencel ? (
+        {material.tencel ? (
           <div
             className="collection"
             data-name="tencel"
@@ -186,7 +193,7 @@ class InputTagCollection extends Component {
             <h6 data-name="tencel">TENCEL</h6>
           </div>
         ) : null}
-        {filter.rayon ? (
+        {material.rayon ? (
           <div
             className="collection"
             data-name="rayon"
@@ -196,7 +203,7 @@ class InputTagCollection extends Component {
           </div>
         ) : null}
         {/* ************** CATEGORY ************** */}
-        {filter.innerwear ? (
+        {category.innerwear ? (
           <div
             className="collection"
             data-name="innerwear"
@@ -205,7 +212,7 @@ class InputTagCollection extends Component {
             <h6 data-name="innerwear">INNERWEAR</h6>
           </div>
         ) : null}
-        {filter.dress ? (
+        {category.dress ? (
           <div
             className="collection"
             data-name="dress"
@@ -214,7 +221,7 @@ class InputTagCollection extends Component {
             <h6 data-name="dress">DRESS</h6>
           </div>
         ) : null}
-        {filter.robe ? (
+        {category.robe ? (
           <div
             className="collection"
             data-name="robe"
@@ -223,7 +230,7 @@ class InputTagCollection extends Component {
             <h6 data-name="robe">ROBE</h6>
           </div>
         ) : null}
-        {filter.pajamas ? (
+        {category.pajamas ? (
           <div
             className="collection"
             data-name="pajamas"
@@ -232,7 +239,7 @@ class InputTagCollection extends Component {
             <h6 data-name="pajamas">PAJAMAS</h6>
           </div>
         ) : null}
-        {filter.sweater ? (
+        {category.sweater ? (
           <div
             className="collection"
             data-name="sweater"
@@ -241,7 +248,7 @@ class InputTagCollection extends Component {
             <h6 data-name="sweater">SWEATER</h6>
           </div>
         ) : null}
-        {filter.pants ? (
+        {category.pants ? (
           <div
             className="collection"
             data-name="pants"
