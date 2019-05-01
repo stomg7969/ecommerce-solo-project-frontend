@@ -1,21 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import ProductCard from "../Components/ProductCard";
 
 class ProductContainer extends Component {
   state = {
-    add: 4,
-    stop: false
+    add: 6
   };
 
   moreProducts = () => {
     this.setState(prevState => ({
-      add: prevState.add + 4
+      add: prevState.add + 6
     }));
   };
-
+  // Purpose of this function is to detect page bottom and render additional products.
   handleScroll = () => {
-    // window height
     const windowHeight =
       "innerHeight" in window
         ? window.innerHeight
@@ -30,9 +27,8 @@ class ProductContainer extends Component {
       html.offsetHeight
     );
     const scrollable = docHeight - windowHeight;
-    // console.log(scrollable);
     const scrolled = window.scrollY;
-    if (Math.ceil(scrolled) === scrollable && !this.state.stop) {
+    if (Math.ceil(scrolled) === scrollable) {
       this.moreProducts();
     }
   };
@@ -40,10 +36,6 @@ class ProductContainer extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener("scroll", this.handleScroll);
-  // }
 
   render() {
     // this.props.products.slice(this.state.start, this.state.end).map...
@@ -55,21 +47,10 @@ class ProductContainer extends Component {
     return (
       <div id="product-container">
         <p>will render more when users reach bottom of the page</p>
-        <div id="product-list">
-          {/* <Link to="/">
-          <span> |Landing Page| </span>
-        </Link> */}
-          {productList}
-        </div>
+        <div id="product-list">{productList}</div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.products
-  };
-};
-
-export default connect(mapStateToProps)(ProductContainer);
+export default ProductContainer;

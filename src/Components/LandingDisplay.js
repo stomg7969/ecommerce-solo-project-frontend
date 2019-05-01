@@ -10,7 +10,8 @@ import ProductContainer from "../Containers/ProductContainer";
 
 class LandingDisplay extends Component {
   state = {
-    userInputContainerClicked: false
+    userInputContainerClicked: false,
+    searchTerm: ""
   };
   // toggles User search/filter/sort component when clicked
   clickListener = () => {
@@ -18,6 +19,12 @@ class LandingDisplay extends Component {
       userInputContainerClicked: !prevState.userInputContainerClicked
     }));
   };
+
+  searchListener = e => {
+    console.log(e.target.value);
+    this.setState({ searchTerm: e.target.value });
+  };
+
   render() {
     return (
       <Fragment>
@@ -40,8 +47,13 @@ class LandingDisplay extends Component {
           alt="magnifier noun project"
           onClick={this.clickListener}
         />
-        {this.state.userInputContainerClicked ? <UserInputContainer /> : null}
-        <ProductContainer />
+        {this.state.userInputContainerClicked ? (
+          <UserInputContainer
+            searchTerm={this.state.searchTerm}
+            searchListener={this.searchListener}
+          />
+        ) : null}
+        <ProductContainer products={this.props.products} />
       </Fragment>
     );
   }
@@ -52,7 +64,8 @@ class LandingDisplay extends Component {
 
 const mapStateToProps = state => {
   return {
-    itemNum: state.numOfCartItems
+    itemNum: state.numOfCartItems,
+    products: state.products
   };
 };
 

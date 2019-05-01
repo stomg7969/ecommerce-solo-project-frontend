@@ -17,7 +17,11 @@ class UserInputContainer extends Component {
         <p>[ ... ] this area will include all the clicked filter terms</p>
         <p>make this be dropdown:</p>
         {/* sort filter search */}
-        <Search />
+        <Search
+          searchTerm={this.props.searchTerm}
+          searchListener={this.props.searchListener}
+          searchSubmitListener={this.props.searchSubmitListener}
+        />
         <Sort />
         <Filter />
         {/* all passed up states must be passed on to product container to filter out */}

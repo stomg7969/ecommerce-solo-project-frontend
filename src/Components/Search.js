@@ -9,12 +9,12 @@ class Search extends React.Component {
         </Link> */}
         <h3>Search section here</h3>
         <p>by product name</p>
-        <form>
+        <form onSubmit={this.props.searchSubmitListener}>
           <input
             type="text"
-            value=""
+            value={this.props.searchTerm}
             placeholder="local state in value"
-            onChange={null}
+            onChange={this.props.searchListener}
           />
           <button>Search</button>
         </form>
