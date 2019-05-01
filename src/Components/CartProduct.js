@@ -15,7 +15,8 @@ class CartProduct extends Component {
     this.setState({ eachProduct });
     this.props.dispatch({
       type: TOTAL_AMOUNT,
-      amount: parseInt(eachProduct.price) * parseInt(this.props.detail.quantity)
+      amount:
+        parseFloat(eachProduct.price) * parseInt(this.props.detail.quantity)
     });
   }
   // this dispatch does not auto render cart list numbers.
@@ -94,8 +95,8 @@ class CartProduct extends Component {
     // );
     return (
       <div>
-        <div>
-          <div>
+        <div id="cart-items-list">
+          <div className="cart items button">
             <button value="-" onClick={this.clickListener}>
               {" "}
               −{" "}
@@ -107,16 +108,17 @@ class CartProduct extends Component {
               ✚{" "}
             </button>
           </div>
-          <div>
-            <strong>name: {this.state.eachProduct.name}</strong>
+          <div className="cart items detail">
+            <strong>{this.state.eachProduct.name}</strong>
             <br />
-            <strong>category: {this.state.eachProduct.category}</strong>
+            <span>-{this.state.eachProduct.category}-</span>
             <br />
-            <strong>size: {this.props.detail.size}</strong>
+            <span>{this.props.detail.size}</span>
             <br />
           </div>
-          <strong>price: {this.state.eachProduct.price}</strong>
-          <p>for admin only, Inventory: {this.state.eachProduct.inventory}</p>
+          <div className="cart items price">
+            <strong>${this.state.eachProduct.price}0</strong>
+          </div>
         </div>
       </div>
     );

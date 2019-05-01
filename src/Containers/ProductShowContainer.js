@@ -157,7 +157,7 @@ class ProductCard extends Component {
           {/* each card has a link to product show page */}
           <div className="product details">
             <h2>{product.name}</h2>
-            <h2>${product.price}</h2>
+            <h2>${product.price}0</h2>
             <strong>Category: </strong>
             <p>{product.category}</p>
             <strong>Color: </strong>

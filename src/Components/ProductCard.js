@@ -21,7 +21,7 @@ class ProductCard extends Component {
         {product.inventory === 0 ? (
           <h6>out of stock</h6>
         ) : (
-          <h6 className="product price">${product.price}</h6>
+          <h6 className="product price">${product.price}0</h6>
         )}
         <Link to={`/products/${product.id}`}>
           <img

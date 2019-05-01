@@ -34,6 +34,7 @@ class ProductContainer extends Component {
   };
 
   componentDidMount() {
+    console.log("SCROLL EVENTLISTENER ADDED");
     window.addEventListener("scroll", this.handleScroll);
   }
 
@@ -44,12 +45,7 @@ class ProductContainer extends Component {
       .map(product => {
         return <ProductCard key={product.id} product={product} />;
       });
-    return (
-      <div id="product-container">
-        <p>will render more when users reach bottom of the page</p>
-        <div id="product-list">{productList}</div>
-      </div>
-    );
+    return <div id="product-list">{productList}</div>;
   }
 }
 

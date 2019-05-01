@@ -161,15 +161,13 @@ class CartContainer extends Component {
         {this.props.userOrder.id ? (
           <span>{this.props.userOrder.product.name} added</span>
         ) : null}
-        <h2>Cart here</h2>
+        <h2>Cart</h2>
         <div>{foundProduct}</div>
         <div>
-          {/* this maybe another component */}
-          <p>total amount will be coming from this child componenet</p>
-
           <div>
-            <form onSubmit={this.submitListener}>
-              <strong>Total: ${this.props.totalAmount}</strong>
+            <form id="submit-order-form" onSubmit={this.submitListener}>
+              <strong>Total: ${this.props.totalAmount}.00</strong>
+              <br />
               <select onChange={this.changeListener}>
                 <option name="regular" value="regular">
                   Regular
