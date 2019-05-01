@@ -9,7 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* border-style: dotted; */
   background-color: #fcf7e4;
-  text-align: center;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -19,9 +18,6 @@ img {
   width: 65%;
 }
 /* Landing page */
-#app-outter-div {
-  /* margin-left: 10% */
-}
 #landing-page {
   text-align: center;
 }
@@ -138,111 +134,127 @@ img {
 /* Container that wraps searching, filtering, and sorting */
 #user-input {
   border-style: ridge;
-  text-align: center;
   margin: 1%;
-  /* margin-left: 20%; */
-  display: flex;
   /* justify-content: space-around; */
   flex-direction: column;
 }
 /* ****************************************************** */
+/* Searching & Filtering & Sorting */
+.user-input {
+  text-align: center;
+}
+/* ****************************************************** */
 /* Searching */
 #search {
-  border-style: double;
+  /* border-style: double;
   text-align: center;
-  margin: 1%;
+  margin: 1%; */
 }
 #magnifier {
-  width: 3em;
+  width: 4em;
+}
+.magnifier {
+  text-align: center;
 }
 /* ****************************************************** */
 /* Sorting */
 #sort {
-  border-style: double;
-  text-align: center;
-  margin: 1%;
+  /* border-style: double; */
 }
 #price-sort-container {
   /* margin-left: 20%; */
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   /* flex-wrap: wrap; */
 }
 .price-sort {
   border-style: groove;
+  background-color: aliceblue;
 }
-.price-sort h5 {
+.price-sort h6 {
   /* background-color: rgb(239, 234, 225); */
   margin: 0.5em;
 }
 /* ****************************************************** */
 /* Filtering */
 #filter {
-  border-style: double;
+  /* border-style: double;
   text-align: center;
-  margin: 1%;
+  margin: 1%; */
 }
 #color-filter-container {
-  /* margin-left: 20%; */
+  /* margin-left: 1%; */
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  /* flex-wrap: wrap; */
 }
 #gender-filter-container {
   /* margin-left: 20%; */
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  /* justify-content: space-around;
+  flex-wrap: wrap; */
 }
 #material-filter-container {
   /* margin-left: 20%; */
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  /* justify-content: space-around;
+  flex-wrap: wrap; */
 }
 #category-filter-container {
-  /* margin-left: 20%; */
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
 }
 .filter {
   border-style: groove;
+  margin-left: 0.2em;
 }
-.filter h5 {
+.filter.gender {
+  background-color: aliceblue;
+}
+.filter.materials {
+  background-color: aliceblue;
+}
+.filter.categories {
+  background-color: aliceblue;
+}
+.filter h6 {
   margin: 0.5em;
 }
-#white {
-  background-color: rgb(239, 234, 225);
+.white {
+  background-color: aliceblue;
 }
-#black {
+.black {
   background-color: black;
+  color: aliceblue;
 }
-#brown {
+.brown {
   background-color: rgb(121, 81, 16);
+  color: aliceblue;
 }
-#navy {
+.navy {
   background-color: rgb(63, 74, 83);
+  color: aliceblue;
 }
-#blue {
+.blue {
   background-color: rgb(103, 157, 198);
 }
-#yellow {
+.yellow {
   background-color: rgb(254, 208, 93);
 }
-#pink {
+.pink {
   background-color: rgb(247, 187, 197);
 }
-#purple {
+.purple {
   background-color: rgb(128, 67, 154);
+  color: aliceblue;
 }
-#beige {
+.beige {
   background-color: rgb(218, 199, 176);
 }
-#red {
+.red {
   background-color: rgb(191, 64, 40);
+  color: aliceblue;
 }
-#green {
+.green {
   background-color: #57ad68;
   /* background-color: rgb(88, 167, 104); */
 }

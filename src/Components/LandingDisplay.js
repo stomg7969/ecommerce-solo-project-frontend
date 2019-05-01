@@ -10,19 +10,13 @@ import ProductContainer from "../Containers/ProductContainer";
 
 class LandingDisplay extends Component {
   state = {
-    userInputContainerClicked: false,
-    searchTerm: ""
+    userInputContainerClicked: false
   };
   // toggles User search/filter/sort component when clicked
   clickListener = () => {
     this.setState(prevState => ({
       userInputContainerClicked: !prevState.userInputContainerClicked
     }));
-  };
-
-  searchListener = e => {
-    console.log(e.target.value);
-    this.setState({ searchTerm: e.target.value });
   };
 
   render() {
@@ -41,18 +35,15 @@ class LandingDisplay extends Component {
           <img src={landingPicture} alt="moonya" />
           <p>will have a big picture (carousel)</p>
         </div>
-        <img
-          id="magnifier"
-          src={magnifier}
-          alt="magnifier noun project"
-          onClick={this.clickListener}
-        />
-        {this.state.userInputContainerClicked ? (
-          <UserInputContainer
-            searchTerm={this.state.searchTerm}
-            searchListener={this.searchListener}
+        <div className="magnifier">
+          <img
+            id="magnifier"
+            src={magnifier}
+            alt="magnifier noun project"
+            onClick={this.clickListener}
           />
-        ) : null}
+        </div>
+        {this.state.userInputContainerClicked ? <UserInputContainer /> : null}
         <ProductContainer products={this.props.products} />
       </Fragment>
     );

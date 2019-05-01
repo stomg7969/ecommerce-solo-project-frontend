@@ -4,17 +4,15 @@ class Sort extends React.Component {
   render() {
     return (
       <div id="sort">
-        <h3>Sort section here</h3>
-        <p>by price</p>
-        <strong>Sort:</strong>
+        <span>Price Sort section</span>
         <div id="price-sort-container">
           {/* mouseover event listener with onclick */}
           {/* clicking, will pass up to parent to appear as tags. */}
           <div className="price-sort">
-            <h5>$ Log - High</h5>
+            <h6>$ LOW - HIGH</h6>
           </div>
           <div className="price-sort">
-            <h5>$ High - Low</h5>
+            <h6>$ HIGH - LOW</h6>
           </div>
         </div>
       </div>
