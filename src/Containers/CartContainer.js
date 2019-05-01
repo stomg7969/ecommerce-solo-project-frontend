@@ -95,7 +95,6 @@ class CartContainer extends Component {
           console.log(r);
           this.props.history.push("/cart");
         } else {
-          // window.location.reload();
           return r.json();
         }
       })
@@ -121,7 +120,7 @@ class CartContainer extends Component {
                 inventory: prodDetail.product.inventory - prodDetail.quantity
               })
             }
-          );
+          ).then(window.location.reload());
         });
       });
   };
