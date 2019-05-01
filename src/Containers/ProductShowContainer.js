@@ -74,7 +74,7 @@ class ProductCard extends Component {
           )
             .then(r => r.json())
             .then(newOrder => {
-              this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+              this.props.dispatch({ type: ADD_TO_CART, payload: newOrder });
             });
         } else {
           console.log("POSTING");
@@ -93,7 +93,7 @@ class ProductCard extends Component {
           })
             .then(r => r.json())
             .then(newOrder => {
-              this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+              this.props.dispatch({ type: ADD_TO_CART, payload: newOrder });
               this.props.dispatch({ type: ADD_ONE });
             });
         }
@@ -112,7 +112,7 @@ class ProductCard extends Component {
         })
           .then(r => r.json())
           .then(data => {
-            // this.props.dispatch({ type: ADD_TO_CART, order: data });
+            // this.props.dispatch({ type: ADD_TO_CART, payload: data });
             // not using Redux for cart because it needs to be persisting.
             fetch(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart`, {
               method: "POST",
@@ -129,7 +129,7 @@ class ProductCard extends Component {
             })
               .then(r => r.json())
               .then(newOrder => {
-                this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+                this.props.dispatch({ type: ADD_TO_CART, payload: newOrder });
                 this.props.dispatch({ type: ADD_ONE });
               });
           });

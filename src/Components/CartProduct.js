@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { ADD_TO_CART, TOTAL_AMOUNT } from "../Types";
+import { ADD_TO_CART, TOTAL_AMOUNT, SAVE_USER } from "../Types";
 
 class CartProduct extends Component {
   state = {
@@ -12,11 +12,12 @@ class CartProduct extends Component {
     const eachProduct = this.props.products.find(
       product => product.id === this.props.detail.product_id
     );
-    this.setState({ eachProduct });
-    this.props.dispatch({
-      type: TOTAL_AMOUNT,
-      amount:
-        parseFloat(eachProduct.price) * parseInt(this.props.detail.quantity)
+    this.setState({ eachProduct }, () => {
+      this.props.dispatch({
+        type: TOTAL_AMOUNT,
+        payload:
+          parseFloat(eachProduct.price) * parseInt(this.props.detail.quantity)
+      });
     });
   }
   // this dispatch does not auto render cart list numbers.
@@ -40,7 +41,21 @@ class CartProduct extends Component {
     )
       .then(r => r.json())
       .then(updatedOrder => {
-        this.props.dispatch({ type: ADD_TO_CART, order: updatedOrder });
+        this.props.dispatch({ type: ADD_TO_CART, payload: updatedOrder });
+        // for auto update, I'm trying to re-fetch current user and update
+        // current user because that is where cart is coming from.
+        const token = localStorage.getItem("user_token");
+        fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then(r => r.json())
+          .then(data => {
+            console.log("userrrrrrrrrrrrererr", data);
+            this.props.dispatch({ type: SAVE_USER, payload: data.user });
+          });
       });
     // below option is just reload the page.
     // ********** MUST AUTO RENDER so users can keep updating fast************
@@ -53,7 +68,7 @@ class CartProduct extends Component {
     //   }
     // })
   };
-
+  // Function to remove items from the cart
   deleteFetch = token => {
     fetch(
       `${process.env.REACT_APP_HOST}/order_details/${this.props.detail.id}`,
@@ -90,9 +105,8 @@ class CartProduct extends Component {
   };
 
   render() {
-    // const eachProduct = this.props.products.find(
-    //   product => product.id === this.props.detail.product_id
-    // );
+    const { quantity, size } = this.props.detail;
+    const { name, category, imgBack, price } = this.state.eachProduct;
     return (
       <div>
         <div id="cart-items-list">
@@ -102,22 +116,25 @@ class CartProduct extends Component {
               −{" "}
             </button>
 
-            <strong>{this.props.detail.quantity}</strong>
+            <strong> {quantity} </strong>
             <button value="+" onClick={this.clickListener}>
               {" "}
               ✚{" "}
             </button>
           </div>
           <div className="cart items detail">
-            <strong>{this.state.eachProduct.name}</strong>
+            <strong>{name}</strong>
             <br />
-            <span>-{this.state.eachProduct.category}-</span>
+            <span>-{category}-</span>
             <br />
-            <span>{this.props.detail.size}</span>
+            <span>{size}</span>
             <br />
           </div>
+          <div>
+            <img src={imgBack} alt="for cart" className="cart image" />
+          </div>
           <div className="cart items price">
-            <strong>${this.state.eachProduct.price}0</strong>
+            <strong>${price}0</strong>
           </div>
         </div>
       </div>

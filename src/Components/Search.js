@@ -10,6 +10,7 @@ const Search = props => {
           placeholder="Search product name"
           onChange={props.searchListener}
         />
+        <br />
         <button>Search</button>
       </form>
     </div>

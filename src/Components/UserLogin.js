@@ -37,7 +37,7 @@ class UserLogin extends React.Component {
           this.props.history.push("/user/login");
         } else {
           // this.props.currentUser(data);
-          this.props.dispatch({ type: SAVE_USER, user: data.user });
+          this.props.dispatch({ type: SAVE_USER, payload: data.user });
           localStorage.setItem("user_token", data.jwt);
           this.props.history.push("/");
           window.location.reload();

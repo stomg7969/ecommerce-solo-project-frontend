@@ -18,7 +18,7 @@ class LandingDisplay extends Component {
       userInputContainerClicked: !prevState.userInputContainerClicked
     }));
   };
-
+  // HERE I WILL HAVE SEARCH FILTER SORT FUNCTIONS
   render() {
     return (
       <Fragment>
@@ -44,7 +44,9 @@ class LandingDisplay extends Component {
           />
         </div>
         {this.state.userInputContainerClicked ? <UserInputContainer /> : null}
-        <ProductContainer products={this.props.products} />
+        {this.props.products.length ? (
+          <ProductContainer products={this.props.products} />
+        ) : null}
       </Fragment>
     );
   }

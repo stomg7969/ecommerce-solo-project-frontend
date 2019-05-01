@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Search from "../Components/Search";
 import Sort from "../Components/Sort";
 import Filter from "../Components/Filter";
@@ -17,7 +18,7 @@ class UserInputContainer extends Component {
         lowHigh: false,
         highLow: false
       },
-      filter: {
+      color: {
         white: false,
         black: false,
         brown: false,
@@ -28,14 +29,20 @@ class UserInputContainer extends Component {
         purple: false,
         beige: false,
         red: false,
-        green: false,
+        green: false
+      },
+      gender: {
         girl: false,
-        boy: false,
+        boy: false
+      },
+      material: {
         modal: false,
         cotton: false,
         spandex: false,
         tencel: false,
-        rayon: false,
+        rayon: false
+      },
+      category: {
         innerwear: false,
         dress: false,
         robe: false,
@@ -59,16 +66,23 @@ class UserInputContainer extends Component {
       }
     });
   };
+  // At click, it will remove searchterm from chosen tag list.
+  cancelSearchTag = () => {
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        search: { inputTerm: "" }
+      }
+    });
+  };
   // Tags coming from Sort component
-  sortClickListener = e => {
+  sortClickListener = (pick, unpick) => {
     this.setState({
       passingTags: {
         ...this.state.passingTags,
         price: {
-          ...this.state.passingTags.price,
-          [e.target.dataset.name]: !this.state.passingTags.price[
-            e.target.dataset.name
-          ]
+          [pick]: !this.state.passingTags.price[pick],
+          [unpick]: false
         }
       }
     });
@@ -85,15 +99,61 @@ class UserInputContainer extends Component {
     //   }
     // }));
   };
-  // Tags coming from Filter component
-  filterClickListener = e => {
+  // COLOR Filter >> splited color, gender, material, and category because each key in this.state
+  // must be able to filter different attributes in product model.
+  colorFilterClickListener = e => {
     console.log("clicked", e.target.dataset.name);
     this.setState({
       passingTags: {
         ...this.state.passingTags,
-        filter: {
-          ...this.state.passingTags.filter,
-          [e.target.dataset.name]: !this.state.passingTags.filter[
+        color: {
+          ...this.state.passingTags.color,
+          [e.target.dataset.name]: !this.state.passingTags.color[
+            e.target.dataset.name
+          ]
+        }
+      }
+    });
+  };
+  // GENDER Filter
+  genderFilterClickListener = e => {
+    console.log("clicked", e.target.dataset.name);
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        gender: {
+          ...this.state.passingTags.gender,
+          [e.target.dataset.name]: !this.state.passingTags.gender[
+            e.target.dataset.name
+          ]
+        }
+      }
+    });
+  };
+  // MATERIAL Filter
+  materialFilterClickListener = e => {
+    console.log("clicked", e.target.dataset.name);
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        material: {
+          ...this.state.passingTags.material,
+          [e.target.dataset.name]: !this.state.passingTags.material[
+            e.target.dataset.name
+          ]
+        }
+      }
+    });
+  };
+  // CATEGORY Filter
+  categoryFilterClickListener = e => {
+    console.log("clicked", e.target.dataset.name);
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        category: {
+          ...this.state.passingTags.category,
+          [e.target.dataset.name]: !this.state.passingTags.category[
             e.target.dataset.name
           ]
         }
@@ -106,19 +166,34 @@ class UserInputContainer extends Component {
       <div id="user-input">
         <h3 className="user-input header">filter search sort here</h3>
         <div>
-          <InputTagCollection tags={this.state.passingTags} />
+          <InputTagCollection
+            tags={this.state.passingTags}
+            cancelSearchTag={this.cancelSearchTag}
+            sortClickListener={this.sortClickListener}
+            colorFilterClickListener={this.colorFilterClickListener}
+            genderFilterClickListener={this.genderFilterClickListener}
+            materialFilterClickListener={this.materialFilterClickListener}
+            categoryFilterClickListener={this.categoryFilterClickListener}
+          />
         </div>
 
-        <Search
-          searchTerm={this.state.searchTerm}
-          searchListener={this.searchListener}
-          searchSubmitListener={this.searchSubmitListener}
-        />
+        <div className="search-component">
+          <Search
+            searchTerm={this.state.searchTerm}
+            searchListener={this.searchListener}
+            searchSubmitListener={this.searchSubmitListener}
+          />
+        </div>
         <Sort sortClickListener={this.sortClickListener} />
-        <Filter filterClickListener={this.filterClickListener} />
+        <Filter
+          colorFilterClickListener={this.colorFilterClickListener}
+          genderFilterClickListener={this.genderFilterClickListener}
+          materialFilterClickListener={this.materialFilterClickListener}
+          categoryFilterClickListener={this.categoryFilterClickListener}
+        />
       </div>
     );
   }
 }
 
-export default UserInputContainer;
+export default connect()(UserInputContainer);

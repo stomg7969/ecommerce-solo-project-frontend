@@ -6,12 +6,12 @@ class ProductContainer extends Component {
     add: 6
   };
 
+  // Purpose of this function is to detect page bottom and render additional products.
   moreProducts = () => {
     this.setState(prevState => ({
       add: prevState.add + 6
     }));
   };
-  // Purpose of this function is to detect page bottom and render additional products.
   handleScroll = () => {
     const windowHeight =
       "innerHeight" in window

@@ -31,17 +31,17 @@ const reducer = (state = initialState, action) => {
   );
   switch (action.type) {
     case SAVE_USER:
-      return { ...state, activeUser: action.user };
+      return { ...state, activeUser: action.payload };
     case STORE_PRODUCTS:
-      return { ...state, products: action.products };
+      return { ...state, products: action.payload };
     case ADD_TO_CART:
-      return { ...state, userOrder: action.order };
+      return { ...state, userOrder: action.payload };
     case RENDER_ITEM_AMOUNT:
-      return { ...state, numOfCartItems: action.itemNum };
+      return { ...state, numOfCartItems: action.payload };
     case ADD_ONE:
       return { ...state, numOfCartItems: state.numOfCartItems + 1 };
     case TOTAL_AMOUNT:
-      return { ...state, totalAmount: state.totalAmount + action.amount };
+      return { ...state, totalAmount: state.totalAmount + action.payload };
     default:
       return state;
   }

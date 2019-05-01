@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import backImg from "../Assets/go_back.png";
+import { SAVE_USER } from "../Types";
 import CartProduct from "../Components/CartProduct";
 
 class CartContainer extends Component {
@@ -59,7 +60,11 @@ class CartContainer extends Component {
       })
         .then(r => r.json())
         .then(data => {
-          const pendingCart = data.user.orders.filter(
+          console.log("userrrrrrrrrrrrererr", data);
+          this.props.dispatch({ type: SAVE_USER, payload: data.user });
+        })
+        .then(() => {
+          const pendingCart = this.props.currentUser.orders.filter(
             order => order.status === "pending"
           );
           this.setState(
@@ -67,6 +72,15 @@ class CartContainer extends Component {
             console.log("state of cart is updated from CDM")
           );
         });
+      // .then(data => {
+      //   const pendingCart = data.user.orders.filter(
+      //     order => order.status === "pending"
+      //   );
+      //   this.setState(
+      //     { cart: pendingCart, haveCartInfo: true },
+      //     console.log("state of cart is updated from CDM")
+      //   );
+      // });
     }
   }
   // changes the state of shipping method
@@ -159,7 +173,7 @@ class CartContainer extends Component {
           onClick={() => this.props.history.push("/")}
         />
         {this.props.userOrder.id ? (
-          <span>{this.props.userOrder.product.name} added</span>
+          <span>{this.props.userOrder.product.name} updated</span>
         ) : null}
         <h2>Cart</h2>
         <div>{foundProduct}</div>
@@ -168,17 +182,20 @@ class CartContainer extends Component {
             <form id="submit-order-form" onSubmit={this.submitListener}>
               <strong>Total: ${this.props.totalAmount}.00</strong>
               <br />
-              <select onChange={this.changeListener}>
-                <option name="regular" value="regular">
-                  Regular
-                </option>
-                <option name="express" value="express">
-                  Express
-                </option>
-                <option name="overNight" value="over night">
-                  Over Night
-                </option>
-              </select>
+              <div>
+                <span>Choose Shipping: </span>
+                <select onChange={this.changeListener}>
+                  <option name="regular" value="regular">
+                    Regular
+                  </option>
+                  <option name="express" value="express">
+                    Express
+                  </option>
+                  <option name="overNight" value="over night">
+                    Over Night
+                  </option>
+                </select>
+              </div>
               <div>
                 <button>Pay to order</button>
               </div>

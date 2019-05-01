@@ -11,77 +11,77 @@ const Filter = props => {
             <div
               className="filter colors white"
               data-name="white"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="white">WHITE</h6>
             </div>
             <div
               className="filter colors black"
               data-name="black"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="black">BLACK</h6>
             </div>
             <div
               className="filter colors brown"
               data-name="brown"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="brown">BROWN</h6>
             </div>
             <div
               className="filter colors navy"
               data-name="navy"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="navy">NAVY</h6>
             </div>
             <div
               className="filter colors blue"
               data-name="blue"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="blue">BLUE</h6>
             </div>
             <div
               className="filter colors yellow"
               data-name="yellow"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="yellow">YELLOW</h6>
             </div>
             <div
               className="filter colors pink"
               data-name="pink"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="pink">PINK</h6>
             </div>
             <div
               className="filter colors purple"
               data-name="purple"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="purple">PURPLE</h6>
             </div>
             <div
               className="filter colors beige"
               data-name="beige"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="beige">BEIGE</h6>
             </div>
             <div
               className="filter colors red"
               data-name="red"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="red">RED</h6>
             </div>
             <div
               className="filter colors green"
               data-name="green"
-              onClick={props.filterClickListener}
+              onClick={props.colorFilterClickListener}
             >
               <h6 data-name="green">GREEN</h6>
             </div>
@@ -94,14 +94,14 @@ const Filter = props => {
             <div
               className="filter gender"
               data-name="girl"
-              onClick={props.filterClickListener}
+              onClick={props.genderFilterClickListener}
             >
               <h6 data-name="girl">GIRL</h6>
             </div>
             <div
               className="filter gender"
               data-name="boy"
-              onClick={props.filterClickListener}
+              onClick={props.genderFilterClickListener}
             >
               <h6 data-name="boy">BOY</h6>
             </div>
@@ -114,35 +114,35 @@ const Filter = props => {
             <div
               className="filter materials"
               data-name="modal"
-              onClick={props.filterClickListener}
+              onClick={props.materialFilterClickListener}
             >
               <h6 data-name="modal">MODAL</h6>
             </div>
             <div
               className="filter materials"
               data-name="cotton"
-              onClick={props.filterClickListener}
+              onClick={props.materialFilterClickListener}
             >
               <h6 data-name="cotton">COTTON</h6>
             </div>
             <div
               className="filter materials"
               data-name="spandex"
-              onClick={props.filterClickListener}
+              onClick={props.materialFilterClickListener}
             >
               <h6 data-name="spandex">SPANDEX</h6>
             </div>
             <div
               className="filter materials"
               data-name="tencel"
-              onClick={props.filterClickListener}
+              onClick={props.materialFilterClickListener}
             >
               <h6 data-name="tencel">TENCEL</h6>
             </div>
             <div
               className="filter materials"
               data-name="rayon"
-              onClick={props.filterClickListener}
+              onClick={props.materialFilterClickListener}
             >
               <h6 data-name="rayon">RAYON</h6>
             </div>
@@ -155,42 +155,42 @@ const Filter = props => {
             <div
               className="filter categories"
               data-name="innerwear"
-              onClick={props.filterClickListener}
+              onClick={props.categoryFilterClickListener}
             >
               <h6 data-name="innerwear">INNERWEAR</h6>
             </div>
             <div
               className="filter categories"
               data-name="dress"
-              onClick={props.filterClickListener}
+              onClick={props.categoryFilterClickListener}
             >
               <h6 data-name="dress">DRESS</h6>
             </div>
             <div
               className="filter categories"
               data-name="robe"
-              onClick={props.filterClickListener}
+              onClick={props.categoryFilterClickListener}
             >
               <h6 data-name="robe">ROBE</h6>
             </div>
             <div
               className="filter categories"
               data-name="pajamas"
-              onClick={props.filterClickListener}
+              onClick={props.categoryFilterClickListener}
             >
               <h6 data-name="pajamas">PAJAMAS</h6>
             </div>
             <div
               className="filter categories"
               data-name="sweater"
-              onClick={props.filterClickListener}
+              onClick={props.categoryFilterClickListener}
             >
               <h6 data-name="sweater">SWEATER</h6>
             </div>
             <div
               className="filter categories"
               data-name="pants"
-              onClick={props.filterClickListener}
+              onClick={props.categoryFilterClickListener}
             >
               <h6 data-name="pants">PANTS</h6>
             </div>

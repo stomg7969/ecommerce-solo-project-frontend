@@ -15,7 +15,7 @@ class App extends Component {
     fetch(`${process.env.REACT_APP_HOST}/products`)
       .then(r => r.json())
       .then(products =>
-        this.props.dispatch({ type: STORE_PRODUCTS, products: products })
+        this.props.dispatch({ type: STORE_PRODUCTS, payload: products })
       );
 
     if (localStorage.getItem("user_token")) {
@@ -35,10 +35,10 @@ class App extends Component {
           if (pendingOrder.length) {
             this.props.dispatch({
               type: RENDER_ITEM_AMOUNT,
-              itemNum: pendingOrder[0].details.length
+              payload: pendingOrder[0].details.length
             });
           }
-          this.props.dispatch({ type: SAVE_USER, user: data.user });
+          this.props.dispatch({ type: SAVE_USER, payload: data.user });
         });
     }
   }

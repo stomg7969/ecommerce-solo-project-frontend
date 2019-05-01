@@ -42,7 +42,7 @@ class UserSignup extends React.Component {
             this.props.history.push("/user/new");
           } else {
             // this.props.currentUser(data);
-            this.props.dispatch({ type: SAVE_USER, user: data.user });
+            this.props.dispatch({ type: SAVE_USER, payload: data.user });
             localStorage.setItem("user_token", data.jwt);
             window.location.reload();
             this.props.history.push("/");

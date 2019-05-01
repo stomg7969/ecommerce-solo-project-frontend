@@ -96,6 +96,12 @@ img {
 .cart.items {
   margin: auto;
 }
+.cart.items.detail {
+  text-align: center;
+}
+.cart.image {
+  width: 200px;
+}
 /* ****************************************************** */
 /* Products */
 /* #product-container {
@@ -154,6 +160,9 @@ img {
 }
 /* ****************************************************** */
 /* Searching */
+.search-component {
+  text-align: center;
+}
 #search {
   margin: 1em 0;
 }
