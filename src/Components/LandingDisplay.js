@@ -62,7 +62,6 @@ class LandingDisplay extends Component {
       userInputContainerClicked: !prevState.userInputContainerClicked
     }));
   };
-  // HERE I WILL HAVE SEARCH FILTER SORT FUNCTIONS that will re-render products according to user inputs
   // receive search term by users and save it to state
   searchListener = e => {
     this.setState({ searchTerm: e.target.value });
@@ -110,8 +109,12 @@ class LandingDisplay extends Component {
     //   }
     // }));
   };
-  // COLOR Filter >> splited color, gender, material, and category because each key in this.state
-  // must be able to filter different attributes in product model.
+  // COMMENT: splited color, gender, material, and category because each key in this.state
+  // ... must be able to filter different attributes in product model.
+  // Reason of moving methods and state from UserInputContainer to this component is because when clicking magnifier,
+  // ... the state is reset to default that can't happen.
+  // Lastly, decided to use pure React instead of Redux for practice purpose.
+  // **************** COLOR Filter ****************
   colorFilterClickListener = e => {
     console.log("clicked", e.target.dataset.name);
     this.setState({
@@ -126,7 +129,7 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // GENDER Filter
+  // **************** GENDER Filter ****************
   genderFilterClickListener = e => {
     console.log("clicked", e.target.dataset.name);
     this.setState({
@@ -141,7 +144,7 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // MATERIAL Filter
+  // **************** MATERIAL Filter ****************
   materialFilterClickListener = e => {
     console.log("clicked", e.target.dataset.name);
     this.setState({
@@ -156,7 +159,7 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // CATEGORY Filter
+  // **************** CATEGORY Filter ****************
   categoryFilterClickListener = e => {
     console.log("clicked", e.target.dataset.name);
     this.setState({
@@ -171,7 +174,26 @@ class LandingDisplay extends Component {
       }
     });
   };
+  // HERE HAVE FINAL SEARCH FILTER SORT FUNCTIONS that will re-render products according to user inputs
 
+  // **************** Sort
+  // .sort((x, y) => {return x.price - y.price;}
+  // y - x for reverse
+  // for sorting, I will sort the this.prop.products, then dispatch copy & sorted product
+  // **************** Search & Filter
+  // .filter(stock => stock.type.includes(this.state.filterTerm));
+  // for filter think about it, I think I need four different functions
+  // good example =>
+  // searchByTerm = () => {
+  //   console.log("searchByTerm", this.state.searchTerm);
+  //   let filteredProducts = this.state.products.filter(product =>
+  //     product.category.includes(this.state.filterTerm)
+  //   );
+  //   return filteredProducts.filter(product =>
+  //     product.name.toLowerCase().includes(this.state.searchTerm)
+  //   );
+  // };
+  // ****************************************************************
   render() {
     return (
       <Fragment>
@@ -217,9 +239,6 @@ class LandingDisplay extends Component {
     );
   }
 }
-// const LandingDisplay = () => {
-//   return ();
-// };
 
 const mapStateToProps = state => {
   return {
