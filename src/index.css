@@ -131,24 +131,31 @@ img {
   margin-top: 5%;
 }
 /* ****************************************************** */
-/* Container that wraps searching, filtering, and sorting */
+/* Searching & Filtering & Sorting */
 #user-input {
   border-style: ridge;
   margin: 1%;
   /* justify-content: space-around; */
   flex-direction: column;
 }
-/* ****************************************************** */
-/* Searching & Filtering & Sorting */
 .user-input {
   text-align: center;
+}
+#chosen-tags {
+  display: flex;
+  justify-content: space-around;
+}
+.collection {
+  border-style: groove;
+  background-color: aliceblue;
+}
+.collection h6 {
+  margin: 0.5em;
 }
 /* ****************************************************** */
 /* Searching */
 #search {
-  /* border-style: double;
-  text-align: center;
-  margin: 1%; */
+  margin: 1em 0;
 }
 #magnifier {
   width: 4em;
@@ -159,7 +166,7 @@ img {
 /* ****************************************************** */
 /* Sorting */
 #sort {
-  /* border-style: double; */
+  margin: 0.5em 0;
 }
 #price-sort-container {
   /* margin-left: 20%; */
@@ -177,10 +184,17 @@ img {
 }
 /* ****************************************************** */
 /* Filtering */
-#filter {
-  /* border-style: double;
-  text-align: center;
-  margin: 1%; */
+#filter-color {
+  margin: 0.5em 0;
+}
+#filter-gender {
+  margin: 0.5em 0;
+}
+#filter-material {
+  margin: 0.5em 0;
+}
+#filter-category {
+  margin: 0.5em 0;
 }
 #color-filter-container {
   /* margin-left: 1%; */

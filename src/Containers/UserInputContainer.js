@@ -17,7 +17,7 @@ class UserInputContainer extends Component {
         lowHigh: false,
         highLow: false
       },
-      color: {
+      filter: {
         white: false,
         black: false,
         brown: false,
@@ -28,20 +28,14 @@ class UserInputContainer extends Component {
         purple: false,
         beige: false,
         red: false,
-        green: false
-      },
-      gender: {
+        green: false,
         girl: false,
-        boy: false
-      },
-      material: {
+        boy: false,
         modal: false,
         cotton: false,
         spandex: false,
         tencel: false,
-        rayon: false
-      },
-      category: {
+        rayon: false,
         innerwear: false,
         dress: false,
         robe: false,
@@ -55,7 +49,7 @@ class UserInputContainer extends Component {
   searchListener = e => {
     this.setState({ searchTerm: e.target.value });
   };
-
+  // Search term, when submitted, sets the state in passingTags to pass down.
   searchSubmitListener = e => {
     e.preventDefault();
     this.setState({
@@ -65,6 +59,48 @@ class UserInputContainer extends Component {
       }
     });
   };
+  // Tags coming from Sort component
+  sortClickListener = e => {
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        price: {
+          ...this.state.passingTags.price,
+          [e.target.dataset.name]: !this.state.passingTags.price[
+            e.target.dataset.name
+          ]
+        }
+      }
+    });
+    // Using prevState, cannot define what 'event' is.
+    // this.setState((prevState, e) => ({
+    //   passingTags: {
+    //     ...this.state.passingTags,
+    //     price: {
+    //       ...this.state.passingTags.price,
+    //       [e.target.dataset.name]: !prevState.passingTags.price[
+    //         e.target.dataset.name
+    //       ]
+    //     }
+    //   }
+    // }));
+  };
+  // Tags coming from Filter component
+  filterClickListener = e => {
+    console.log("clicked", e.target.dataset.name);
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        filter: {
+          ...this.state.passingTags.filter,
+          [e.target.dataset.name]: !this.state.passingTags.filter[
+            e.target.dataset.name
+          ]
+        }
+      }
+    });
+  };
+
   render() {
     return (
       <div id="user-input">
@@ -78,8 +114,8 @@ class UserInputContainer extends Component {
           searchListener={this.searchListener}
           searchSubmitListener={this.searchSubmitListener}
         />
-        <Sort />
-        <Filter />
+        <Sort sortClickListener={this.sortClickListener} />
+        <Filter filterClickListener={this.filterClickListener} />
       </div>
     );
   }

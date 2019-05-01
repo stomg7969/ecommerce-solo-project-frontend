@@ -1,107 +1,204 @@
 import React from "react";
 
-class Filter extends React.Component {
-  render() {
-    return (
-      <div id="filter">
-        {/* <Link to="/">
-          <span> |Landing Page| </span>
-        </Link> */}
-        <span>Filter section here</span>
-        <div>
-          {/* mouseover event listener with onclick */}
-          {/* clicking, will pass up to parent to appear as tags. */}
-          <label>Colors:</label>
+const Filter = props => {
+  return (
+    <div id="filter">
+      <div>
+        {/* ************** COLOR ************** */}
+        <div id="filter-color">
+          <label>color</label>
           <div id="color-filter-container">
-            <div className="filter colors white">
-              <h6>WHITE</h6>
+            <div
+              className="filter colors white"
+              data-name="white"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="white">WHITE</h6>
             </div>
-            <div className="filter colors black">
-              <h6>BLACK</h6>
+            <div
+              className="filter colors black"
+              data-name="black"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="black">BLACK</h6>
             </div>
-            <div className="filter colors brown">
-              <h6>BROWN</h6>
+            <div
+              className="filter colors brown"
+              data-name="brown"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="brown">BROWN</h6>
             </div>
-            <div className="filter colors navy">
-              <h6>NAVY</h6>
+            <div
+              className="filter colors navy"
+              data-name="navy"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="navy">NAVY</h6>
             </div>
-            <div className="filter colors blue">
-              <h6>BLUE</h6>
+            <div
+              className="filter colors blue"
+              data-name="blue"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="blue">BLUE</h6>
             </div>
-            <div className="filter colors yellow">
-              <h6>YELLOW</h6>
+            <div
+              className="filter colors yellow"
+              data-name="yellow"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="yellow">YELLOW</h6>
             </div>
-            <div className="filter colors pink">
-              <h6>PINK</h6>
+            <div
+              className="filter colors pink"
+              data-name="pink"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="pink">PINK</h6>
             </div>
-            <div className="filter colors purple">
-              <h6>PURPLE</h6>
+            <div
+              className="filter colors purple"
+              data-name="purple"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="purple">PURPLE</h6>
             </div>
-            <div className="filter colors beige">
-              <h6>BEIGE</h6>
+            <div
+              className="filter colors beige"
+              data-name="beige"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="beige">BEIGE</h6>
             </div>
-            <div className="filter colors red">
-              <h6>RED</h6>
+            <div
+              className="filter colors red"
+              data-name="red"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="red">RED</h6>
             </div>
-            <div className="filter colors green">
-              <h6>GREEN</h6>
+            <div
+              className="filter colors green"
+              data-name="green"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="green">GREEN</h6>
             </div>
           </div>
-          <label>Gender:</label>
+        </div>
+        {/* ************** GENDER ************** */}
+        <div id="filter-gender">
+          <label>gender</label>
           <div id="gender-filter-container">
-            <div className="filter gender">
-              <h6>UNISEX</h6>
+            <div
+              className="filter gender"
+              data-name="girl"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="girl">GIRL</h6>
             </div>
-            <div className="filter gender">
-              <h6>GIRL</h6>
-            </div>
-            <div className="filter gender">
-              <h6>BOY</h6>
+            <div
+              className="filter gender"
+              data-name="boy"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="boy">BOY</h6>
             </div>
           </div>
-          <label>Materials:</label>
+        </div>
+        {/* ************** MATERIAL ************** */}
+        <div id="filter-material">
+          <label>materials</label>
           <div id="material-filter-container">
-            <div className="filter materials">
-              <h6>MODAL</h6>
+            <div
+              className="filter materials"
+              data-name="modal"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="modal">MODAL</h6>
             </div>
-            <div className="filter materials">
-              <h6>COTTON</h6>
+            <div
+              className="filter materials"
+              data-name="cotton"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="cotton">COTTON</h6>
             </div>
-            <div className="filter materials">
-              <h6>SPANDEX</h6>
+            <div
+              className="filter materials"
+              data-name="spandex"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="spandex">SPANDEX</h6>
             </div>
-            <div className="filter materials">
-              <h6>TENCEL</h6>
+            <div
+              className="filter materials"
+              data-name="tencel"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="tencel">TENCEL</h6>
             </div>
-            <div className="filter materials">
-              <h6>RAYON</h6>
+            <div
+              className="filter materials"
+              data-name="rayon"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="rayon">RAYON</h6>
             </div>
           </div>
-          <label>Category:</label>
+        </div>
+        {/* ************** CATEGORY ************** */}
+        <div id="filter-category">
+          <label>category</label>
           <div id="category-filter-container">
-            <div className="filter categories">
-              <h6>INNERWEAR</h6>
+            <div
+              className="filter categories"
+              data-name="innerwear"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="innerwear">INNERWEAR</h6>
             </div>
-            <div className="filter categories">
-              <h6>DRESS</h6>
+            <div
+              className="filter categories"
+              data-name="dress"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="dress">DRESS</h6>
             </div>
-            <div className="filter categories">
-              <h6>ROBE</h6>
+            <div
+              className="filter categories"
+              data-name="robe"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="robe">ROBE</h6>
             </div>
-            <div className="filter categories">
-              <h6>PAJAMAS</h6>
+            <div
+              className="filter categories"
+              data-name="pajamas"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="pajamas">PAJAMAS</h6>
             </div>
-            <div className="filter categories">
-              <h6>SWEATER</h6>
+            <div
+              className="filter categories"
+              data-name="sweater"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="sweater">SWEATER</h6>
             </div>
-            <div className="filter categories">
-              <h6>PANTS</h6>
+            <div
+              className="filter categories"
+              data-name="pants"
+              onClick={props.filterClickListener}
+            >
+              <h6 data-name="pants">PANTS</h6>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Filter;
