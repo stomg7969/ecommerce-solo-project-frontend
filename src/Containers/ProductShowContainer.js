@@ -8,7 +8,7 @@ import { ADD_TO_CART, ADD_ONE } from "../Types";
 class ProductCard extends Component {
   state = {
     imgClicked: false,
-    quantity: 0,
+    quantity: 1,
     size: ""
   };
 
@@ -130,6 +130,7 @@ class ProductCard extends Component {
               .then(r => r.json())
               .then(newOrder => {
                 this.props.dispatch({ type: ADD_TO_CART, order: newOrder });
+                this.props.dispatch({ type: ADD_ONE });
               });
           });
       }

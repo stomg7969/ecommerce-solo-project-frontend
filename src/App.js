@@ -32,10 +32,12 @@ class App extends Component {
           const pendingOrder = data.user.orders.filter(
             order => order.status === "pending"
           );
-          this.props.dispatch({
-            type: RENDER_ITEM_AMOUNT,
-            itemNum: pendingOrder[0].details.length
-          });
+          if (pendingOrder.length) {
+            this.props.dispatch({
+              type: RENDER_ITEM_AMOUNT,
+              itemNum: pendingOrder[0].details.length
+            });
+          }
           this.props.dispatch({ type: SAVE_USER, user: data.user });
         });
     }

@@ -18,7 +18,7 @@ const DeleteAccount = props => {
         props.history.push("/user/profile");
       } else {
         localStorage.removeItem("user_token");
-        alert("Deleted, bye bye");
+        alert(`Deleted, bye bye ${decoded.username}`);
         props.history.push("/");
       }
     });

@@ -10,7 +10,8 @@ import {
   STORE_PRODUCTS,
   ADD_TO_CART,
   RENDER_ITEM_AMOUNT,
-  ADD_ONE
+  ADD_ONE,
+  TOTAL_AMOUNT
 } from "./Types";
 import * as serviceWorker from "./serviceWorker";
 
@@ -18,7 +19,8 @@ const initialState = {
   activeUser: {},
   products: [],
   userOrder: {},
-  numOfCartItems: 0
+  numOfCartItems: 0,
+  totalAmount: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +40,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, numOfCartItems: action.itemNum };
     case ADD_ONE:
       return { ...state, numOfCartItems: state.numOfCartItems + 1 };
+    case TOTAL_AMOUNT:
+      return { ...state, totalAmount: state.totalAmount + action.amount };
     default:
       return state;
   }

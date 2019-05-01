@@ -18,7 +18,11 @@ class ProductCard extends Component {
       <div id="product-card">
         {/* each card has a link to product show page */}
         <h5 className="product name">{product.name}</h5>
-        <h6 className="product price">${product.price}</h6>
+        {product.inventory === 0 ? (
+          <h6>out of stock</h6>
+        ) : (
+          <h6 className="product price">${product.price}</h6>
+        )}
         <Link to={`/products/${product.id}`}>
           <img
             className="product-image"

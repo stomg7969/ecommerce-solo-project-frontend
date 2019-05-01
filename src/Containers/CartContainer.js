@@ -7,10 +7,9 @@ import CartProduct from "../Components/CartProduct";
 class CartContainer extends Component {
   state = {
     cart: {},
-    shipping_method: "",
     paid: false,
-    totalAmount: 0.0,
-    haveCartInfo: false
+    haveCartInfo: false,
+    shipping: "regular"
   };
 
   componentDidUpdate() {
@@ -48,6 +47,7 @@ class CartContainer extends Component {
       "Cart in State",
       this.state.cart
     );
+    // fetch again to auto update the cart list.
     if (this.props.currentUser.orders && !this.state.haveCartInfo) {
       console.log("RUNNING THIS?");
       const token = localStorage.getItem("user_token");
@@ -69,10 +69,61 @@ class CartContainer extends Component {
         });
     }
   }
-
-  // trying to display total amount to pay
-  addToTotal = num => {
-    this.setState(prevState => ({ totalAmount: prevState + num }));
+  // changes the state of shipping method
+  changeListener = e => {
+    this.setState({ shipping: e.target.value });
+  };
+  // once submit, it will update 'this' order with new price, shipping, and status
+  // after order, it will refresh the window to empty the cart.
+  submitListener = e => {
+    e.preventDefault();
+    console.log("aaaaaaaaa", this.state.cart[0].id);
+    fetch(`${process.env.REACT_APP_HOST}/orders/${this.state.cart[0].id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        total_amount: this.props.totalAmount,
+        shipping_method: this.state.shipping,
+        status: "ordered"
+      })
+    })
+      .then(r => {
+        if (!r.ok) {
+          console.log(r);
+          this.props.history.push("/cart");
+        } else {
+          // window.location.reload();
+          return r.json();
+        }
+      })
+      // then call below component to update inventory for each product
+      .then(orderObj => {
+        orderObj.details.forEach(prodDetail => {
+          console.log(
+            "%c INVENTORY IS BEING UPDATED",
+            "color: red; background-color: black"
+          );
+          // in case customers are not logged in, I built a customer route to authorize user to only update inventory.
+          fetch(
+            `${process.env.REACT_APP_HOST}/updateinventory/${
+              prodDetail.product.id
+            }`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+              },
+              body: JSON.stringify({
+                inventory: prodDetail.product.inventory - prodDetail.quantity
+              })
+            }
+          );
+        });
+      });
   };
 
   render() {
@@ -84,7 +135,6 @@ class CartContainer extends Component {
             key={detail.id}
             detail={detail}
             products={this.props.products}
-            amount={num => this.addToTotal(num)}
           />
         );
       });
@@ -117,17 +167,26 @@ class CartContainer extends Component {
         <div>
           {/* this maybe another component */}
           <p>total amount will be coming from this child componenet</p>
-          <strong>Total: ${this.state.totalAmount}</strong>
-          <br />
-          <strong>Choose Shipping Method: {this.state.cart.ship}</strong>
-          <br />
-          <strong>status for just admin ???: {this.state.cart.status}</strong>
-          <br />
-          {/* order time is only for Admin */}
-          {/* <p>{this.state.cart.ordered}</p> */}
-        </div>
-        <div>
-          <button onClick={null}>Pay to order</button>
+
+          <div>
+            <form onSubmit={this.submitListener}>
+              <strong>Total: ${this.props.totalAmount}</strong>
+              <select onChange={this.changeListener}>
+                <option name="regular" value="regular">
+                  Regular
+                </option>
+                <option name="express" value="express">
+                  Express
+                </option>
+                <option name="overNight" value="over night">
+                  Over Night
+                </option>
+              </select>
+              <div>
+                <button>Pay to order</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );
@@ -145,7 +204,8 @@ const mapStateToProps = state => {
   return {
     currentUser: state.activeUser,
     products: state.products,
-    userOrder: state.userOrder
+    userOrder: state.userOrder,
+    totalAmount: state.totalAmount
   };
 };
 

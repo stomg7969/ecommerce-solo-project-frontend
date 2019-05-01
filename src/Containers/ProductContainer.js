@@ -46,7 +46,6 @@ class ProductContainer extends Component {
   // }
 
   render() {
-    console.log("asdfasdf", this.state.add);
     // this.props.products.slice(this.state.start, this.state.end).map...
     const productList = this.props.products
       .slice(0, this.state.add)
