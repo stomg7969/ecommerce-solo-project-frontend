@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import landingPicture from "../Assets/moonya landing picture.jpg";
 import magnifier from "../Assets/noun_magnifier.png";
 import box from "../Assets/square_box.png";
+import { STORE_PRODUCTS } from "../Types";
 import NavBar from "./NavBar";
 import UserInputContainer from "../Containers/UserInputContainer";
 import ProductContainer from "../Containers/ProductContainer";
@@ -85,17 +86,20 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // Tags coming from Sort component
+  // Tags coming from Sort component, then call sortPRoduct function
   sortClickListener = (pick, unpick) => {
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        price: {
-          [pick]: !this.state.passingTags.price[pick],
-          [unpick]: false
+    this.setState(
+      {
+        passingTags: {
+          ...this.state.passingTags,
+          price: {
+            [pick]: !this.state.passingTags.price[pick],
+            [unpick]: false
+          }
         }
-      }
-    });
+      },
+      () => this.sortProducts(pick)
+    );
     // Using prevState, cannot define what 'event' is.
     // this.setState((prevState, e) => ({
     //   passingTags: {
@@ -174,14 +178,38 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // HERE HAVE FINAL SEARCH FILTER SORT FUNCTIONS that will re-render products according to user inputs
-
-  // **************** Sort
-  // .sort((x, y) => {return x.price - y.price;}
-  // y - x for reverse
-  // for sorting, I will sort the this.prop.products, then dispatch copy & sorted product
+  // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
+  // Sort product by price then dispatch to the store ****************
+  sortProducts = sortArgument => {
+    if (sortArgument === "lowHigh" && this.state.passingTags.price.lowHigh) {
+      const sortedProducts = this.props.products.sort(
+        (x, y) => x.price - y.price
+      );
+      this.props.dispatch({
+        type: STORE_PRODUCTS,
+        payload: [...sortedProducts]
+      });
+    } else if (
+      sortArgument === "highLow" &&
+      this.state.passingTags.price.highLow
+    ) {
+      const sortedProducts = this.props.products.sort(
+        (x, y) => y.price - x.price
+      );
+      this.props.dispatch({
+        type: STORE_PRODUCTS,
+        payload: [...sortedProducts]
+      });
+    }
+  };
   // **************** Search & Filter
-  // .filter(stock => stock.type.includes(this.state.filterTerm));
+  filterProducts = () => {
+    // Loop through this.state.passingTags keys and values, if any of them are true,
+    // then grab that key(not boolean) and filter products that include that key
+    // then dispatch to store to product.
+    // dispatching to product is okay because if I remove the tag products will come back.
+    // I NEED four different filter functions.
+  };
   // for filter think about it, I think I need four different functions
   // good example =>
   // searchByTerm = () => {
