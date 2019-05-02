@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-// import { SAVE_USER } from "../Types";
 
 class NavBar extends React.Component {
   clickListener = () => {
@@ -11,32 +10,36 @@ class NavBar extends React.Component {
   };
 
   render() {
+    const { username } = this.props.activeUser;
     return (
-      <div className="top-right button">
+      <div className="top-right button nav-1" id="navnav">
         <h4>Menu Bar here</h4>
         {localStorage.getItem("user_token") ? (
-          <h6>
-            Hello,{" "}
-            {this.props.activeUser ? this.props.activeUser.username : null}
-          </h6>
+          <h5>Hello, {this.props.activeUser ? username : null}</h5>
         ) : null}
         <div className="navbar-name">
-          <Link to="/">
-            <span> |Landing Page| </span>
+          <Link to="/" className="link-1">
+            <span> |HOME| </span>
           </Link>
         </div>
         <div className="navbar-name">
           {localStorage.getItem("user_token") ? (
-            <Link to="/user/profile">
-              <span> |User Profile| </span>
+            <Link to="/user/profile" className="link-1">
+              <span> |PROFILE| </span>
             </Link>
           ) : (
-            <Link to="/user/login">
-              <span> |Login| </span>
+            <Link to="/user/login" className="link-1">
+              <span> |LOGIN| </span>
             </Link>
           )}
+        </div>
+
+        <div className="navbar-name">
           {localStorage.getItem("user_token") ? (
-            <span onClick={this.clickListener}> |Logout| </span>
+            <span className="link-1" onClick={this.clickListener}>
+              {" "}
+              |LOGOUT|{" "}
+            </span>
           ) : null}
         </div>
       </div>

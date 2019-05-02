@@ -1,11 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
   margin-left: 15%;
   margin-right: 15%;
   margin-top: 5%;
   /* padding: 0; */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif; */
+  font-family: Raleway;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* border-style: dotted; */
@@ -15,12 +17,65 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-img {
-  width: 65%;
-}
+/* img {
+  width: 75%;
+} */
 /* Landing page */
 #landing-page {
+  width: 70%;
+  align-content: center;
   text-align: center;
+  margin: auto;
+}
+/* ****************************************************** */
+/* Go down Arrow Animation */
+/* .wrap {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+} */
+#arrow {
+  height: 50px;
+  width: auto;
+}
+/* .wrap img {
+  margin: 0px 0 0 -40px;
+  line-height: 60px;
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+} */
+.bounce {
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+  animation: bounce 3.6s ease infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  5.55556% {
+    transform: translateY(0);
+  }
+  11.11111% {
+    transform: translateY(0);
+  }
+  22.22222% {
+    transform: translateY(-15px);
+  }
+  27.77778% {
+    transform: translateY(0);
+  }
+  33.33333% {
+    transform: translateY(-15px);
+  }
+  44.44444% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 /* ****************************************************** */
 /* Navigation menue */
@@ -47,7 +102,31 @@ img {
   width: 3em;
 }
 .navbar-name {
-  margin: 5%;
+  margin: 25% auto;
+}
+#navnav {
+  padding: 24px;
+  font-family: Raleway;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+.nav-1 {
+  background: #fcf7e4;
+}
+.link-1 {
+  transition: 0.3s ease;
+  background: rgba(0, 0, 0, 0);
+  color: black;
+  font-size: 15px;
+  text-decoration: none;
+  border-top: 4px solid rgba(0, 0, 0, 0);
+  border-bottom: 4px solid rgba(0, 0, 0, 0);
+  padding: 20px 0;
+  margin: 0 20px;
+}
+.link-1:hover {
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  padding: 6px 0;
 }
 /* ****************************************************** */
 /* User login, logout, signup, profile container */

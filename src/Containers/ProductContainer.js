@@ -38,6 +38,10 @@ class ProductContainer extends Component {
     window.addEventListener("scroll", this.handleScroll);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
   render() {
     // this.props.products.slice(this.state.start, this.state.end).map...
     const productList = this.props.products

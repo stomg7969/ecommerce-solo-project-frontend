@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import landingPicture from "../Assets/moonya landing picture.jpg";
 import magnifier from "../Assets/noun_magnifier.png";
 import box from "../Assets/square_box.png";
 import { STORE_PRODUCTS } from "../Types";
 import NavBar from "./NavBar";
 import UserInputContainer from "../Containers/UserInputContainer";
 import ProductContainer from "../Containers/ProductContainer";
+import LandingFrontImg from "./LandingFrontImg";
 
 class LandingDisplay extends Component {
   // this component will have states of: [price(asc), price(dsc), color, gender, material-1, ..., material-5 , category]
@@ -225,7 +225,18 @@ class LandingDisplay extends Component {
     // I NEED four different filter functions.
   };
   // **************** Search & Filter ****************
-
+  genderFilteringTestFunc = () => {
+    const emptyArr = [];
+    const genderState = this.state.passingTags.gender;
+    for (let gender in genderState) {
+      if (genderState[gender]) {
+        emptyArr.push(gender);
+      }
+    }
+    return this.props.products.filter(product => {
+      return product.gender.includes();
+    });
+  };
   // good example =>
   // searchByTerm = () => {
   //   console.log("searchByTerm", this.state.searchTerm);
@@ -249,10 +260,16 @@ class LandingDisplay extends Component {
           </span>
         </Link>
         <div id="landing-page">
-          <h1>Moonya Ecommerce</h1>
-          <img src={landingPicture} alt="moonya" />
-          <p>will have a big picture (carousel)</p>
+          <LandingFrontImg />
+          <div className="wrap">
+            <img
+              src="http://image.flaticon.com/icons/svg/3/3907.svg"
+              id="arrow"
+              className="animated bounce"
+            />
+          </div>
         </div>
+
         <div className="magnifier">
           <img
             id="magnifier"
