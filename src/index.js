@@ -31,7 +31,20 @@ const reducer = (state = initialState, action) => {
   );
   switch (action.type) {
     case SAVE_USER:
+      // debugger;
+      // const newUser = Object.assign({}, action.payload);
+      // const length = newUser.orders.length;
+      // newUser.orders = [
+      //   ...newUser.orders.splice(0, length - 1),
+      //   Object.assign({}, newUser.orders[length - 1], { details: [] })
+      // ];
+      //
+      // newUser.orders.details = []
+
       return { ...state, activeUser: action.payload };
+    // return Object.assign({}, state, {
+    //   activeUser: newUser
+    // });
     case STORE_PRODUCTS:
       return { ...state, products: action.payload };
     case ADD_TO_CART:

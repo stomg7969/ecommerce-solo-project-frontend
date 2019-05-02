@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 class NavBar extends React.Component {
   clickListener = () => {
     localStorage.removeItem("user_token");
-    window.location.reload();
     this.props.history.push("/");
+    window.location.reload();
   };
 
   render() {

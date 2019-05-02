@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { ADD_TO_CART, TOTAL_AMOUNT, SAVE_USER } from "../Types";
+import { TOTAL_AMOUNT } from "../Types";
 
 class CartProduct extends Component {
   state = {
@@ -39,34 +39,34 @@ class CartProduct extends Component {
         })
       }
     )
-      .then(r => r.json())
-      .then(updatedOrder => {
-        this.props.dispatch({ type: ADD_TO_CART, payload: updatedOrder });
-        // for auto update, I'm trying to re-fetch current user and update
-        // current user because that is where cart is coming from.
-        const token = localStorage.getItem("user_token");
-        fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-          .then(r => r.json())
-          .then(data => {
-            console.log("userrrrrrrrrrrrererr", data);
-            this.props.dispatch({ type: SAVE_USER, payload: data.user });
-          });
+      // .then(r => r.json())
+      // .then(updatedOrder => {
+      //   this.props.dispatch({ type: ADD_TO_CART, payload: updatedOrder });
+      //   // for auto update, I'm trying to re-fetch current user and update
+      //   // current user because that is where cart is coming from.
+      //   const token = localStorage.getItem("user_token");
+      //   fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`
+      //     }
+      //   })
+      //     .then(r => r.json())
+      //     .then(data => {
+      //       console.log("userrrrrrrrrrrrererr", data);
+      //       this.props.dispatch({ type: SAVE_USER, payload: data.user });
+      //     });
+      // });
+      // below option is just reload the page.
+      // ********** MUST AUTO RENDER so users can keep updating fast************
+      .then(r => {
+        if (!r.ok) {
+          console.log(r);
+          this.props.history.push("/cart");
+        } else {
+          window.location.reload();
+        }
       });
-    // below option is just reload the page.
-    // ********** MUST AUTO RENDER so users can keep updating fast************
-    // .then(r => {
-    //   if (!r.ok) {
-    //     console.log(r);
-    //     this.props.history.push("/cart");
-    //   } else {
-    //     window.location.reload();
-    //   }
-    // })
   };
   // Function to remove items from the cart
   deleteFetch = token => {

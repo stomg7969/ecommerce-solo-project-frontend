@@ -184,17 +184,19 @@ class ProductCard extends Component {
                 <option value="medium">Medium</option>
                 <option value="large">Large</option>
               </select>
+              <br />
               <input
                 type="number"
                 name="quantity"
                 value={this.state.quantity}
                 onChange={this.changeListener}
               />
+              <br />
               <button>Add to Cart</button>
             </form>
           </div>
         </div>
-        <div>
+        <div id="flip-image-button">
           <span onClick={this.clickListener}>Flip the image</span>
         </div>
       </Fragment>

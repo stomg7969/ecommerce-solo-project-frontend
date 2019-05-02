@@ -67,24 +67,30 @@ class LandingDisplay extends Component {
   searchListener = e => {
     this.setState({ searchTerm: e.target.value });
   };
-  // Search term, when submitted, sets the state in passingTags to pass down.
+  // Search term, when submitted, sets the state in passingTags to pass down to child component. Finally call searchProducts to filter.
   searchSubmitListener = e => {
     e.preventDefault();
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        search: { inputTerm: this.state.searchTerm }
-      }
-    });
+    this.setState(
+      {
+        passingTags: {
+          ...this.state.passingTags,
+          search: { inputTerm: this.state.searchTerm }
+        }
+      },
+      () => this.searchProducts()
+    );
   };
-  // At click, it will remove searchterm from chosen tag list.
+  // At click, it will remove searchterm from chosen tag list. Then call searchProducts to filter
   cancelSearchTag = () => {
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        search: { inputTerm: "" }
-      }
-    });
+    this.setState(
+      {
+        passingTags: {
+          ...this.state.passingTags,
+          search: { inputTerm: "" }
+        }
+      },
+      () => this.searchProducts()
+    );
   };
   // Tags coming from Sort component, then call sortPRoduct function
   sortClickListener = (pick, unpick) => {
@@ -100,18 +106,19 @@ class LandingDisplay extends Component {
       },
       () => this.sortProducts(pick)
     );
-    // Using prevState, cannot define what 'event' is.
-    // this.setState((prevState, e) => ({
-    //   passingTags: {
-    //     ...this.state.passingTags,
-    //     price: {
-    //       ...this.state.passingTags.price,
-    //       [e.target.dataset.name]: !prevState.passingTags.price[
-    //         e.target.dataset.name
-    //       ]
+    // sortClickListener = e => {
+    // ******** to pass down the event to setState, store it to a variable.
+    //   const name = e.target.dataset.name;
+    //   this.setState(prevState => ({
+    //     passingTags: {
+    //       ...this.state.passingTags,
+    //       price: {
+    //         ...this.state.passingTags.price,
+    //         [name]: !prevState.passingTags.price[name]
+    //       }
     //     }
-    //   }
-    // }));
+    //   }));
+    // };
   };
   // COMMENT: splited color, gender, material, and category because each key in this.state
   // ... must be able to filter different attributes in product model.
@@ -179,7 +186,7 @@ class LandingDisplay extends Component {
     });
   };
   // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
-  // Sort product by price then dispatch to the store ****************
+  // **************** PRICE Sort & Dispatch ****************
   sortProducts = sortArgument => {
     if (sortArgument === "lowHigh" && this.state.passingTags.price.lowHigh) {
       const sortedProducts = this.props.products.sort(
@@ -202,15 +209,23 @@ class LandingDisplay extends Component {
       });
     }
   };
-  // **************** Search & Filter
-  filterProducts = () => {
+  // **************** SEARCH Filter & Dispatch ****************
+  searchProducts = () => {
+    // const filteredProducts = this.props.products.filter(product => {
+    return this.props.products.filter(product => {
+      return product.name
+        .toLowerCase()
+        .includes(this.state.passingTags.search.inputTerm);
+    });
+
     // Loop through this.state.passingTags keys and values, if any of them are true,
     // then grab that key(not boolean) and filter products that include that key
     // then dispatch to store to product.
     // dispatching to product is okay because if I remove the tag products will come back.
     // I NEED four different filter functions.
   };
-  // for filter think about it, I think I need four different functions
+  // **************** Search & Filter ****************
+
   // good example =>
   // searchByTerm = () => {
   //   console.log("searchByTerm", this.state.searchTerm);
@@ -261,7 +276,7 @@ class LandingDisplay extends Component {
           />
         ) : null}
         {this.props.products.length ? (
-          <ProductContainer products={this.props.products} />
+          <ProductContainer products={this.searchProducts()} />
         ) : null}
       </Fragment>
     );
