@@ -91,7 +91,7 @@ class CartContainer extends Component {
   // after order, it will refresh the window to empty the cart.
   submitListener = e => {
     e.preventDefault();
-    console.log("aaaaaaaaa", this.state.cart[0].id);
+    console.log("ORDERING PROCESS STARTING...", this.state.cart[0].id);
     fetch(`${process.env.REACT_APP_HOST}/orders/${this.state.cart[0].id}`, {
       method: "PATCH",
       headers: {
@@ -117,7 +117,8 @@ class CartContainer extends Component {
         orderObj.details.forEach(prodDetail => {
           console.log(
             "%c INVENTORY IS BEING UPDATED",
-            "color: red; background-color: black"
+            "color: red; background-color: black",
+            prodDetail
           );
           // in case customers are not logged in, I built a customer route to authorize user to only update inventory.
           fetch(

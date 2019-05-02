@@ -16,5 +16,6 @@ const Search = props => {
     </div>
   );
 };
-
+// If I want to render number of products after filtering, use redux. this.props.products.length.
+// Pop up next to search bar??
 export default Search;
