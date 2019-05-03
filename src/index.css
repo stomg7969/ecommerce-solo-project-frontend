@@ -201,13 +201,18 @@ code {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  border-style: groove;
   text-align: center;
-  margin: 1%;
+  /* border-style: groove; */
+  /* margin: 1%; */
+}
+#product-card-wrapper {
+  margin-bottom: 1em;
 }
 #product-card {
   border-style: groove;
   text-align: center;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  /* margin-bottom: 0.5em; */
 }
 #product-showpage {
   display: flex;
@@ -221,6 +226,9 @@ code {
 }
 .product-image {
   width: 250px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  /* margin-bottom: 1em; */
+  padding: 0.1em;
 }
 .product {
   margin: 10px auto;

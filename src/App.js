@@ -3,13 +3,16 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
 import "./App.css";
-import logo from "./Assets/moonya crown.png";
+import crown from "./Assets/moonya crown.png";
+import logo from "./Assets/moonya logo.png";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
 import UserContainer from "./Containers/UserContainer";
 import ProductShowContainer from "./Containers/ProductShowContainer";
 
 class App extends Component {
+  state = { mouseOver: false };
+
   componentDidMount() {
     // token and authorization is unnecessary because users are able to see
     // all products even when not logged in.
@@ -48,8 +51,16 @@ class App extends Component {
     return (
       <div id="app-outter-div">
         {/* Always present */}
-        <div id="moonya-logo">
-          <img src={logo} alt="moonya logo" />
+        <div
+          id="moonya-logo"
+          onMouseOver={() => this.setState(() => ({ mouseOver: true }))}
+          onMouseOut={() => this.setState(() => ({ mouseOver: false }))}
+        >
+          {this.state.mouseOver ? (
+            <img src={logo} alt="moonya logo" />
+          ) : (
+            <img src={crown} alt="moonya crown" />
+          )}
         </div>
         <Switch>
           {/* Cart will always show whether user is logged in or not, but will have restriction if not logged in. */}

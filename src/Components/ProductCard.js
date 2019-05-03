@@ -15,14 +15,16 @@ class ProductCard extends Component {
   render() {
     const { product } = this.props;
     return (
-      <div id="product-card">
+      <div id="product-card-wrapper">
         {/* each card has a link to product show page */}
-        <h5 className="product name">{product.name}</h5>
-        {product.inventory === 0 ? (
-          <h6>out of stock</h6>
-        ) : (
-          <h6 className="product price">${product.price}0</h6>
-        )}
+        <div id="product-card">
+          <h5 className="product name">{product.name}</h5>
+          {product.inventory === 0 ? (
+            <h6>out of stock</h6>
+          ) : (
+            <h6 className="product price">${product.price}0</h6>
+          )}
+        </div>
         <Link to={`/products/${product.id}`}>
           <img
             className="product-image"
