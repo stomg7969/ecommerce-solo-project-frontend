@@ -1,7 +1,6 @@
 import React from "react";
 
 const UserOrderCard = props => {
-  console.log("in here", props);
   return (
     <div className="order history table">
       <table id="order-table">

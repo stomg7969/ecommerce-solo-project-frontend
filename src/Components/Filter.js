@@ -11,77 +11,77 @@ const Filter = props => {
             <div
               className="filter colors white"
               data-name="white"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="white">WHITE</h6>
             </div>
             <div
               className="filter colors black"
               data-name="black"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="black">BLACK</h6>
             </div>
             <div
               className="filter colors brown"
               data-name="brown"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="brown">BROWN</h6>
             </div>
             <div
               className="filter colors navy"
               data-name="navy"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="navy">NAVY</h6>
             </div>
             <div
               className="filter colors blue"
               data-name="blue"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="blue">BLUE</h6>
             </div>
             <div
               className="filter colors yellow"
               data-name="yellow"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="yellow">YELLOW</h6>
             </div>
             <div
               className="filter colors pink"
               data-name="pink"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="pink">PINK</h6>
             </div>
             <div
               className="filter colors purple"
               data-name="purple"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="purple">PURPLE</h6>
             </div>
             <div
               className="filter colors beige"
               data-name="beige"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="beige">BEIGE</h6>
             </div>
             <div
               className="filter colors red"
               data-name="red"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="red">RED</h6>
             </div>
             <div
               className="filter colors green"
               data-name="green"
-              onClick={props.colorFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "color")}
             >
               <h6 data-name="green">GREEN</h6>
             </div>
@@ -94,14 +94,14 @@ const Filter = props => {
             <div
               className="filter gender"
               data-name="girl"
-              onClick={props.genderFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "gender")}
             >
               <h6 data-name="girl">GIRL</h6>
             </div>
             <div
               className="filter gender"
               data-name="boy"
-              onClick={props.genderFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "gender")}
             >
               <h6 data-name="boy">BOY</h6>
             </div>
@@ -114,35 +114,35 @@ const Filter = props => {
             <div
               className="filter materials"
               data-name="modal"
-              onClick={props.materialFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "material")}
             >
               <h6 data-name="modal">MODAL</h6>
             </div>
             <div
               className="filter materials"
               data-name="cotton"
-              onClick={props.materialFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "material")}
             >
               <h6 data-name="cotton">COTTON</h6>
             </div>
             <div
               className="filter materials"
               data-name="spandex"
-              onClick={props.materialFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "material")}
             >
               <h6 data-name="spandex">SPANDEX</h6>
             </div>
             <div
               className="filter materials"
               data-name="tencel"
-              onClick={props.materialFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "material")}
             >
               <h6 data-name="tencel">TENCEL</h6>
             </div>
             <div
               className="filter materials"
               data-name="rayon"
-              onClick={props.materialFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "material")}
             >
               <h6 data-name="rayon">RAYON</h6>
             </div>
@@ -155,42 +155,42 @@ const Filter = props => {
             <div
               className="filter categories"
               data-name="innerwear"
-              onClick={props.categoryFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "category")}
             >
               <h6 data-name="innerwear">INNERWEAR</h6>
             </div>
             <div
               className="filter categories"
               data-name="dress"
-              onClick={props.categoryFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "category")}
             >
               <h6 data-name="dress">DRESS</h6>
             </div>
             <div
               className="filter categories"
               data-name="robe"
-              onClick={props.categoryFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "category")}
             >
               <h6 data-name="robe">ROBE</h6>
             </div>
             <div
               className="filter categories"
               data-name="pajamas"
-              onClick={props.categoryFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "category")}
             >
               <h6 data-name="pajamas">PAJAMAS</h6>
             </div>
             <div
               className="filter categories"
               data-name="sweater"
-              onClick={props.categoryFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "category")}
             >
               <h6 data-name="sweater">SWEATER</h6>
             </div>
             <div
               className="filter categories"
               data-name="pants"
-              onClick={props.categoryFilterClickListener}
+              onClick={e => props.allFilterClickListener(e, "category")}
             >
               <h6 data-name="pants">PANTS</h6>
             </div>

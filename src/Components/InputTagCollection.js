@@ -42,7 +42,7 @@ class InputTagCollection extends Component {
           <div
             className="collection white"
             data-name="white"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="white">WHITE</h6>
           </div>
@@ -50,8 +50,8 @@ class InputTagCollection extends Component {
         {color.black ? (
           <div
             className="collection black"
-            data-name="balue"
-            onClick={this.props.colorFilterClickListener}
+            data-name="black"
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="black">BLACK</h6>
           </div>
@@ -60,7 +60,7 @@ class InputTagCollection extends Component {
           <div
             className="collection brown"
             data-name="brown"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="brown">BROWN</h6>
           </div>
@@ -69,7 +69,7 @@ class InputTagCollection extends Component {
           <div
             className="collection navy"
             data-name="navy"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="navy">NAVY</h6>
           </div>
@@ -78,7 +78,7 @@ class InputTagCollection extends Component {
           <div
             className="collection blue"
             data-name="blue"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="blue">BLUE</h6>
           </div>
@@ -87,7 +87,7 @@ class InputTagCollection extends Component {
           <div
             className="collection yellow"
             data-name="yellow"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="yellow">YELLOW</h6>
           </div>
@@ -96,7 +96,7 @@ class InputTagCollection extends Component {
           <div
             className="collection pink"
             data-name="pink"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="pink">PINK</h6>
           </div>
@@ -105,7 +105,7 @@ class InputTagCollection extends Component {
           <div
             className="collection purple"
             data-name="purple"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="purple">PURPLE</h6>
           </div>
@@ -114,7 +114,7 @@ class InputTagCollection extends Component {
           <div
             className="collection beige"
             data-name="beige"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="beige">BEIGE</h6>
           </div>
@@ -123,7 +123,7 @@ class InputTagCollection extends Component {
           <div
             className="collection red"
             data-name="red"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="red">RED</h6>
           </div>
@@ -132,7 +132,7 @@ class InputTagCollection extends Component {
           <div
             className="collection green"
             data-name="green"
-            onClick={this.props.colorFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "color")}
           >
             <h6 data-name="green">GREEN</h6>
           </div>
@@ -142,7 +142,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="boy"
-            onClick={this.props.genderFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "gender")}
           >
             <h6 data-name="boy">BOY</h6>
           </div>
@@ -151,7 +151,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="girl"
-            onClick={this.props.genderFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "gender")}
           >
             <h6 data-name="girl">GIRL</h6>
           </div>
@@ -161,7 +161,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="modal"
-            onClick={this.props.materialFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "material")}
           >
             <h6 data-name="modal">MODAL</h6>
           </div>
@@ -170,7 +170,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="cotton"
-            onClick={this.props.materialFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "material")}
           >
             <h6 data-name="cotton">COTTON</h6>
           </div>
@@ -179,7 +179,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="spandex"
-            onClick={this.props.materialFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "material")}
           >
             <h6 data-name="spandex">SPANDEX</h6>
           </div>
@@ -188,7 +188,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="tencel"
-            onClick={this.props.materialFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "material")}
           >
             <h6 data-name="tencel">TENCEL</h6>
           </div>
@@ -197,7 +197,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="rayon"
-            onClick={this.props.materialFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "material")}
           >
             <h6 data-name="rayon">RAYON</h6>
           </div>
@@ -207,7 +207,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="innerwear"
-            onClick={this.props.categoryFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "category")}
           >
             <h6 data-name="innerwear">INNERWEAR</h6>
           </div>
@@ -216,7 +216,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="dress"
-            onClick={this.props.categoryFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "category")}
           >
             <h6 data-name="dress">DRESS</h6>
           </div>
@@ -225,7 +225,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="robe"
-            onClick={this.props.categoryFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "category")}
           >
             <h6 data-name="robe">ROBE</h6>
           </div>
@@ -234,7 +234,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="pajamas"
-            onClick={this.props.categoryFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "category")}
           >
             <h6 data-name="pajamas">PAJAMAS</h6>
           </div>
@@ -243,7 +243,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="sweater"
-            onClick={this.props.categoryFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "category")}
           >
             <h6 data-name="sweater">SWEATER</h6>
           </div>
@@ -252,7 +252,7 @@ class InputTagCollection extends Component {
           <div
             className="collection"
             data-name="pants"
-            onClick={this.props.categoryFilterClickListener}
+            onClick={e => this.props.allFilterClickListener(e, "category")}
           >
             <h6 data-name="pants">PANTS</h6>
           </div>

@@ -67,123 +67,56 @@ class LandingDisplay extends Component {
   searchListener = e => {
     this.setState({ searchTerm: e.target.value });
   };
-  // Search term, when submitted, sets the state in passingTags to pass down to child component. Finally call searchProducts to filter.
+  // Search term, when submitted, sets the state in passingTags to pass down to child component.
+  // Reason is to begin searching for product only onSubmit, NOT onChange.
   searchSubmitListener = e => {
     e.preventDefault();
-    this.setState(
-      {
-        passingTags: {
-          ...this.state.passingTags,
-          search: { inputTerm: this.state.searchTerm }
-        }
-      },
-      () => this.searchProducts()
-    );
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        search: { inputTerm: this.state.searchTerm }
+      }
+    });
   };
-  // At click, it will remove searchterm from chosen tag list. Then call searchProducts to filter
+  // At click, it will remove searchterm from chosen tag list.
   cancelSearchTag = () => {
-    this.setState(
-      {
-        passingTags: {
-          ...this.state.passingTags,
-          search: { inputTerm: "" }
-        }
-      },
-      () => this.searchProducts()
-    );
+    this.setState({
+      passingTags: {
+        ...this.state.passingTags,
+        search: { inputTerm: "" }
+      }
+    });
   };
   // Tags coming from Sort component, then call sortPRoduct function
   sortClickListener = (pick, unpick) => {
     this.setState(
-      {
+      prevState => ({
         passingTags: {
           ...this.state.passingTags,
           price: {
-            [pick]: !this.state.passingTags.price[pick],
+            [pick]: !prevState.passingTags.price[pick],
             [unpick]: false
           }
         }
-      },
+      }),
       () => this.sortProducts(pick)
     );
-    // sortClickListener = e => {
-    // ******** to pass down the event to setState, store it to a variable.
-    //   const name = e.target.dataset.name;
-    //   this.setState(prevState => ({
-    //     passingTags: {
-    //       ...this.state.passingTags,
-    //       price: {
-    //         ...this.state.passingTags.price,
-    //         [name]: !prevState.passingTags.price[name]
-    //       }
-    //     }
-    //   }));
-    // };
   };
-  // COMMENT: splited color, gender, material, and category because each key in this.state
-  // ... must be able to filter different attributes in product model.
   // Reason of moving methods and state from UserInputContainer to this component is because when clicking magnifier,
   // ... the state is reset to default that can't happen.
-  // Lastly, decided to use pure React instead of Redux for practice purpose.
-  // **************** COLOR Filter ****************
-  colorFilterClickListener = e => {
-    console.log("clicked", e.target.dataset.name);
-    this.setState({
+  // **************** UNIVERSAL Filter **************** (Accepts color, gender, material, and category)
+  allFilterClickListener = (e, filterProp) => {
+    console.log("FILTER clicked", e.target.dataset.name);
+    const name = e.target.dataset.name;
+    this.setState(prevState => ({
       passingTags: {
-        ...this.state.passingTags,
-        color: {
-          ...this.state.passingTags.color,
-          [e.target.dataset.name]: !this.state.passingTags.color[
-            e.target.dataset.name
-          ]
+        ...prevState.passingTags,
+        [filterProp]: {
+          ...prevState.passingTags[filterProp],
+          [name]: !prevState.passingTags[filterProp][name]
         }
       }
-    });
-  };
-  // **************** GENDER Filter ****************
-  genderFilterClickListener = e => {
-    console.log("clicked", e.target.dataset.name);
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        gender: {
-          ...this.state.passingTags.gender,
-          [e.target.dataset.name]: !this.state.passingTags.gender[
-            e.target.dataset.name
-          ]
-        }
-      }
-    });
-  };
-  // **************** MATERIAL Filter ****************
-  materialFilterClickListener = e => {
-    console.log("clicked", e.target.dataset.name);
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        material: {
-          ...this.state.passingTags.material,
-          [e.target.dataset.name]: !this.state.passingTags.material[
-            e.target.dataset.name
-          ]
-        }
-      }
-    });
-  };
-  // **************** CATEGORY Filter ****************
-  categoryFilterClickListener = e => {
-    console.log("clicked", e.target.dataset.name);
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        category: {
-          ...this.state.passingTags.category,
-          [e.target.dataset.name]: !this.state.passingTags.category[
-            e.target.dataset.name
-          ]
-        }
-      }
-    });
+    }));
   };
   // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
   // **************** PRICE Sort & Dispatch ****************
@@ -209,45 +142,69 @@ class LandingDisplay extends Component {
       });
     }
   };
+  // **************** Collect all keys and Filter ****************
+  // This function collects ALL keys that have true as a value, then create a new obj to compare to filter.
+  filteredCollected = () => {
+    const collectedTrueKeys = {
+      searchTerm: this.state.passingTags.search.inputTerm,
+      color: [],
+      gender: [],
+      material: [],
+      category: []
+    };
+    const { color, gender, material, category } = this.state.passingTags;
+    for (let colorKey in color) {
+      if (color[colorKey]) collectedTrueKeys.color.push(colorKey);
+    }
+    for (let genderKey in gender) {
+      if (gender[genderKey]) collectedTrueKeys.gender.push(genderKey);
+    }
+    for (let materialKey in material) {
+      if (material[materialKey]) collectedTrueKeys.material.push(materialKey);
+    }
+    for (let categoryKey in category) {
+      if (category[categoryKey]) collectedTrueKeys.category.push(categoryKey);
+    }
+    return collectedTrueKeys;
+  };
+  // Resource: https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
+  multiPropsFilter = (products, filters) => {
+    const filterKeys = Object.keys(filters);
+    return products.filter(product => {
+      return filterKeys.every(key => {
+        if (!filters[key].length) return true;
+        // if (Array.isArray(product[key])) {
+        //   for (let i = 0; i < product[key].length; i++) {
+        //     return filters[key].includes(product[key][i]);
+        //   }
+        // }
+        return filters[key].includes(product[key]);
+      });
+    });
+  };
+
   // **************** SEARCH Filter & Dispatch ****************
   searchProducts = () => {
-    // const filteredProducts = this.props.products.filter(product => {
-    return this.props.products.filter(product => {
-      return product.name
-        .toLowerCase()
-        .includes(this.state.passingTags.search.inputTerm);
-    });
-
-    // Loop through this.state.passingTags keys and values, if any of them are true,
-    // then grab that key(not boolean) and filter products that include that key
-    // then dispatch to store to product.
-    // dispatching to product is okay because if I remove the tag products will come back.
-    // I NEED four different filter functions.
-  };
-  // **************** Search & Filter ****************
-  genderFilteringTestFunc = () => {
-    const emptyArr = [];
-    const genderState = this.state.passingTags.gender;
-    for (let gender in genderState) {
-      if (genderState[gender]) {
-        emptyArr.push(gender);
-      }
+    const filteredProducts = this.multiPropsFilter(
+      this.props.products,
+      this.filteredCollected()
+    );
+    console.log("filteredCollected called =>", filteredProducts);
+    if (filteredProducts.length === 0) {
+      return this.props.products.filter(product => {
+        return product.name
+          .toLowerCase()
+          .includes(this.state.passingTags.search.inputTerm);
+      });
+    } else {
+      return filteredProducts.filter(product => {
+        return product.name
+          .toLowerCase()
+          .includes(this.state.passingTags.search.inputTerm);
+      });
     }
-    return this.props.products.filter(product => {
-      return product.gender.includes();
-    });
   };
-  // good example =>
-  // searchByTerm = () => {
-  //   console.log("searchByTerm", this.state.searchTerm);
-  //   let filteredProducts = this.state.products.filter(product =>
-  //     product.category.includes(this.state.filterTerm)
-  //   );
-  //   return filteredProducts.filter(product =>
-  //     product.name.toLowerCase().includes(this.state.searchTerm)
-  //   );
-  // };
-  // ****************************************************************
+
   render() {
     return (
       <Fragment>
@@ -264,6 +221,7 @@ class LandingDisplay extends Component {
           <div className="wrap">
             <img
               src="http://image.flaticon.com/icons/svg/3/3907.svg"
+              alt="user navigation animation"
               id="arrow"
               className="animated bounce"
             />
@@ -283,10 +241,7 @@ class LandingDisplay extends Component {
             tags={this.state.passingTags}
             cancelSearchTag={this.cancelSearchTag}
             sortClickListener={this.sortClickListener}
-            colorFilterClickListener={this.colorFilterClickListener}
-            genderFilterClickListener={this.genderFilterClickListener}
-            materialFilterClickListener={this.materialFilterClickListener}
-            categoryFilterClickListener={this.categoryFilterClickListener}
+            allFilterClickListener={this.allFilterClickListener}
             searchTerm={this.state.searchTerm}
             searchListener={this.searchListener}
             searchSubmitListener={this.searchSubmitListener}

@@ -15,10 +15,7 @@ class UserInputContainer extends Component {
             tags={this.props.tags}
             cancelSearchTag={this.props.cancelSearchTag}
             sortClickListener={this.props.sortClickListener}
-            colorFilterClickListener={this.props.colorFilterClickListener}
-            genderFilterClickListener={this.props.genderFilterClickListener}
-            materialFilterClickListener={this.props.materialFilterClickListener}
-            categoryFilterClickListener={this.props.categoryFilterClickListener}
+            allFilterClickListener={this.props.allFilterClickListener}
           />
         </div>
 
@@ -30,12 +27,7 @@ class UserInputContainer extends Component {
           />
         </div>
         <Sort sortClickListener={this.props.sortClickListener} />
-        <Filter
-          colorFilterClickListener={this.props.colorFilterClickListener}
-          genderFilterClickListener={this.props.genderFilterClickListener}
-          materialFilterClickListener={this.props.materialFilterClickListener}
-          categoryFilterClickListener={this.props.categoryFilterClickListener}
-        />
+        <Filter allFilterClickListener={this.props.allFilterClickListener} />
       </div>
     );
   }
