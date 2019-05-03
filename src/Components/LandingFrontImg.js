@@ -5,13 +5,12 @@ import picture1 from "../Assets/moonya landing picture 1.jpg";
 import picture2 from "../Assets/moonya landing picture 2.jpg";
 import picture3 from "../Assets/moonya landing picture 3.jpg";
 import picture4 from "../Assets/moonya landing picture 4.jpg";
+// import logo from "../Assets/moonya crown.png";
 
 class LandingFrontImg extends Component {
   render() {
     return (
       <Fragment>
-        <h1>Moonya Ecommerce</h1>
-        {/*<img src={landingPicture} alt="abc" />*/}
         <CarouselProvider
           naturalSlideWidth={50}
           naturalSlideHeight={35}

@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
 import "./App.css";
+import logo from "./Assets/moonya crown.png";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
 import UserContainer from "./Containers/UserContainer";
@@ -47,7 +48,9 @@ class App extends Component {
     return (
       <div id="app-outter-div">
         {/* Always present */}
-
+        <div id="moonya-logo">
+          <img src={logo} alt="moonya logo" />
+        </div>
         <Switch>
           {/* Cart will always show whether user is logged in or not, but will have restriction if not logged in. */}
           <Route path="/cart" component={CartContainer} />

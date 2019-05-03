@@ -13,7 +13,7 @@ class NavBar extends React.Component {
     const { username } = this.props.activeUser;
     return (
       <div className="top-right button nav-1" id="navnav">
-        <h4>Menu Bar here</h4>
+        <h4>MENU</h4>
         {localStorage.getItem("user_token") ? (
           <h5>Hello, {this.props.activeUser ? username : null}</h5>
         ) : null}

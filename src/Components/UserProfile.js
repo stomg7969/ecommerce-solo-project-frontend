@@ -22,7 +22,7 @@ class UserProfile extends Component {
   render() {
     return (
       <div id="user-profile">
-        <h3>profile info here</h3>
+        <h3>PROFILE</h3>
         <Switch>
           <Route path="/user/profile/update" component={PasswordUpdate} />
           <Route path="/user/profile/delete" component={DeleteAccount} />
@@ -38,9 +38,11 @@ class UserProfile extends Component {
                   <Link to="/user/profile/update">
                     <button>Change PW</button>
                   </Link>
+                  <br />
                   <Link to="/user/profile/delete">
                     <button>Delete Accout</button>
                   </Link>
+                  <br />
                   <Link to="/user/profile/orders">
                     <span>See All my orders</span>
                   </Link>

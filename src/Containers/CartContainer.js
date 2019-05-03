@@ -142,8 +142,12 @@ class CartContainer extends Component {
 
   render() {
     let foundProduct;
+    console.log(this.state.cart[0]);
     if (this.state.cart[0]) {
-      foundProduct = this.state.cart[0].details.map(detail => {
+      const sortedCart = this.state.cart[0].details.sort(
+        (x, y) => x.product_id - y.product_id
+      );
+      foundProduct = sortedCart.map(detail => {
         return (
           <CartProduct
             key={detail.id}
