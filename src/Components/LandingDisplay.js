@@ -146,7 +146,6 @@ class LandingDisplay extends Component {
   // This function collects ALL keys that have true as a value, then create a new obj to compare to filter.
   filteredCollected = () => {
     const collectedTrueKeys = {
-      searchTerm: this.state.passingTags.search.inputTerm,
       color: [],
       gender: [],
       material: [],
@@ -173,11 +172,12 @@ class LandingDisplay extends Component {
     return products.filter(product => {
       return filterKeys.every(key => {
         if (!filters[key].length) return true;
-        // if (Array.isArray(product[key])) {
-        //   for (let i = 0; i < product[key].length; i++) {
-        //     return filters[key].includes(product[key][i]);
-        //   }
-        // }
+        // In addition to the resource, I added below five lines because product[key] is an array for material attribute.
+        if (Array.isArray(product[key])) {
+          for (let i = 0; i < product[key].length; i++) {
+            return filters[key].includes(product[key][i]);
+          }
+        }
         return filters[key].includes(product[key]);
       });
     });
@@ -189,20 +189,11 @@ class LandingDisplay extends Component {
       this.props.products,
       this.filteredCollected()
     );
-    console.log("filteredCollected called =>", filteredProducts);
-    if (filteredProducts.length === 0) {
-      return this.props.products.filter(product => {
-        return product.name
-          .toLowerCase()
-          .includes(this.state.passingTags.search.inputTerm);
-      });
-    } else {
-      return filteredProducts.filter(product => {
-        return product.name
-          .toLowerCase()
-          .includes(this.state.passingTags.search.inputTerm);
-      });
-    }
+    return filteredProducts.filter(product => {
+      return product.name
+        .toLowerCase()
+        .includes(this.state.passingTags.search.inputTerm);
+    });
   };
 
   render() {
