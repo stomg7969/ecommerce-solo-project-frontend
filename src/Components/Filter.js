@@ -6,7 +6,7 @@ const Filter = props => {
       <div>
         {/* ************** COLOR ************** */}
         <div id="filter-color">
-          <label>color</label>
+          <label>COLOR</label>
           <div id="color-filter-container">
             <div
               className="filter colors white"
@@ -89,7 +89,7 @@ const Filter = props => {
         </div>
         {/* ************** GENDER ************** */}
         <div id="filter-gender">
-          <label>gender</label>
+          <label>GENDER</label>
           <div id="gender-filter-container">
             <div
               className="filter gender"
@@ -109,7 +109,7 @@ const Filter = props => {
         </div>
         {/* ************** MATERIAL ************** */}
         <div id="filter-material">
-          <label>materials</label>
+          <label>MATERIAL</label>
           <div id="material-filter-container">
             <div
               className="filter materials"
@@ -150,7 +150,7 @@ const Filter = props => {
         </div>
         {/* ************** CATEGORY ************** */}
         <div id="filter-category">
-          <label>category</label>
+          <label>CATEGORY</label>
           <div id="category-filter-container">
             <div
               className="filter categories"

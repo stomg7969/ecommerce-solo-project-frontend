@@ -52,6 +52,8 @@ button {
 button:hover {
   font-size: 20px;
 }
+/* ************* Input CSS ************* */
+/* https://codepen.io/SMLMRKHLMS/pen/qxtDw */
 .input {
   background-color: transparent;
   border: none;
@@ -76,7 +78,82 @@ input:focus::-webkit-input-placeholder {
   color: black;
 }
 /* ****************************************************** */
-/* Go down Arrow Animation */
+/* ************* DROPDOWN Select menu ************* */
+/* https://codepen.io/bello/pen/wopvbN?editors=1100 */
+label.dropdown select {
+  padding: 10px 42px 10px 10px;
+  background: #f8f8f8;
+  color: #444;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+label.dropdown select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #444;
+}
+label.dropdown select::-ms-expand {
+  display: none;
+}
+label.dropdown:before {
+  content: "";
+  right: 5px;
+  top: -7px;
+  width: 30px;
+  height: 33px;
+  background: #f8f8f8;
+  position: absolute;
+  pointer-events: none;
+  display: block;
+}
+label.dropdown {
+  position: relative;
+}
+label.dropdown:after {
+  content: ">";
+  font: 16px Consolas, monospace;
+  color: #444;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 2px;
+  top: 5px;
+  position: absolute;
+  pointer-events: none;
+  width: 50px;
+  padding: 0 0 5px 0;
+  text-indent: 14px;
+}
+@media screen\0 {
+  label.dropdown:after {
+    width: 38px;
+    text-indent: 15px;
+    right: 0;
+  }
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  label.dropdown select {
+    padding-right: 40px;
+  }
+  label.dropdown:before {
+    right: 6px;
+  }
+  label.dropdown:after {
+    text-indent: 14px;
+    right: 6px;
+    top: -5px;
+    width: 36px;
+  }
+}
+/* ****************************************************** */
+/* ************* Go down Arrow Animation ************* */
+/* https://codepen.io/bunyaminakin/pen/XjqxgL */
 /* .wrap {
   height: 100%;
   width: 100%;
@@ -121,6 +198,7 @@ input:focus::-webkit-input-placeholder {
   }
 }
 /* ****************************************************** */
+/* ****************************************************** */
 /* Navigation menue */
 .top-right {
   border-style: double;
@@ -139,6 +217,8 @@ input:focus::-webkit-input-placeholder {
 .navbar-name {
   margin: 25% auto;
 }
+/* **************** Hover Menu Bar **************** */
+/* https://codepen.io/Calloumi/pen/vndlH */
 #navnav {
   margin: 1% 0 0 2%;
   padding: 24px;
@@ -164,6 +244,7 @@ input:focus::-webkit-input-placeholder {
   border-bottom: 4px solid black;
   padding: 6px 0;
 }
+/* ****************************************************** */
 /* ****************************************************** */
 /* User login, logout, signup, profile container */
 #user-container {
@@ -286,15 +367,96 @@ input:focus::-webkit-input-placeholder {
 .customer-input form {
   margin-left: 1em;
 }
-#flip-image-button {
-  text-align: center;
-  padding: 1em 0 0 15em;
+/* ***************** Flip image ***************** */
+/*  https://codepen.io/himalayasingh/pen/PdqbqV?editors=1100  */
+section {
+  width: 150px;
+  background-color: transparent;
+  /* box-shadow: 0px 5px 35px #d7d7d7; */
+  border-radius: 35px;
+  margin: auto;
 }
+.toggle-btn {
+  position: relative;
+  width: 55px;
+  height: 30px;
+  /* margin: 0; */
+  border-radius: 40px;
+}
+input[type="checkbox"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: 0px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+}
+#flip-toggle-btn {
+  /* margin: 60px auto 76px auto; */
+}
+#flip-toggle-btn span {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border: 3px solid #b3b3b3;
+  border-color: #82c1d6;
+  overflow: hidden;
+  background-color: #c0e6f6;
+  border-radius: 40px;
+  transition: 0.8s ease border-color;
+}
+#flip-toggle-btn span:before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 20px;
+  height: 20px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: tan;
+  background-color: #f5e63d;
+  margin-left: 0px;
+  border-radius: 50%;
+  transform: translate(0px, 7px);
+  transition: 0.4s ease border-radius, 0.4s ease transform, 0.6s ease width,
+    0.6s ease margin-left, 0.8s ease border-color;
+}
+#flip-toggle-btn input[type="checkbox"]:active + span:before {
+  width: 80px;
+  border-radius: 40px;
+}
+#flip-toggle-btn input[type="checkbox"]:checked:active + span:before {
+  margin-left: -22px;
+}
+#flip-toggle-btn input[type="checkbox"]:checked + span {
+  border-color: #000;
+  background-color: #484848;
+}
+#flip-toggle-btn input[type="checkbox"]:checked + span:before {
+  border-color: #e1e4c5;
+  transform: translate(23px, 7px);
+}
+#flip-toggle-btn label {
+  position: absolute;
+  margin-left: 0.7em;
+  margin-top: 2em;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+/* ****************************************************** */
 /* ****************************************************** */
 /* Searching & Filtering & Sorting */
 #user-input {
-  border-style: ridge;
-  margin: 1%;
+  /* border-style: ridge; */
+  margin: 2%;
   /* justify-content: space-around; */
   flex-direction: column;
 }

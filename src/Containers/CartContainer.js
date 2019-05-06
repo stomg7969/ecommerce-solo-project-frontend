@@ -189,17 +189,19 @@ class CartContainer extends Component {
               <br />
               <div>
                 <span>Choose Shipping: </span>
-                <select onChange={this.changeListener}>
-                  <option name="regular" value="regular">
-                    Regular
-                  </option>
-                  <option name="express" value="express">
-                    Express
-                  </option>
-                  <option name="overNight" value="over night">
-                    Over Night
-                  </option>
-                </select>
+                <label className="dropdown">
+                  <select onChange={this.changeListener}>
+                    <option name="regular" value="regular">
+                      Regular
+                    </option>
+                    <option name="express" value="express">
+                      Express
+                    </option>
+                    <option name="overNight" value="over night">
+                      Over Night
+                    </option>
+                  </select>
+                </label>
               </div>
               <div>
                 <button>Pay to order</button>

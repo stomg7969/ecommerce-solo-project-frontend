@@ -179,12 +179,14 @@ class ProductCard extends Component {
           <div className="customer-input">
             <form onSubmit={this.submitListener}>
               <div>
-                <select name="size" onChange={this.changeListener}>
-                  <option value="">Select size:</option>
-                  <option value="small">Small</option>
-                  <option value="medium">Medium</option>
-                  <option value="large">Large</option>
-                </select>
+                <label className="dropdown">
+                  <select name="size" onChange={this.changeListener}>
+                    <option value="">Select size:</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                  </select>
+                </label>
               </div>
               <br />
               <div>
@@ -202,9 +204,17 @@ class ProductCard extends Component {
             </form>
           </div>
         </div>
-        <div id="flip-image-button">
-          <span onClick={this.clickListener}>Flip the image</span>
-        </div>
+        <section>
+          <div
+            className="toggle-btn"
+            id="flip-toggle-btn"
+            onClick={this.clickListener}
+          >
+            <input type="checkbox" />
+            <span />
+            <label htmlFor="flip-toggle-btn">FLIP</label>
+          </div>
+        </section>
       </Fragment>
     );
   }
