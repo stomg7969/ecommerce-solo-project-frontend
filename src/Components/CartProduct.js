@@ -112,14 +112,11 @@ class CartProduct extends Component {
         <div id="cart-items-list">
           <div className="cart items button">
             <button value="-" onClick={this.clickListener}>
-              {" "}
-              −{" "}
+              −
             </button>
-
-            <strong> {quantity} </strong>
+            <strong id="quantity"> {quantity} </strong>
             <button value="+" onClick={this.clickListener}>
-              {" "}
-              ✚{" "}
+              ✚
             </button>
           </div>
           <div className="cart items detail">

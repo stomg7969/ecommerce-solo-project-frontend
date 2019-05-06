@@ -11,11 +11,7 @@ class PasswordUpdate extends Component {
   changeListener = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  // jsonwebtoken library.
-  // I don't have to passdown user props from parent component.
-  // I can just get user_id right away.
-
-  // updates user password.
+  // Submits updated password and PATCH request.
   submitListener = e => {
     e.preventDefault();
     const { newPW, confirmPW } = this.state;
@@ -50,34 +46,44 @@ class PasswordUpdate extends Component {
       <div id="update-form">
         <form onSubmit={this.submitListener}>
           {/* input type is text for testing purpose */}
-          <input
-            type="text"
-            placeholder="current password"
-            name="currentPW"
-            value={currentPW}
-            onChange={this.changeListener}
-          />
+          <div className="wrapper">
+            <input
+              className="input"
+              type="text"
+              placeholder="current password"
+              name="currentPW"
+              value={currentPW}
+              onChange={this.changeListener}
+            />
+          </div>
           <br />
-          <input
-            type="text"
-            placeholder="new password"
-            name="newPW"
-            value={newPW}
-            onChange={this.changeListener}
-          />
+          <div className="wrapper">
+            <input
+              className="input"
+              type="text"
+              placeholder="new password"
+              name="newPW"
+              value={newPW}
+              onChange={this.changeListener}
+            />
+          </div>
           <br />
-          <input
-            type="text"
-            placeholder="confirm password"
-            name="confirmPW"
-            value={confirmPW}
-            onChange={this.changeListener}
-          />
+          <div className="wrapper">
+            <input
+              className="input"
+              type="text"
+              placeholder="confirm password"
+              name="confirmPW"
+              value={confirmPW}
+              onChange={this.changeListener}
+            />
+          </div>
           <br />
           <button>change</button>
         </form>
+        <br />
         <Link to="/user/profile">
-          <span>Cancel</span>
+          <button>Cancel</button>
         </Link>
       </div>
     );

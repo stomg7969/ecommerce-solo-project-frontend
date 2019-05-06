@@ -51,27 +51,33 @@ class UserLogin extends React.Component {
       <div>
         <h3>Login</h3>
         <form onSubmit={this.submitListener}>
-          <label>Name</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.changeListener}
-          />
+          <div>
+            <input
+              className="input"
+              type="text"
+              name="username"
+              placeholder="username"
+              value={username}
+              onChange={this.changeListener}
+            />
+          </div>
           <br />
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.changeListener}
-          />
+          <div>
+            <input
+              className="input"
+              type="password"
+              name="password"
+              placeholder="password"
+              value={password}
+              onChange={this.changeListener}
+            />
+          </div>
           <br />
           <button>Login</button>
         </form>
         <Link to="/user/new">
           {" "}
-          <span>sign up</span>
+          <button>sign up</button>
         </Link>
       </div>
     );

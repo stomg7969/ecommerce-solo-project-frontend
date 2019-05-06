@@ -23,7 +23,7 @@ class UserContainer extends Component {
             {this.props.itemNum ? this.props.itemNum : 0}
           </span>
         </Link>
-        <h2>User profile comps here</h2>
+        <h2>{this.props.currentUser.username}</h2>
         <div id="user-container">
           <Switch>
             <Route path="/user/new" component={UserSignup} />
@@ -38,7 +38,8 @@ class UserContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    itemNum: state.numOfCartItems
+    itemNum: state.numOfCartItems,
+    currentUser: state.activeUser
   };
 };
 

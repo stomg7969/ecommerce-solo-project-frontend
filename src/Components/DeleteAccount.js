@@ -28,7 +28,8 @@ const DeleteAccount = props => {
 
   return (
     <div>
-      <h4>delete confirmation message here</h4>
+      <h4>Delete confirmation</h4>
+      <br />
       <button onClick={() => confirmDeleteListener()}>Yes</button>
       <button onClick={() => props.history.push("/user/profile")}>No</button>
     </div>

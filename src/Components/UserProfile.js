@@ -6,23 +6,10 @@ import DeleteAccount from "./DeleteAccount";
 import UserOrdersList from "./UserOrdersList";
 
 class UserProfile extends Component {
-  componentDidMount() {
-    const jwt = require("jsonwebtoken");
-    const token = localStorage.getItem("user_token");
-    const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
-    //
-    console.log(
-      "%c IN USER PROFILE",
-      "background: #222; color: yellow",
-      "jwt decoded: ",
-      decoded
-    );
-  }
-  // profile page. has a button that calls PasswordUpdate component
   render() {
     return (
       <div id="user-profile">
-        <h3>PROFILE</h3>
+        <br />
         <Switch>
           <Route path="/user/profile/update" component={PasswordUpdate} />
           <Route path="/user/profile/delete" component={DeleteAccount} />
@@ -39,12 +26,12 @@ class UserProfile extends Component {
                     <button>Change PW</button>
                   </Link>
                   <br />
-                  <Link to="/user/profile/delete">
-                    <button>Delete Accout</button>
+                  <Link to="/user/profile/orders">
+                    <button>See All orders</button>
                   </Link>
                   <br />
-                  <Link to="/user/profile/orders">
-                    <span>See All my orders</span>
+                  <Link to="/user/profile/delete">
+                    <button>Delete Accout</button>
                   </Link>
                 </div>
               );

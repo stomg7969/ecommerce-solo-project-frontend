@@ -178,19 +178,25 @@ class ProductCard extends Component {
           </div>
           <div className="customer-input">
             <form onSubmit={this.submitListener}>
-              <select name="size" onChange={this.changeListener}>
-                <option value="">Select size:</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-              </select>
+              <div>
+                <select name="size" onChange={this.changeListener}>
+                  <option value="">Select size:</option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                </select>
+              </div>
               <br />
-              <input
-                type="number"
-                name="quantity"
-                value={this.state.quantity}
-                onChange={this.changeListener}
-              />
+              <div>
+                <label>Enter quantity</label>
+                <input
+                  className="input"
+                  type="number"
+                  name="quantity"
+                  value={this.state.quantity}
+                  onChange={this.changeListener}
+                />
+              </div>
               <br />
               <button>Add to Cart</button>
             </form>

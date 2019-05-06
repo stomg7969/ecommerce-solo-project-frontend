@@ -30,6 +30,51 @@ code {
 .carousel {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
+button {
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0);
+  width: 230px;
+  height: 59px;
+  top: 170px;
+  left: 70px;
+  margin: 1%;
+  border: 1px solid black;
+  border-radius: 30px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+button:hover {
+  font-size: 20px;
+}
+.input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: Raleway;
+  font-size: 18px;
+  height: 50px;
+  /* left: 50%; */
+  padding: 10px 0px;
+  /* top: 50%; */
+  width: 200px;
+}
+.input:focus {
+  outline: none;
+  border-bottom: 1px solid black;
+}
+input::-webkit-input-placeholder {
+  color: #aaa;
+}
+input:focus::-webkit-input-placeholder {
+  color: black;
+}
 /* ****************************************************** */
 /* Go down Arrow Animation */
 /* .wrap {
@@ -42,11 +87,6 @@ code {
   width: auto;
 }
 /* .wrap img {
-  margin: 0px 0 0 -40px;
-  line-height: 60px;
-  position: absolute;
-  left: 50%;
-  bottom: 0px;
 } */
 .bounce {
   animation-iteration-count: infinite;
@@ -86,22 +126,14 @@ code {
   border-style: double;
   text-align: center;
   background-color: #fcf7e4;
-  /* margin: 1%;
-  margin-right: 80%; */
   position: fixed;
   top: 0;
   left: 0;
   width: 10em;
 }
 .top-right.go-back {
-  border-style: double;
-  text-align: center;
-  background-color: #fcf7e4;
-  /* margin: 1%;
-  margin-right: 80%; */
-  position: fixed;
-  top: 0;
-  left: 0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  margin: 1% 0 0 2%;
   width: 3em;
 }
 .navbar-name {
@@ -135,9 +167,13 @@ code {
 /* ****************************************************** */
 /* User login, logout, signup, profile container */
 #user-container {
-  border-style: groove;
+  /* border-style: groove; */
   text-align: center;
   margin: 1%;
+}
+#profile-update {
+  display: flex;
+  justify-content: space-between;
 }
 #order-table {
   margin: 0.5em;
@@ -182,6 +218,18 @@ code {
   justify-content: space-between;
   margin: 2%;
 }
+#quantity {
+  font-size: 25px;
+}
+.cart.items.button {
+  display: flex;
+  justify-content: space-around;
+}
+.cart.items.button button {
+  height: 30px;
+  width: 25px;
+  line-height: 1%;
+}
 .cart.items {
   margin: auto;
 }
@@ -194,8 +242,6 @@ code {
 /* ****************************************************** */
 /* Products */
 /* #product-container {
-  border-style: solid;
-  text-align: center;
 } */
 #product-list {
   display: flex;
@@ -235,6 +281,9 @@ code {
 }
 .customer-input {
   margin-top: 15%;
+  margin-left: 1em;
+}
+.customer-input form {
   margin-left: 1em;
 }
 #flip-image-button {
@@ -285,8 +334,6 @@ code {
 #price-sort-container {
   /* margin-left: 20%; */
   display: flex;
-  /* justify-content: space-around; */
-  /* flex-wrap: wrap; */
 }
 .price-sort {
   border-style: groove;
@@ -317,16 +364,10 @@ code {
   /* flex-wrap: wrap; */
 }
 #gender-filter-container {
-  /* margin-left: 20%; */
   display: flex;
-  /* justify-content: space-around;
-  flex-wrap: wrap; */
 }
 #material-filter-container {
-  /* margin-left: 20%; */
   display: flex;
-  /* justify-content: space-around;
-  flex-wrap: wrap; */
 }
 #category-filter-container {
   display: flex;
