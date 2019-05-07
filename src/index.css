@@ -465,11 +465,13 @@ input[type="checkbox"] {
 }
 #chosen-tags {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 .collection {
   border-style: groove;
   background-color: aliceblue;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
 }
 .collection h6 {
   margin: 0.5em;

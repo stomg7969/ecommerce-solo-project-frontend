@@ -190,7 +190,7 @@ class ProductCard extends Component {
               </div>
               <br />
               <div>
-                <label>Enter quantity</label>
+                <label>Enter quantity: </label>
                 <input
                   className="input"
                   type="number"
