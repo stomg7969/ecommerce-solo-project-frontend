@@ -59,6 +59,22 @@ One of this application's features is my `Filter`, which took me the most time t
 
 ### What I learned 2
 
+Before figuring out, I had memory leak warning because I didn't understand the responsibility of `componentWillUnmount()`.
+At first, I created a `scroll event` to render additional products when users reach bottom of the page. However, I didn't remove the event when users move on to other components. If there is an event for `window` only on a certain page, I must remove the event when component is being unmounted.
+
+```
+componentDidMount() {
+  console.log("SCROLL EVENTLISTENER ADDED");
+  window.addEventListener("scroll", this.handleScroll);
+}
+
+componentWillUnmount() {
+  window.removeEventListener("scroll", this.handleScroll);
+}
+```
+
+### What I learned 3
+
 The biggest problem I met was in the `CartProduct.js`. I had to force refresh the page when user changes the quantity of an item. Reason why it didn't automatically render the page is because the quantity attribute was deeply nested from what I stored in Redux store.
 
 When website is loaded, get request is initiated to get all `products` and `current user`. To get the quantity, I need to get `current user`'s all orders, find an order with status of 'pending', which is `current user`'s cart, then get each product and return quantity. The Redux was not able to detect the change I made because current user's memory address didn't change.
