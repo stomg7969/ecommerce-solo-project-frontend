@@ -203,10 +203,12 @@ class LandingDisplay extends Component {
         <NavBar />
 
         <Link to="/cart">
-          <img id="cart-image" src={box} alt="box noun project" />
-          <span id="cart-number">
-            {this.props.itemNum ? this.props.itemNum : 0}
-          </span>
+          <div>
+            <img id="cart-image" src={box} alt="box noun project" />
+            <span id="cart-number">
+              {this.props.itemNum ? this.props.itemNum : 0}
+            </span>
+          </div>
         </Link>
         <div id="landing-page">
           <LandingFrontImg />
