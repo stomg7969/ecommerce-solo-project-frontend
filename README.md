@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # ecommerce-website-solo-project
 
-Flatiron School Module 5 solo project (FRONTEND)
+_Flatiron School Module 5 solo project (FRONTEND)_
 
 #### For this project, frontend and backend are now split into two repositories.
 
@@ -23,26 +23,16 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 ### Features / App Description
 
 - Cart: users can ...
-
   - Add products to a cart.
   - Adjust quantity of each product.
   - Delete each product.
   - Choose shipping method.
   - Check total amount.
-
-  * Full authentication & authorization
-
-  - Authenticate users.
-  - Authorize only on intended pages.
-
+- Full authentication & authorization
 - User's ActiveRecord CRUD
-
 - User can see all orders
-
 - Filter by multiple categories
-
 - Search by product name
-
 - Sort by price (both ASC and DESC)
 
 ### What I learned 1
