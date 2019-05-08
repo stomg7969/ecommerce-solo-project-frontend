@@ -37,7 +37,6 @@ class LandingDisplay extends Component {
         green: false
       },
       gender: {
-        unisex: true,
         girl: false,
         boy: false
       },
