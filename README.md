@@ -12,7 +12,10 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 [Link to Demo] heroku (url)
 
-# Copy this readme also to backend readme too.
+### Dummy Account
+
+**ID:**
+**PW:**
 
 ### Language
 
