@@ -4,9 +4,11 @@ import UserOrderCard from "./UserOrderCard";
 
 const UserOrdersList = props => {
   if (props.orders) {
-    const orderObj = props.orders.map(order => {
-      return <UserOrderCard key={order.id} order={order} />;
-    });
+    const orderObj = props.orders
+      .filter(eachOrder => eachOrder.status === "ordered")
+      .map(order => {
+        return <UserOrderCard key={order.id} order={order} />;
+      });
     return (
       <div>
         <h3>All orders</h3>
