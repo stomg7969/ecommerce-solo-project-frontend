@@ -177,7 +177,9 @@ class ProductCard extends Component {
             </div>
           </div>
           <div className="customer-input">
-            <form onSubmit={this.submitListener}>
+            <form
+              onSubmit={localStorage.user_token ? this.submitListener : null}
+            >
               <div>
                 <label className="dropdown">
                   <select name="size" onChange={this.changeListener}>
