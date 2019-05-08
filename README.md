@@ -10,7 +10,7 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 [Link to BACKEND repo](https://github.com/stomg7969/ecommerce-solo-project-backend)
 
-[Link to Demo] heroku
+[Link to Demo] heroku (url)
 
 # Copy this readme also to backend readme too.
 
@@ -41,7 +41,23 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 - Filter by multiple categories
 
-### What I learned
+- Search by product name
+
+- Sort by price (both ASC and DESC)
+
+### What I learned 1
+
+[Link to my blog] - (url)
+
+One of this application's features is my `Filter`, which took me the most time to complete. This feature lets users to filter product list by `Color, Gender, Material, and/or Category`. Because these four categories are part of attributes of Product class, I had to make some decisions on several factors:
+
+1. state management - use just react or redux
+2. whether if I should make four different functions or one universal function
+3. organizing my codes (Filter.js, InputTagCollection.js)
+4. managing an array inside of an array (material attribute)
+5. combining search and filter into one function to pass down to child component
+
+### What I learned 2
 
 The biggest problem I met was in the `CartProduct.js`. I had to force refresh the page when user changes the quantity of an item. Reason why it didn't automatically render the page is because the quantity attribute was deeply nested from what I stored in Redux store.
 

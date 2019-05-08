@@ -174,9 +174,10 @@ class LandingDisplay extends Component {
         if (!filters[key].length) return true;
         // In addition to the resource, I added below five lines because product[key] is an array for material attribute.
         if (Array.isArray(product[key])) {
-          for (let i = 0; i < product[key].length; i++) {
-            return filters[key].includes(product[key][i]);
-          }
+          // for (let i = 0; i < product[key].length; i++) {
+          //   return filters[key].includes(product[key][i].toLowerCase());
+          // }
+          return product[key].some(keyEle => filters[key].includes(keyEle));
         }
         return filters[key].includes(product[key]);
       });
