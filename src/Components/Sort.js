@@ -3,6 +3,7 @@ import React from "react";
 const Sort = props => {
   return (
     <div id="sort">
+      <label className="filter-title">PRICE</label>
       <div id="price-sort-container">
         <div
           className="price-sort"

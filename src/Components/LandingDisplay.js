@@ -59,9 +59,15 @@ class LandingDisplay extends Component {
   };
   // toggles User search/filter/sort component when clicked
   clickListener = () => {
-    this.setState(prevState => ({
-      userInputContainerClicked: !prevState.userInputContainerClicked
-    }));
+    this.setState(
+      prevState => ({
+        userInputContainerClicked: !prevState.userInputContainerClicked
+      }),
+      () =>
+        this.state.userInputContainerClicked
+          ? window.scroll(0, 590)
+          : window.scroll(0, 0)
+    );
   };
   // receive search term by users and save it to state
   searchListener = e => {

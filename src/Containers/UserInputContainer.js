@@ -9,7 +9,6 @@ class UserInputContainer extends Component {
   render() {
     return (
       <div id="user-input">
-        <h3 className="user-input header">FILTER YOUR SEARCH</h3>
         <div>
           <InputTagCollection
             tags={this.props.tags}
