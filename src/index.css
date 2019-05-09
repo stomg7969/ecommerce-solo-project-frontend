@@ -52,6 +52,30 @@ button {
 button:hover {
   font-size: 20px;
 }
+/* ************* ADMIN only ************* */
+#admin-all-orders {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+}
+#admin-each-order {
+  border-style: double;
+  margin: 0.5em;
+}
+.admin-each-order {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.admin.order.info {
+  border-style: double;
+  margin: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+/* *************************************** */
 /* ************* Input CSS ************* */
 /* https://codepen.io/SMLMRKHLMS/pen/qxtDw */
 .input {

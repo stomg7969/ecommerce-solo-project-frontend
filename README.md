@@ -29,7 +29,9 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 ### Features / App Description
 
-- Cart: users can ...
+**Users**
+
+- Cart
   - Add products to a cart.
   - Adjust quantity of each product.
   - Delete each product.
@@ -41,6 +43,13 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 - Filter by multiple categories
 - Search by product name
 - Sort by price (both ASC and DESC)
+
+**Admin**
+
+- **Admin** can...
+  check total sales, order quantity
+
+  **_After Project: (1)Create ORDER SHOW PAGE for details, (2)then re organize the component into directories_**
 
 ### What I learned 1
 
@@ -77,3 +86,7 @@ The biggest problem I met was in the `CartProduct.js`. I had to force refresh th
 When website is loaded, get request is initiated to get all `products` and `current user`. To get the quantity, I need to get `current user`'s all orders, find an order with status of 'pending', which is `current user`'s cart, then get each product and return quantity. The Redux was not able to detect the change I made because current user's memory address didn't change.
 
 I need to refactor the `CartContainer.js` to do fetch request for `orders`, instead of `current user`. It would've made the process easier.
+
+### What I learned 4
+
+As the number of components is increasing, it would be much better to find components if related components are collected into specific directories.

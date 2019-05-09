@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
+import {
+  STORE_PRODUCTS,
+  SAVE_USER,
+  RENDER_ITEM_AMOUNT,
+  ADMIN_ALL_USERS
+} from "./Types";
 import "./App.css";
 import crown from "./Assets/moonya crown.png";
 import logo from "./Assets/moonya logo.png";
@@ -21,7 +26,6 @@ class App extends Component {
       .then(products =>
         this.props.dispatch({ type: STORE_PRODUCTS, payload: products })
       );
-
     if (localStorage.getItem("user_token")) {
       const token = localStorage.getItem("user_token");
       // GET request to always store this user object to Redux store

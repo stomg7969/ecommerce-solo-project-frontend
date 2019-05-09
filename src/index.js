@@ -11,7 +11,9 @@ import {
   ADD_TO_CART,
   RENDER_ITEM_AMOUNT,
   ADD_ONE,
-  TOTAL_AMOUNT
+  TOTAL_AMOUNT,
+  ADMIN_TOTAL_SALES,
+  ADMIN_ORDER_QUANTITY
 } from "./Types";
 import * as serviceWorker from "./serviceWorker";
 
@@ -20,7 +22,9 @@ const initialState = {
   products: [],
   userOrder: {},
   numOfCartItems: 0,
-  totalAmount: 0
+  totalAmount: 0,
+  adminTotalSales: 0.0,
+  adminOrderQuantity: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +59,16 @@ const reducer = (state = initialState, action) => {
       return { ...state, numOfCartItems: state.numOfCartItems + 1 };
     case TOTAL_AMOUNT:
       return { ...state, totalAmount: state.totalAmount + action.payload };
+    case ADMIN_TOTAL_SALES:
+      return {
+        ...state,
+        adminTotalSales: state.adminTotalSales + action.payload
+      };
+    case ADMIN_ORDER_QUANTITY:
+      return {
+        ...state,
+        adminOrderQuantity: state.adminOrderQuantity + action.payload
+      };
     default:
       return state;
   }

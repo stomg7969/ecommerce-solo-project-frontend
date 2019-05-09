@@ -17,7 +17,7 @@ class UserProfile extends Component {
             path="/user/profile/orders"
             render={() => (
               <UserOrdersList
-                orders={this.props.orders}
+                orders={this.props.currentUser.orders}
                 user={this.props.currentUser}
               />
             )}
@@ -35,9 +35,11 @@ class UserProfile extends Component {
                     <button>See All orders</button>
                   </Link>
                   <br />
-                  <Link to="/user/profile/delete">
-                    <button>Delete Accout</button>
-                  </Link>
+                  {this.props.currentUser.isAdmin ? null : (
+                    <Link to="/user/profile/delete">
+                      <button>Delete Accout</button>
+                    </Link>
+                  )}
                 </div>
               );
             }}
@@ -50,7 +52,6 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    orders: state.activeUser.orders,
     currentUser: state.activeUser
   };
 };
