@@ -19,7 +19,7 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 ### Language
 
-- Javascript with React and Redux fro client-side
+- Javascript with React and Redux for client-side
 - Rails for server-side
 - Custom CSS using open source
 
