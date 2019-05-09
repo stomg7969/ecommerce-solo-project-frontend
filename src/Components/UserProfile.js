@@ -15,7 +15,12 @@ class UserProfile extends Component {
           <Route path="/user/profile/delete" component={DeleteAccount} />
           <Route
             path="/user/profile/orders"
-            render={() => <UserOrdersList orders={this.props.orders} />}
+            render={() => (
+              <UserOrdersList
+                orders={this.props.orders}
+                user={this.props.currentUser}
+              />
+            )}
           />
           <Route
             path="/user/profile"
@@ -45,7 +50,8 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    orders: state.activeUser.orders
+    orders: state.activeUser.orders,
+    currentUser: state.activeUser
   };
 };
 
