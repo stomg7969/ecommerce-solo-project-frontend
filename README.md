@@ -24,6 +24,8 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 - Javascript with React and Redux for client-side
 - Rails for server-side
 - Custom CSS and some implementation from open source
+- Pure-React-Carousel node package
+- JsonWebToken node package
 
 ### Features / App Description
 
