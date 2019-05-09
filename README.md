@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 _Flatiron School Module 5 solo project (FRONTEND)_
 
+**An online shopping website for children innerwear. Customers can browse products and purchase.**
+
 #### For this project, frontend and backend are now split into two repositories.
 
 Original commits are in [this repo](https://github.com/stomg7969/ecommerce-website-solo-project)
@@ -21,7 +23,7 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 - Javascript with React and Redux for client-side
 - Rails for server-side
-- Custom CSS using open source
+- Custom CSS and some implementation from open source
 
 ### Features / App Description
 
