@@ -175,7 +175,10 @@ class CartContainer extends Component {
           src={backImg}
           alt="go-back button"
           className="top-right go-back"
-          onClick={() => this.props.history.push("/")}
+          onClick={() => {
+            this.props.history.push("/");
+            window.location.reload();
+          }}
         />
         {this.props.userOrder.id ? (
           <span>{this.props.userOrder.product.name} updated</span>

@@ -12,12 +12,19 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 [Link to BACKEND repo](https://github.com/stomg7969/ecommerce-solo-project-backend)
 
-[Link to Demo] heroku (url)
+[Link to Demo(Heroku)](https://hidden-harbor-75858.herokuapp.com/)
 
 ### Dummy Account
 
-**ID:**
-**PW:**
+**CUSTOMER**
+
+- ID: jane
+- PW: jane
+
+**ADMIN**
+
+- ID: admin
+- PW: admin
 
 ### Language
 
@@ -46,12 +53,10 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 **Admin**
 
-- **Admin** can...
-  check total sales, order quantity
+- Check total sales and number of orders to fulfill
+- Check each user's orders
 
-  **_After Project: (1)Create ORDER SHOW PAGE for details, (2)then re organize the component into directories_**
-
-### What I learned 1
+### What I learned 1 - _Filtering multiple attributes_
 
 [Link to my blog] - (url)
 
@@ -63,7 +68,7 @@ One of this application's features is my `Filter`, which took me the most time t
 4. managing an array inside of an array (material attribute)
 5. combining search and filter into one function to pass down to child component
 
-### What I learned 2
+### What I learned 2 - _'Memory leak' warning_
 
 Before figuring out, I had memory leak warning because I didn't understand the responsibility of `componentWillUnmount()`.
 At first, I created a `scroll event` to render additional products when users reach bottom of the page. However, I didn't remove the event when users move on to other components. If there is an event for `window` only on a certain page, I must remove the event when component is being unmounted.
@@ -79,7 +84,7 @@ componentWillUnmount() {
 }
 ```
 
-### What I learned 3
+### What I learned 3 - _Updating the states_
 
 The biggest problem I met was in the `CartProduct.js`. I had to force refresh the page when user changes the quantity of an item. Reason why it didn't automatically render the page is because the quantity attribute was deeply nested from what I stored in Redux store.
 
@@ -87,6 +92,6 @@ When website is loaded, get request is initiated to get all `products` and `curr
 
 I need to refactor the `CartContainer.js` to do fetch request for `orders`, instead of `current user`. It would've made the process easier.
 
-### What I learned 4
+### What I learned 4 - _Organizing components_
 
 As the number of components is increasing, it would be much better to find components if related components are collected into specific directories.
