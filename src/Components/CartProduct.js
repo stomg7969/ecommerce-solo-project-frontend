@@ -18,6 +18,7 @@ class CartProduct extends Component {
         payload:
           parseFloat(eachProduct.price) * parseInt(this.props.detail.quantity)
       });
+      window.locatin.reload();
     });
   }
   // this dispatch does not auto render cart list numbers.
