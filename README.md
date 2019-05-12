@@ -58,7 +58,7 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 ### What I learned 1 - _Filtering multiple attributes_
 
-[Link to my blog] - (url)
+[Link to my blog about filtering](https://medium.com/@stomg7969/creating-a-multi-filter-function-to-filter-out-multiple-attributes-javascript-react-rails-5aad8e272142)
 
 One of this application's features is my `Filter`, which took me the most time to complete. This feature lets users to filter product list by `Color, Gender, Material, and/or Category`. Because these four categories are part of attributes of Product class, I had to make some decisions on several factors:
 

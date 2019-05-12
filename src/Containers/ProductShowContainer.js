@@ -136,6 +136,12 @@ class ProductCard extends Component {
       }
     }
   };
+  // This function will be triggered if user tries to add an item to cart without loggin in.
+  requestLogin = e => {
+    e.preventDefault();
+    alert("must sign in first");
+    this.props.history.push("/user/login");
+  };
 
   render() {
     const { product } = this.props;
@@ -178,7 +184,11 @@ class ProductCard extends Component {
           </div>
           <div className="customer-input">
             <form
-              onSubmit={localStorage.user_token ? this.submitListener : null}
+              onSubmit={
+                localStorage.user_token
+                  ? this.submitListener
+                  : this.requestLogin
+              }
             >
               <div>
                 <label className="dropdown">
