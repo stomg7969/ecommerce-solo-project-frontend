@@ -12,7 +12,7 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 
 [Link to BACKEND repo](https://github.com/stomg7969/ecommerce-solo-project-backend)
 
-[Link to Demo(Heroku)](https://hidden-harbor-75858.herokuapp.com/)
+##### [Link to Demo(Heroku)](https://hidden-harbor-75858.herokuapp.com/)
 
 ### Dummy Account
 
