@@ -33,6 +33,7 @@ Original commits are in [this repo](https://github.com/stomg7969/ecommerce-websi
 - Custom CSS and some implementation from open source
 - Pure-React-Carousel node package
 - JsonWebToken node package
+- jQuery for sliding
 
 ### Features / App Description
 
