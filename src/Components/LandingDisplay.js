@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import $ from "jquery";
 import magnifier from "../Assets/noun_magnifier.png";
 import box from "../Assets/square_box.png";
 import { STORE_PRODUCTS } from "../Types";
@@ -59,15 +60,16 @@ class LandingDisplay extends Component {
   };
   // toggles User search/filter/sort component when clicked
   clickListener = () => {
-    this.setState(
-      prevState => ({
-        userInputContainerClicked: !prevState.userInputContainerClicked
-      }),
-      () =>
-        this.state.userInputContainerClicked
-          ? window.scroll(0, 590)
-          : window.scroll(0, 0)
-    );
+    // this.setState(
+    //   prevState => ({
+    //     userInputContainerClicked: !prevState.userInputContainerClicked
+    //   }),
+    //   () =>
+    //     this.state.userInputContainerClicked
+    //       ? window.scroll(0, 590)
+    //       : window.scroll(0, 0)
+    // );
+    $("#userInputjQuery").slideToggle();
   };
   // receive search term by users and save it to state
   searchListener = e => {
@@ -236,7 +238,7 @@ class LandingDisplay extends Component {
             onClick={this.clickListener}
           />
         </div>
-        {this.state.userInputContainerClicked ? (
+        {/* this.state.userInputContainerClicked ? (
           <UserInputContainer
             tags={this.state.passingTags}
             cancelSearchTag={this.cancelSearchTag}
@@ -246,7 +248,19 @@ class LandingDisplay extends Component {
             searchListener={this.searchListener}
             searchSubmitListener={this.searchSubmitListener}
           />
-        ) : null}
+        ) : null */}
+        <div id="userInputjQuery">
+          {/* purpose of this div is for CSS */}
+          <UserInputContainer
+            tags={this.state.passingTags}
+            cancelSearchTag={this.cancelSearchTag}
+            sortClickListener={this.sortClickListener}
+            allFilterClickListener={this.allFilterClickListener}
+            searchTerm={this.state.searchTerm}
+            searchListener={this.searchListener}
+            searchSubmitListener={this.searchSubmitListener}
+          />
+        </div>
         {this.props.products.length ? (
           <ProductContainer products={this.searchProducts()} />
         ) : null}

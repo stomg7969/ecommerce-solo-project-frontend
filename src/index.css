@@ -478,6 +478,9 @@ input[type="checkbox"] {
 /* ****************************************************** */
 /* ****************************************************** */
 /* Searching & Filtering & Sorting */
+#userInputjQuery {
+  display: none;
+}
 #user-input {
   margin: 2%;
   flex-direction: column;
