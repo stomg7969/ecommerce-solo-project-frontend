@@ -2,16 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class ProductCard extends Component {
-  // state = {
-  //   productImgClicked: false
-  // };
-  //
-  // clickListener = () => {
-  //   this.setState(prevState => ({
-  //     productImgClicked: !prevState.productImgClicked
-  //   }));
-  // };
-
   render() {
     const { product } = this.props;
     return (

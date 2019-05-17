@@ -144,7 +144,16 @@ class ProductCard extends Component {
   };
 
   render() {
-    const { product } = this.props;
+    const {
+      name,
+      price,
+      category,
+      color,
+      gender,
+      material,
+      imgBack,
+      imgFront
+    } = this.props.product;
     return (
       <Fragment>
         <div id="product-showpage">
@@ -162,21 +171,21 @@ class ProductCard extends Component {
           </Link>
           {/* each card has a link to product show page */}
           <div className="product details">
-            <h2>{product.name}</h2>
-            <h2>${product.price}0</h2>
+            <h2>{name}</h2>
+            <h2>${price}0</h2>
             <strong>Category: </strong>
-            <p>{product.category}</p>
+            <p>{category}</p>
             <strong>Color: </strong>
-            <p>{product.color}</p>
+            <p>{color}</p>
             <strong>Gender: </strong>
-            <p>{product.gender}</p>
+            <p>{gender}</p>
             <strong>Material: </strong>
-            <p>{product.material.join(", ")}</p>
+            <p>{material.join(", ")}</p>
           </div>
           <div id="showpage-img">
             <div>
               <img
-                src={this.state.imgClicked ? product.imgBack : product.imgFront}
+                src={this.state.imgClicked ? imgBack : imgFront}
                 alt="product images"
                 className="product-image"
               />

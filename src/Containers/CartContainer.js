@@ -15,7 +15,7 @@ class CartContainer extends Component {
 
   componentDidUpdate() {
     console.log(
-      "CDUUUUU",
+      "COMPONENT DID UPDATE",
       "currentUser",
       this.props.currentUser,
       "products",
@@ -37,17 +37,7 @@ class CartContainer extends Component {
     }
   }
   componentDidMount() {
-    console.log(
-      "CDMMMMM",
-      "currentUser",
-      this.props.currentUser,
-      "products",
-      this.props.products,
-      "userOrderDetail",
-      this.props.userOrder,
-      "Cart in State",
-      this.state.cart
-    );
+    console.log("COMPONENT DID MOUNT");
     // fetch again to auto update the cart list.
     if (this.props.currentUser.orders && !this.state.haveCartInfo) {
       console.log("RUNNING THIS?");
@@ -72,15 +62,6 @@ class CartContainer extends Component {
             console.log("state of cart is updated from CDM")
           );
         });
-      // .then(data => {
-      //   const pendingCart = data.user.orders.filter(
-      //     order => order.status === "pending"
-      //   );
-      //   this.setState(
-      //     { cart: pendingCart, haveCartInfo: true },
-      //     console.log("state of cart is updated from CDM")
-      //   );
-      // });
     }
   }
   // changes the state of shipping method
