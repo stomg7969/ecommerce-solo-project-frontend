@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
 // copied from my auth lab. must be modified
 class PasswordUpdate extends Component {
   state = {
@@ -21,17 +22,22 @@ class PasswordUpdate extends Component {
       const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
       console.log("%c Updated info submitted", "color: green", decoded);
 
-      fetch(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          user: { password: newPW }
-        })
-      }).then(() => {
+      // fetch(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //     Authorization: `Bearer ${token}`
+      //   },
+      //   body: JSON.stringify({
+      //     user: { password: newPW }
+      //   })
+      // })
+      axios.patch(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
+        data: { user: { password: newPW } },
+        config: { headers: { Authorization: `Bearer ${token}` } }
+      })
+      .then(() => {
         alert("success");
         this.props.history.push("/");
       });

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from 'axios'
 import {
   STORE_PRODUCTS,
   SAVE_USER,
@@ -21,21 +22,25 @@ class App extends Component {
   componentDidMount() {
     // token and authorization is unnecessary because users are able to see
     // all products even when not logged in.
-    fetch(`${process.env.REACT_APP_HOST}/products`)
-      .then(r => r.json())
+    // fetch(`${process.env.REACT_APP_HOST}/products`)
+    axios.get(`${process.env.REACT_APP_HOST}/products`)
+      .then(r => r.data)
       .then(products =>
         this.props.dispatch({ type: STORE_PRODUCTS, payload: products })
       );
     if (localStorage.getItem("user_token")) {
       const token = localStorage.getItem("user_token");
       // GET request to always store this user object to Redux store
-      fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then(r => r.json())
+      // fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: `Bearer ${token}`
+      //   }
+      // })
+      //   .then(r => r.json())
+      axios.get(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(r => r.data)
         .then(data => {
           const pendingOrder = data.user.orders.filter(
             order => order.status === "pending"

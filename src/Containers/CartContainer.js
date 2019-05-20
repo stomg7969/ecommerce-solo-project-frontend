@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from 'axios';
 import backImg from "../Assets/go_back.png";
 import { SAVE_USER } from "../Types";
 import CartProduct from "../Components/CartProduct";
@@ -73,24 +74,29 @@ class CartContainer extends Component {
   submitListener = e => {
     e.preventDefault();
     console.log("ORDERING PROCESS STARTING...", this.state.cart[0].id);
-    fetch(`${process.env.REACT_APP_HOST}/orders/${this.state.cart[0].id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        total_amount: this.props.totalAmount,
-        shipping_method: this.state.shipping,
-        status: "ordered"
-      })
+    // fetch(`${process.env.REACT_APP_HOST}/orders/${this.state.cart[0].id}`, {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     total_amount: this.props.totalAmount,
+    //     shipping_method: this.state.shipping,
+    //     status: "ordered"
+    //   })
+    // })
+    axios.patch(`${process.env.REACT_APP_HOST}/orders/${this.state.cart[0].id}`, {
+      total_amount: this.props.totalAmount,
+      shipping_method: this.state.shipping,
+      status: "ordered"
     })
       .then(r => {
-        if (!r.ok) {
+        if (r.statusText !== 'OK') {
           console.log(r);
           this.props.history.push("/cart");
         } else {
-          return r.json();
+          return r.data;
         }
       })
       // then call below component to update inventory for each product
@@ -101,22 +107,26 @@ class CartContainer extends Component {
             "color: red; background-color: black",
             prodDetail
           );
-          // in case customers are not logged in, I built a customer route to authorize user to only update inventory.
-          fetch(
-            `${process.env.REACT_APP_HOST}/updateinventory/${
-              prodDetail.product.id
-            }`,
-            {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-              },
-              body: JSON.stringify({
-                inventory: prodDetail.product.inventory - prodDetail.quantity
-              })
-            }
-          ).then(window.location.reload());
+          // in case customers are not logged in, I built a custom route to authorize user to only update inventory.
+          // fetch(
+          //   `${process.env.REACT_APP_HOST}/updateinventory/${
+          //     prodDetail.product.id
+          //   }`,
+          //   {
+          //     method: "PATCH",
+          //     headers: {
+          //       "Content-Type": "application/json",
+          //       Accept: "application/json"
+          //     },
+          //     body: JSON.stringify({
+          //       inventory: prodDetail.product.inventory - prodDetail.quantity
+          //     })
+          //   }
+          // )
+          axios.patch(`${process.env.REACT_APP_HOST}/updateinventory/${prodDetail.product.id}`, {
+            inventory: prodDetail.product.inventory - prodDetail.quantity
+          })
+          .then(window.location.reload());
         });
       });
   };
