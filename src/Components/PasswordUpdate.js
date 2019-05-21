@@ -33,11 +33,13 @@ class PasswordUpdate extends Component {
       //     user: { password: newPW }
       //   })
       // })
-      axios.patch(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
-        data: { user: { password: newPW } },
-        config: { headers: { Authorization: `Bearer ${token}` } }
+      axios(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
+        method: 'patch', 
+        headers: { Authorization: `Bearer ${token}` },
+        data: { user: { password: newPW } }
       })
-      .then(() => {
+      .then((r) => {
+        console.log(r);
         alert("success");
         this.props.history.push("/");
       });
