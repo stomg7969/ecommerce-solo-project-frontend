@@ -58,6 +58,7 @@ class ProductCard extends Component {
           const detailQuantity = foundDetail.quantity;
           const detailId = foundDetail.id;
           console.log("PATCHING", detailQuantity, quantity);
+          // I decided not to refactor this requests for the purpose of remembering the format.
           fetch(
             `${process.env.REACT_APP_HOST}/api/v1/add_to_cart/${detailId}`,
             {
