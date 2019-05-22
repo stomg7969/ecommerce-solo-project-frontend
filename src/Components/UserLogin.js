@@ -2,6 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { SAVE_USER } from "../Types";
+import axios from "axios";
 
 class UserLogin extends React.Component {
   state = {
@@ -16,32 +17,49 @@ class UserLogin extends React.Component {
   submitListener = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    fetch(`${process.env.REACT_APP_HOST}/api/v1/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user: {
+    // fetch(`${process.env.REACT_APP_HOST}/api/v1/login`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     user: {
+    //       username: username,
+    //       password: password
+    //     }
+    //   })
+    // })
+    axios.post(`${process.env.REACT_APP_HOST}/api/v1/login`, {
+      user: {
           username: username,
           password: password
         }
-      })
     })
-      .then(r => r.json())
+      .then(r => r.data)
       .then(data => {
-        if (data.message) {
-          alert(data.message);
-          this.setState({ username: "", password: "" });
-          this.props.history.push("/user/login");
-        } else {
-          this.props.dispatch({ type: SAVE_USER, payload: data.user });
-          localStorage.setItem("user_token", data.jwt);
-          this.props.history.push("/");
-          window.location.reload();
-        }
-      });
+        this.props.dispatch({ type: SAVE_USER, payload: data.user });
+        localStorage.setItem("user_token", data.jwt);
+        this.props.history.push("/");
+        window.location.reload();
+      })
+      .catch(() => {
+        alert('invalid');
+        this.setState({ username: "", password: "" });
+        this.props.history.push("/user/login");
+      })
+      // .then(data => {
+      //   if (data.message) {
+      //     alert(data.message);
+      //     this.setState({ username: "", password: "" });
+      //     this.props.history.push("/user/login");
+      //   } else {
+      //     this.props.dispatch({ type: SAVE_USER, payload: data.user });
+      //     localStorage.setItem("user_token", data.jwt);
+      //     this.props.history.push("/");
+      //     window.location.reload();
+      //   }
+      // });
   };
 
   render() {

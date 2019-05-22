@@ -107,22 +107,6 @@ class CartContainer extends Component {
             "color: red; background-color: black",
             prodDetail
           );
-          // in case customers are not logged in, I built a custom route to authorize user to only update inventory.
-          // fetch(
-          //   `${process.env.REACT_APP_HOST}/updateinventory/${
-          //     prodDetail.product.id
-          //   }`,
-          //   {
-          //     method: "PATCH",
-          //     headers: {
-          //       "Content-Type": "application/json",
-          //       Accept: "application/json"
-          //     },
-          //     body: JSON.stringify({
-          //       inventory: prodDetail.product.inventory - prodDetail.quantity
-          //     })
-          //   }
-          // )
           axios.patch(`${process.env.REACT_APP_HOST}/updateinventory/${prodDetail.product.id}`, {
             inventory: prodDetail.product.inventory - prodDetail.quantity
           })

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { TOTAL_AMOUNT } from "../Types";
+import axios from "axios";
 
 class CartProduct extends Component {
   state = {
@@ -23,49 +24,15 @@ class CartProduct extends Component {
   // this dispatch does not auto render cart list numbers.
   // updates product quantity change in cart also changes order of list when updated
   updateFetch = (num, token) => {
-    fetch(
-      `${process.env.REACT_APP_HOST}/api/v1/add_to_cart/${
-        this.props.detail.id
-      }`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          quantity: this.props.detail.quantity + num
-        })
-      }
-    )
-      // .then(r => r.json())
-      // .then(updatedOrder => {
-      //   this.props.dispatch({ type: ADD_TO_CART, payload: updatedOrder });
-      //   // for auto update, I'm trying to re-fetch current user and update
-      //   // current user because that is where cart is coming from.
-      //   const token = localStorage.getItem("user_token");
-      //   fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
-      //     method: "GET",
-      //     headers: {
-      //       Authorization: `Bearer ${token}`
-      //     }
-      //   })
-      //     .then(r => r.json())
-      //     .then(data => {
-      //       console.log("userrrrrrrrrrrrererr", data);
-      //       this.props.dispatch({ type: SAVE_USER, payload: data.user });
-      //     });
-      // });
-      // below option is just reload the page.
-      // ********** MUST AUTO RENDER so users can keep updating fast************
-      .then(r => {
-        if (!r.ok) {
-          console.log(r);
-          this.props.history.push("/cart");
-        } else {
-          window.location.reload();
-        }
+    axios(`${process.env.REACT_APP_HOST}/api/v1/add_to_cart/${this.props.detail.id}`, {
+      method: 'patch',
+      headers: { Authorization: `Bearer ${ token }` },
+      data: { quantity: this.props.detail.quantity + num }
+    })
+      .then(() => { window.location.reload() })
+      .catch(error => {
+        alert(error);
+        this.props.history.push('/cart')
       });
   };
   // Function to remove items from the cart

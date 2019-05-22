@@ -21,21 +21,6 @@ class UserSignup extends React.Component {
     if (username === "" || email === "" || password === "") {
       alert("make your input");
     } else {
-      // fetch(`${process.env.REACT_APP_HOST}/api/v1/users`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json"
-      //   },
-      //   body: JSON.stringify({
-      //     user: {
-      //       username: username,
-      //       email: email,
-      //       password: password
-      //     }
-      //   })
-      // })
-      //   .then(r => r.json())
       axios.post(`${process.env.REACT_APP_HOST}/api/v1/users`, {
         user: {
           username: username,

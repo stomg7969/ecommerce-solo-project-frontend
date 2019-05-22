@@ -5,8 +5,7 @@ import axios from 'axios'
 import {
   STORE_PRODUCTS,
   SAVE_USER,
-  RENDER_ITEM_AMOUNT,
-  ADMIN_ALL_USERS
+  RENDER_ITEM_AMOUNT
 } from "./Types";
 import "./App.css";
 import crown from "./Assets/moonya crown.png";
@@ -23,7 +22,7 @@ class App extends Component {
     // token and authorization is unnecessary because users are able to see
     // all products even when not logged in.
     // fetch(`${process.env.REACT_APP_HOST}/products`)
-    axios.get(`${process.env.REACT_APP_HOST}/products`)
+    axios(`${process.env.REACT_APP_HOST}/products`)
       .then(r => r.data)
       .then(products =>
         this.props.dispatch({ type: STORE_PRODUCTS, payload: products })

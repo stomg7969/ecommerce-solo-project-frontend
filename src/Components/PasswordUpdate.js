@@ -21,18 +21,7 @@ class PasswordUpdate extends Component {
       const token = localStorage.getItem("user_token");
       const decoded = jwt.verify(token, process.env.REACT_APP_AUTH_KEY);
       console.log("%c Updated info submitted", "color: green", decoded);
-
-      // fetch(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json",
-      //     Authorization: `Bearer ${token}`
-      //   },
-      //   body: JSON.stringify({
-      //     user: { password: newPW }
-      //   })
-      // })
+      
       axios(`${process.env.REACT_APP_HOST}/api/v1/users/${decoded.user_id}`, {
         method: 'patch', 
         headers: { Authorization: `Bearer ${token}` },

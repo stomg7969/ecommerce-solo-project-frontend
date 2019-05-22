@@ -6,4 +6,4 @@ export const ADD_ONE = "add_one";
 export const TOTAL_AMOUNT = "total_amount";
 export const ADMIN_TOTAL_SALES = "total_sales";
 export const ADMIN_ORDER_QUANTITY = "order_quantity";
-export const ADMIN_ALL_USERS = "get_all_users";
+// export const ADMIN_ALL_USERS = "get_all_users";
