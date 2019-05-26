@@ -1,53 +1,51 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import PasswordUpdate from "./PasswordUpdate";
 import DeleteAccount from "./DeleteAccount";
 import UserOrdersList from "./UserOrdersList";
 
-class UserProfile extends Component {
-  render() {
-    return (
-      <div id="user-profile">
-        <br />
-        <Switch>
-          <Route path="/user/profile/update" component={PasswordUpdate} />
-          <Route path="/user/profile/delete" component={DeleteAccount} />
-          <Route
-            path="/user/profile/orders"
-            render={() => (
-              <UserOrdersList
-                orders={this.props.currentUser.orders}
-                user={this.props.currentUser}
-              />
-            )}
-          />
-          <Route
-            path="/user/profile"
-            render={() => {
-              return (
-                <div id="profile-update">
-                  <Link to="/user/profile/update">
-                    <button>Change PW</button>
+const UserProfile = props => {
+  return (
+    <div id="user-profile">
+      <br />
+      <Switch>
+        <Route path="/user/profile/update" component={PasswordUpdate} />
+        <Route path="/user/profile/delete" component={DeleteAccount} />
+        <Route
+          path="/user/profile/orders"
+          render={() => (
+            <UserOrdersList
+              orders={props.currentUser.orders}
+              user={props.currentUser}
+            />
+          )}
+        />
+        <Route
+          path="/user/profile"
+          render={() => {
+            return (
+              <div id="profile-update">
+                <Link to="/user/profile/update">
+                  <button>Change PW</button>
+                </Link>
+                <br />
+                <Link to="/user/profile/orders">
+                  <button>See All orders</button>
+                </Link>
+                <br />
+                {props.currentUser.isAdmin ? null : (
+                  <Link to="/user/profile/delete">
+                    <button>Delete Accout</button>
                   </Link>
-                  <br />
-                  <Link to="/user/profile/orders">
-                    <button>See All orders</button>
-                  </Link>
-                  <br />
-                  {this.props.currentUser.isAdmin ? null : (
-                    <Link to="/user/profile/delete">
-                      <button>Delete Accout</button>
-                    </Link>
-                  )}
-                </div>
-              );
-            }}
-          />
-        </Switch>
-      </div>
-    );
-  }
+                )}
+              </div>
+            );
+          }}
+        />
+      </Switch>
+    </div>
+  );
 }
 
 const mapStateToProps = state => {

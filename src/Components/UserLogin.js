@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { SAVE_USER } from "../Types";
 import axios from "axios";
 
-class UserLogin extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
-  // listens to changes and sets states
-  changeListener = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+const UserLogin = props => {
+  
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   // listens to submit and lets user log in
-  submitListener = e => {
+  const submitListener = e => {
     e.preventDefault();
-    const { username, password } = this.state;
     // fetch(`${process.env.REACT_APP_HOST}/api/v1/login`, {
     //   method: "POST",
     //   headers: {
@@ -38,67 +32,54 @@ class UserLogin extends React.Component {
     })
       .then(r => r.data)
       .then(data => {
-        this.props.dispatch({ type: SAVE_USER, payload: data.user });
+        props.dispatch({ type: SAVE_USER, payload: data.user });
         localStorage.setItem("user_token", data.jwt);
-        this.props.history.push("/");
+        props.history.push("/");
         window.location.reload();
       })
       .catch(() => {
         alert('invalid');
-        this.setState({ username: "", password: "" });
-        this.props.history.push("/user/login");
+        // setState({ username: "", password: "" });
+        setUsername('');
+        setPassword('');
+        props.history.push("/user/login");
       })
-      // .then(data => {
-      //   if (data.message) {
-      //     alert(data.message);
-      //     this.setState({ username: "", password: "" });
-      //     this.props.history.push("/user/login");
-      //   } else {
-      //     this.props.dispatch({ type: SAVE_USER, payload: data.user });
-      //     localStorage.setItem("user_token", data.jwt);
-      //     this.props.history.push("/");
-      //     window.location.reload();
-      //   }
-      // });
   };
-
-  render() {
-    const { username, password } = this.state;
-    return (
-      <div>
-        <h3>Login</h3>
-        <form onSubmit={this.submitListener}>
-          <div>
-            <input
-              className="input"
-              type="text"
-              name="username"
-              placeholder="username"
-              value={username}
-              onChange={this.changeListener}
-            />
-          </div>
-          <br />
-          <div>
-            <input
-              className="input"
-              type="password"
-              name="password"
-              placeholder="password"
-              value={password}
-              onChange={this.changeListener}
-            />
-          </div>
-          <br />
-          <button>Login</button>
-        </form>
-        <Link to="/user/new">
-          {" "}
-          <button>sign up</button>
-        </Link>
-      </div>
-    );
-  }
+  // const { username, password } = this.state;
+  return (
+    <div>
+      <h3>Login</h3>
+      <form onSubmit={submitListener}>
+        <div>
+          <input
+            className="input"
+            type="text"
+            name="username"
+            placeholder="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+        </div>
+        <br />
+        <div>
+          <input
+            className="input"
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </div>
+        <br />
+        <button>Login</button>
+      </form>
+      <Link to="/user/new">
+        {" "}
+        <button>sign up</button>
+      </Link>
+    </div>
+  );
 }
 
 export default withRouter(connect()(UserLogin));

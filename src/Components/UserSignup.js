@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from 'axios';
 import { SAVE_USER } from "../Types";
 
-class UserSignup extends React.Component {
-  state = {
-    username: "",
-    email: "",
-    password: ""
-  };
+const UserSignup = props => {
+  
+  const initialState = { username: "", email: "", password: "" };
+  const [{username, email, password}, setState] = useState(initialState);
+
   // listens to changes and sets states
-  changeListener = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  const changeListener = e => {
+    const { name, value } = e.target;
+    setState(prevState => ({ ...prevState, [name]: value }));
   };
   // listens to submit and lets user signup
-  submitListener = e => {
+  const submitListener = e => {
     e.preventDefault();
-    const { username, email, password } = this.state;
     if (username === "" || email === "" || password === "") {
       alert("make your input");
+      setState({ ...initialState }); // Both work.
+      // setState(initialState);
     } else {
       axios.post(`${process.env.REACT_APP_HOST}/api/v1/users`, {
         user: {
@@ -30,15 +31,15 @@ class UserSignup extends React.Component {
       })
       .then(r => r.data)
       .then(data => {
-        this.props.dispatch({ type: SAVE_USER, payload: data.user });
+        props.dispatch({ type: SAVE_USER, payload: data.user });
         localStorage.setItem("user_token", data.jwt);
-        this.props.history.push("/");
+        props.history.push("/");
         window.location.reload();
       })
         .catch(() => {
           alert("Username already exist");
-          this.setState({username: "", email: "", password: ""});
-          this.props.history.push("/user/new");
+          setState({ ...initialState });
+          props.history.push("/user/new");
         })
         // .then(data => {
         //   if (data.message) {
@@ -56,61 +57,48 @@ class UserSignup extends React.Component {
     }
   };
 
-  render() {
-    const { username, email, password } = this.state;
-    return (
-      <div>
-        <h3>Create Account</h3>
-        <form onSubmit={this.submitListener}>
-          <div>
-            <input
-              className="input"
-              type="text"
-              name="username"
-              placeholder="username"
-              value={username}
-              onChange={this.changeListener}
-            />
-          </div>
-          <div>
-            <input
-              className="input"
-              type="text"
-              name="email"
-              placeholder="email"
-              value={email}
-              onChange={this.changeListener}
-            />
-          </div>
-          <div>
-            <input
-              className="input"
-              type="password"
-              name="password"
-              placeholder="password"
-              value={password}
-              onChange={this.changeListener}
-            />
-          </div>
-          <br />
-          <button>Signup</button>
-        </form>
-        <Link to="/user/login">
-          <button>login</button>
-        </Link>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h3>Create Account</h3>
+      <form onSubmit={submitListener}>
+        <div>
+          <input
+            className="input"
+            type="text"
+            name="username"
+            placeholder="username"
+            value={username}
+            onChange={changeListener}
+          />
+        </div>
+        <div>
+          <input
+            className="input"
+            type="text"
+            name="email"
+            placeholder="email"
+            value={email}
+            onChange={changeListener}
+          />
+        </div>
+        <div>
+          <input
+            className="input"
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={changeListener}
+          />
+        </div>
+        <br />
+        <button>Signup</button>
+      </form>
+      <Link to="/user/login">
+        <button>login</button>
+      </Link>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-  // state gives me access to the initialState
-  // connect gives me an access to dispatch function.
-  // If I don't need any state, I don't need mapStateToProps.
-  console.log("state from REDUX", state);
-  return {
-    name: "nate"
-  };
-};
-
-export default withRouter(connect(mapStateToProps)(UserSignup));
+export default withRouter(connect()(UserSignup));
