@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from 'axios'
-import {
-  STORE_PRODUCTS,
-  SAVE_USER,
-  RENDER_ITEM_AMOUNT
-} from "./Types";
+import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
 import "./App.css";
 import crown from "./Assets/moonya crown.png";
 import logo from "./Assets/moonya logo.png";
