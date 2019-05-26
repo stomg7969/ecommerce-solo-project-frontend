@@ -1,18 +1,13 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../Components/ProductCard";
 
-class ProductContainer extends Component {
-  state = {
-    add: 6
-  };
+const ProductContainer = props => {
 
+  const [add, setAdd] = useState(6);
+  // Render 6 more products.
+  const moreProducts = () => setAdd(add + 6);
   // Purpose of this function is to detect page bottom and render additional products.
-  moreProducts = () => {
-    this.setState(prevState => ({
-      add: prevState.add + 6
-    }));
-  };
-  handleScroll = () => {
+  const handleScroll = () => {
     const windowHeight =
       "innerHeight" in window
         ? window.innerHeight
@@ -29,28 +24,36 @@ class ProductContainer extends Component {
     const scrollable = docHeight - windowHeight;
     const scrolled = window.scrollY;
     if (Math.ceil(scrolled) === scrollable) {
-      this.moreProducts();
+      moreProducts();
     }
   };
 
-  componentDidMount() {
+  useEffect(() => {
     console.log("SCROLL EVENTLISTENER ADDED");
-    window.addEventListener("scroll", this.handleScroll);
-  }
+    window.addEventListener("scroll", handleScroll);
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
+    return () => {
+      console.log("SCROLL EVENTLISTENER REMOVED");
+      window.removeEventListener("scroll", handleScroll);
+    }
+  });
 
-  render() {
-    // this.props.products.slice(this.state.start, this.state.end).map...
-    const productList = this.props.products
-      .slice(0, this.state.add)
-      .map(product => {
-        return <ProductCard key={product.id} product={product} />;
-      });
-    return <div id="product-list">{productList}</div>;
-  }
+  // componentDidMount() {
+  //   console.log("SCROLL EVENTLISTENER ADDED");
+  //   window.addEventListener("scroll", handleScroll);
+  // }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", handleScroll);
+  // }
+
+  const productList = props.products
+    .slice(0, add)
+    .map(product => {
+      return <ProductCard key={product.id} product={product} />;
+    });
+  return <div id="product-list">{productList}</div>;
+
 }
 
 export default ProductContainer;
