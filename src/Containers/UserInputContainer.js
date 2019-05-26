@@ -1,35 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Search from "../Components/Search";
 import Sort from "../Components/Sort";
 import Filter from "../Components/Filter";
 import InputTagCollection from "../Components/InputTagCollection";
 
-class UserInputContainer extends Component {
-  render() {
-    return (
-      <div id="user-input">
-        <div>
-          <InputTagCollection
-            tags={this.props.tags}
-            cancelSearchTag={this.props.cancelSearchTag}
-            sortClickListener={this.props.sortClickListener}
-            allFilterClickListener={this.props.allFilterClickListener}
-          />
-        </div>
-
-        <div className="search-component">
-          <Search
-            searchTerm={this.props.searchTerm}
-            searchListener={this.props.searchListener}
-            searchSubmitListener={this.props.searchSubmitListener}
-          />
-        </div>
-        <Sort sortClickListener={this.props.sortClickListener} />
-        <Filter allFilterClickListener={this.props.allFilterClickListener} />
+const UserInputContainer = props => {
+  return (
+    <div id="user-input">
+      <div>
+        <InputTagCollection
+          tags={props.tags}
+          cancelSearchTag={props.cancelSearchTag}
+          sortClickListener={props.sortClickListener}
+          allFilterClickListener={props.allFilterClickListener}
+        />
       </div>
-    );
-  }
+
+      <div className="search-component">
+        <Search
+          searchTerm={props.searchTerm}
+          searchListener={props.searchListener}
+          searchSubmitListener={props.searchSubmitListener}
+        />
+      </div>
+      <Sort sortClickListener={props.sortClickListener} />
+      <Filter allFilterClickListener={props.allFilterClickListener} />
+    </div>
+  );
 }
 
 export default connect()(UserInputContainer);
