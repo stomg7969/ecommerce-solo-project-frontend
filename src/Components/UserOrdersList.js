@@ -15,7 +15,7 @@ const UserOrdersList = props => {
         .then(r => r.json())
         .then(users => setAllUsers(users));
     }
-  }) // in this useEffect, if I pass in a second argument, it understands as value has changes.
+  }, [props.user.isAdmin]) // in this useEffect, if I pass in a second argument, it understands as value has changes.
   // ... meaning that it will only re-run if passed in variable changes.
   // so it will run again, but if I pass empty [], it will stop because it assumes nothing changed.
   // useEffect as a second argument is equal to componentDidMount

@@ -224,7 +224,7 @@ label.dropdown:after {
 /* ****************************************************** */
 /* ****************************************************** */
 .app-outter-div {
-  margin-top: 10vh;
+  margin-top: 12vh;
   position: relative;
 }
 /* Navigation menu */
@@ -256,6 +256,8 @@ label.dropdown:after {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   margin: 1% 0 0 2%;
   width: 3em;
+  position: absolute;
+  top: 5px;
 }
 /* .navbar-name {
   margin: 0;
@@ -297,7 +299,11 @@ label.dropdown:after {
 }
 #profile-update {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#profile-update a {
+  margin: 1rem;
 }
 #order-table {
   margin: 0.5em;
@@ -318,11 +324,15 @@ label.dropdown:after {
 .order.history.table {
   border-style: double;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 1%;
 }
-.table-content {
-  padding-left: 3em;
+.table-content.title {
+  border-bottom: 1.5px solid black;
+}
+.table-content.row {
+  border-left: 1.5px solid rgba(0, 0, 0, 0.2);
+  border-right: 1.5px solid rgba(0, 0, 0, 0.2);
 }
 /* ****************************************************** */
 /* customer cart */
@@ -541,6 +551,7 @@ input[type="checkbox"] {
 }
 #magnifier {
   width: 4em;
+  padding: .5rem;
 }
 .magnifier {
   text-align: center;

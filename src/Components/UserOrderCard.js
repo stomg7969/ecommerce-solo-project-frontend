@@ -7,22 +7,22 @@ const UserOrderCard = props => {
       <table id="order-table">
         <thead>
           <tr className="table-title">
-            <th className="table-content">Order#</th>
-            <th className="table-content">Status</th>
-            <th className="table-content">Date & Time</th>
-            <th className="table-content">Shipping</th>
-            <th className="table-content">Total Amount</th>
+            <th className="table-content title">Order#</th>
+            <th className="table-content title">Status</th>
+            <th className="table-content title">Date & Time</th>
+            <th className="table-content title">Shipping</th>
+            <th className="table-content title">Total Amount</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="table-content">{id}</td>
-            <td className="table-content">{status.toUpperCase()}</td>
-            <td className="table-content">
+            <td className="table-content row">{id}</td>
+            <td className="table-content row">{status.toUpperCase()}</td>
+            <td className="table-content row">
               {ordered.slice(0, -8).replace("T", ", ")}
             </td>
-            <td className="table-content">{ship.toUpperCase()}</td>
-            <td className="table-content">${total}0</td>
+            <td className="table-content row">{ship.toUpperCase()}</td>
+            <td className="table-content row">${total}0</td>
           </tr>
         </tbody>
       </table>
