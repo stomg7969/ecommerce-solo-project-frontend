@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
-  margin-left: 25%;
-  margin-right: 15%;
-  margin-top: 2%;
+  /* margin-left: 25%;
+  margin-right: 15%; */
+  /* margin-top: 2%; */
   /* padding: 0; */
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -225,27 +225,40 @@ label.dropdown:after {
 /* ****************************************************** */
 /* Navigation menu */
 .top-right {
-  border-style: double;
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 100%;
+  z-index: 1;
   text-align: center;
   background-color: #fcf7e4;
+  /* display: flex; */
   position: fixed;
   top: 0;
   left: 0;
   /* width: 10em; */
+}
+.top-right p {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase; 
+}
+.top-right > div {
+  display: inline-block;
+  vertical-align: middle;
 }
 .top-right.go-back {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   margin: 1% 0 0 2%;
   width: 3em;
 }
-.navbar-name {
+/* .navbar-name {
   margin: 25% auto;
-}
+} */
 /* **************** Hover Menu Bar **************** */
 /* https://codepen.io/Calloumi/pen/vndlH */
 #navnav {
-  margin: 1% 0 0 2%;
-  /* padding: 1.5rem; */
+  /* margin: 1% 0 0 2%; */
   font-family: Raleway;
   /* box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); */
 }
@@ -261,9 +274,10 @@ label.dropdown:after {
   border-top: 4px solid rgba(0, 0, 0, 0);
   border-bottom: 4px solid rgba(0, 0, 0, 0);
   padding: 20px 0;
-  margin: 0 20px;
+  margin: 0 15px;
 }
-.link-1:hover {
+.link-1:hover,
+.link-1:active {
   border-top: 4px solid black;
   border-bottom: 4px solid black;
   padding: 6px 0;
@@ -287,7 +301,7 @@ label.dropdown:after {
   width: 90%;
   height: 7vh;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px auto;
   background-image: url("./Assets/moonya_crown.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -307,19 +321,19 @@ label.dropdown:after {
 }
 /* ****************************************************** */
 /* customer cart */
-#cart {
-}
 #cart-image {
   margin: 1% 2% 0 0;
   background-color: #fcf7e4;
   width: 3em;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  right: 0;
+  right: 0; */
+  display: inline-block;
+  position: relative;
 }
 #cart-number {
   margin: 1% 2% 0 0;
-  position: fixed;
+  position: absolute;
   top: 17px;
   right: 20px;
 }

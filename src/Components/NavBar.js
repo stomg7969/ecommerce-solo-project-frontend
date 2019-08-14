@@ -2,6 +2,8 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import box from "../Assets/square_box.png";
+
 class NavBar extends React.Component {
   clickListener = () => {
     localStorage.removeItem("user_token");
@@ -13,10 +15,9 @@ class NavBar extends React.Component {
     const { username } = this.props.activeUser;
     return (
       <div className="top-right button nav-1" id="navnav">
-        <h4>MENU</h4>
         {localStorage.getItem("user_token") ? (
-          <h5>Hello, {this.props.activeUser ? username : null}</h5>
-        ) : null}
+          <p>{this.props.activeUser ? username : null}</p>
+        ) : <p>Hello.</p>}
         <div className="navbar-name">
           <Link to="/" className="link-1">
             <span> |HOME| </span>
@@ -28,12 +29,11 @@ class NavBar extends React.Component {
               <span> |PROFILE| </span>
             </Link>
           ) : (
-            <Link to="/user/login" className="link-1">
-              <span> |LOGIN| </span>
-            </Link>
-          )}
+              <Link to="/user/login" className="link-1">
+                <span> |LOGIN| </span>
+              </Link>
+            )}
         </div>
-
         <div className="navbar-name">
           {localStorage.getItem("user_token") ? (
             <span className="link-1" onClick={this.clickListener}>
@@ -41,6 +41,14 @@ class NavBar extends React.Component {
               |LOGOUT|{" "}
             </span>
           ) : null}
+        </div>
+        <div>
+          <Link to="/cart">
+            <img id="cart-image" src={box} alt="box noun project" />
+            <span id="cart-number">
+              {this.props.itemNum ? this.props.itemNum : 0}
+            </span>
+          </Link>
         </div>
       </div>
     );
@@ -54,6 +62,7 @@ const mapStateToProps = state => {
     state.activeUser
   );
   return {
+    itemNum: state.numOfCartItems,
     activeUser: state.activeUser
   };
 };

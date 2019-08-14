@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import box from "../Assets/square_box.png";
+// import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
 import { ADD_TO_CART, ADD_ONE } from "../Types";
 
@@ -164,12 +164,14 @@ class ProductCard extends Component {
             className="top-right go-back"
             onClick={() => this.props.history.push("/")}
           />
-          <Link to="/cart">
-            <img id="cart-image" src={box} alt="box noun project" />
-            <span id="cart-number">
-              {this.props.itemNum ? this.props.itemNum : 0}
-            </span>
-          </Link>
+          {/* <div>
+            <Link to="/cart">
+              <img id="cart-image" src={box} alt="box noun project" />
+              <span id="cart-number">
+                {this.props.itemNum ? this.props.itemNum : 0}
+              </span>
+            </Link>
+          </div> */}
           {/* each card has a link to product show page */}
           <div className="product details">
             <h2>{name}</h2>
@@ -245,7 +247,7 @@ class ProductCard extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.activeUser,
-    itemNum: state.numOfCartItems
+    // itemNum: state.numOfCartItems
   };
 };
 export default withRouter(connect(mapStateToProps)(ProductCard));

@@ -1,7 +1,7 @@
 import React from "react";
-import { Switch, Route, Link, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import box from "../Assets/square_box.png";
+// import box from "../Assets/square_box.png";
 import backImg from "../Assets/go_back.png";
 import UserLogin from "../Components/UserLogin";
 import UserSignup from "../Components/UserSignup";
@@ -16,12 +16,14 @@ const UserContainer = props => {
         className="top-right go-back"
         onClick={() => props.history.push("/")}
       />
-      <Link to="/cart">
-        <img id="cart-image" src={box} alt="box noun project" />
-        <span id="cart-number">
-          {props.itemNum ? props.itemNum : 0}
-        </span>
-      </Link>
+      {/* <div>
+        <Link to="/cart">
+          <img id="cart-image" src={box} alt="box noun project" />
+          <span id="cart-number">
+            {props.itemNum ? props.itemNum : 0}
+          </span>
+        </Link>
+      </div> */}
       <h2>{props.currentUser.username}</h2>
       <div id="user-container">
         <Switch>
@@ -36,7 +38,7 @@ const UserContainer = props => {
 
 const mapStateToProps = state => {
   return {
-    itemNum: state.numOfCartItems,
+    // itemNum: state.numOfCartItems,
     currentUser: state.activeUser
   };
 };

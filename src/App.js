@@ -6,6 +6,7 @@ import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
 import "./App.css";
 // import crown from "./Assets/moonya_crown.png";
 // import logo from "./Assets/moonya_logo.png";
+import NavBar from "./Components/NavBar";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
 import UserContainer from "./Containers/UserContainer";
@@ -53,9 +54,11 @@ class App extends Component {
 
   render() {
     return (
-      <div id="app-outter-div">
-        {/* Always present */}
-        {/* <div
+      <>
+        <NavBar />
+        <div id="app-outter-div">
+          {/* Always present */}
+          {/* <div
           id="moonya-logo"
           onMouseOver={() => this.setState(() => ({ mouseOver: true }))}
           onMouseOut={() => this.setState(() => ({ mouseOver: false }))}
@@ -66,36 +69,37 @@ class App extends Component {
               <img className="no-word-logo" src={crown} alt="moonya crown" />
             )}
         </div> */}
-        <div className="moonya-logo"></div>
-        <Switch>
-          {/* Cart will always show whether user is logged in or not, but will have restriction if not logged in. */}
-          <Route path="/cart" component={CartContainer} />
-          {/* User Container, if not logged in, log in button is present,
+          <div className="moonya-logo"></div>
+          <Switch>
+            {/* Cart will always show whether user is logged in or not, but will have restriction if not logged in. */}
+            <Route path="/cart" component={CartContainer} />
+            {/* User Container, if not logged in, log in button is present,
             if logged in, log out and profile buttons are present.
             should only exist in NavBar */}
-          <Route path="/user" component={UserContainer} />
-          <Route
-            path="/products/:id"
-            render={routerProps => {
-              if (this.props.products.length > 0) {
-                const id = parseInt(routerProps.match.params.id);
-                const product = this.props.products.find(
-                  product => product.id === id
-                );
-                console.log(
-                  "%c Before calling show page(APP.js)",
-                  "color: white; background-color: black",
-                  product
-                );
-                return <ProductShowContainer product={product} />;
-              } else {
-                return <h1>Loading</h1>;
-              }
-            }}
-          />
-          <Route path="/" component={LandingDisplay} />
-        </Switch>
-      </div>
+            <Route path="/user" component={UserContainer} />
+            <Route
+              path="/products/:id"
+              render={routerProps => {
+                if (this.props.products.length > 0) {
+                  const id = parseInt(routerProps.match.params.id);
+                  const product = this.props.products.find(
+                    product => product.id === id
+                  );
+                  console.log(
+                    "%c Before calling show page(APP.js)",
+                    "color: white; background-color: black",
+                    product
+                  );
+                  return <ProductShowContainer product={product} />;
+                } else {
+                  return <h1>Loading</h1>;
+                }
+              }}
+            />
+            <Route path="/" component={LandingDisplay} />
+          </Switch>
+        </div>
+      </>
     );
   }
 }

@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import $ from "jquery";
 import magnifier from "../Assets/noun_magnifier.png";
-import box from "../Assets/square_box.png";
+// import box from "../Assets/square_box.png";
 import { STORE_PRODUCTS } from "../Types";
-import NavBar from "./NavBar";
+// import NavBar from "./NavBar";
 import UserInputContainer from "../Containers/UserInputContainer";
 import ProductContainer from "../Containers/ProductContainer";
 import LandingFrontImg from "./LandingFrontImg";
@@ -208,16 +208,15 @@ class LandingDisplay extends Component {
   render() {
     return (
       <Fragment>
-        <NavBar />
-
-        <Link to="/cart">
-          <div>
+        {/* <NavBar /> */}
+        {/* <div>
+          <Link to="/cart">
             <img id="cart-image" src={box} alt="box noun project" />
             <span id="cart-number">
               {this.props.itemNum ? this.props.itemNum : 0}
             </span>
-          </div>
-        </Link>
+          </Link>
+        </div> */}
         <div id="landing-page">
           <LandingFrontImg />
           <div className="wrap">
@@ -271,7 +270,7 @@ class LandingDisplay extends Component {
 
 const mapStateToProps = state => {
   return {
-    itemNum: state.numOfCartItems,
+    // itemNum: state.numOfCartItems,
     products: state.products
   };
 };
