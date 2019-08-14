@@ -23,12 +23,13 @@ code {
 /* Landing page */
 #landing-page {
   width: 70%;
-  align-content: center;
   text-align: center;
   margin: auto;
 }
 .carousel {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  max-width: 50rem;
+  margin: 0 auto;
 }
 button {
   box-sizing: border-box;
