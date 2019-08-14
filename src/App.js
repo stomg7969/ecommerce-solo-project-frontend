@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import axios from 'axios'
 import { STORE_PRODUCTS, SAVE_USER, RENDER_ITEM_AMOUNT } from "./Types";
 import "./App.css";
-import crown from "./Assets/moonya crown.png";
-import logo from "./Assets/moonya logo.png";
+// import crown from "./Assets/moonya_crown.png";
+// import logo from "./Assets/moonya_logo.png";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
 import UserContainer from "./Containers/UserContainer";
@@ -55,17 +55,18 @@ class App extends Component {
     return (
       <div id="app-outter-div">
         {/* Always present */}
-        <div
+        {/* <div
           id="moonya-logo"
           onMouseOver={() => this.setState(() => ({ mouseOver: true }))}
           onMouseOut={() => this.setState(() => ({ mouseOver: false }))}
         >
           {this.state.mouseOver ? (
-            <img src={logo} alt="moonya logo" />
+            <img className="word-logo" src={logo} alt="moonya logo" />
           ) : (
-            <img src={crown} alt="moonya crown" />
-          )}
-        </div>
+              <img className="no-word-logo" src={crown} alt="moonya crown" />
+            )}
+        </div> */}
+        <div className="moonya-logo"></div>
         <Switch>
           {/* Cart will always show whether user is logged in or not, but will have restriction if not logged in. */}
           <Route path="/cart" component={CartContainer} />

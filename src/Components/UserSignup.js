@@ -5,9 +5,9 @@ import axios from 'axios';
 import { SAVE_USER } from "../Types";
 
 const UserSignup = props => {
-  
+
   const initialState = { username: "", email: "", password: "" };
-  const [{username, email, password}, setState] = useState(initialState);
+  const [{ username, email, password }, setState] = useState(initialState);
 
   // listens to changes and sets states
   const changeListener = e => {
@@ -29,31 +29,31 @@ const UserSignup = props => {
           password: password
         }
       })
-      .then(r => r.data)
-      .then(data => {
-        props.dispatch({ type: SAVE_USER, payload: data.user });
-        localStorage.setItem("user_token", data.jwt);
-        props.history.push("/");
-        window.location.reload();
-      })
+        .then(r => r.data)
+        .then(data => {
+          props.dispatch({ type: SAVE_USER, payload: data.user });
+          localStorage.setItem("user_token", data.jwt);
+          props.history.push("/");
+          window.location.reload();
+        })
         .catch(() => {
           alert("Username already exist");
           setState({ ...initialState });
           props.history.push("/user/new");
         })
-        // .then(data => {
-        //   if (data.message) {
-        //     alert(data.message);
-        //     this.setState({ username: "", password: "" });
-        //     this.props.history.push("/user/new");
-        //   } else {
-        //     // this.props.currentUser(data);
-        //     this.props.dispatch({ type: SAVE_USER, payload: data.user });
-        //     localStorage.setItem("user_token", data.jwt);
-        //     this.props.history.push("/");
-        //     window.location.reload();
-        //   }
-        // });
+      // .then(data => {
+      //   if (data.message) {
+      //     alert(data.message);
+      //     this.setState({ username: "", password: "" });
+      //     this.props.history.push("/user/new");
+      //   } else {
+      //     // this.props.currentUser(data);
+      //     this.props.dispatch({ type: SAVE_USER, payload: data.user });
+      //     localStorage.setItem("user_token", data.jwt);
+      //     this.props.history.push("/");
+      //     window.location.reload();
+      //   }
+      // });
     }
   };
 

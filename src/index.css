@@ -223,7 +223,7 @@ label.dropdown:after {
 }
 /* ****************************************************** */
 /* ****************************************************** */
-/* Navigation menue */
+/* Navigation menu */
 .top-right {
   border-style: double;
   text-align: center;
@@ -231,7 +231,7 @@ label.dropdown:after {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10em;
+  /* width: 10em; */
 }
 .top-right.go-back {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
@@ -245,9 +245,9 @@ label.dropdown:after {
 /* https://codepen.io/Calloumi/pen/vndlH */
 #navnav {
   margin: 1% 0 0 2%;
-  padding: 24px;
+  /* padding: 1.5rem; */
   font-family: Raleway;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); */
 }
 .nav-1 {
   background: #fcf7e4;
@@ -283,8 +283,18 @@ label.dropdown:after {
 #order-table {
   margin: 0.5em;
 }
-#moonya-logo {
-  text-align: center;
+.moonya-logo {
+  width: 90%;
+  height: 7vh;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-image: url("./Assets/moonya_crown.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.moonya-logo:hover {
+  background-image: url("./Assets/moonya_logo.png");
 }
 .order.history.table {
   border-style: double;
