@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <>
         <NavBar />
-        <div id="app-outter-div">
+        <div className="app-outter-div">
           {/* Always present */}
           {/* <div
           id="moonya-logo"

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import box from "../Assets/square_box.png";
+// import box from "../Assets/square_box.png";
 
 class NavBar extends React.Component {
   clickListener = () => {
@@ -42,12 +42,11 @@ class NavBar extends React.Component {
             </span>
           ) : null}
         </div>
-        <div>
+        <div id="cart-image">
           <Link to="/cart">
-            <img id="cart-image" src={box} alt="box noun project" />
-            <span id="cart-number">
+            <h3 id="cart-number">
               {this.props.itemNum ? this.props.itemNum : 0}
-            </span>
+            </h3>
           </Link>
         </div>
       </div>

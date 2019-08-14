@@ -223,29 +223,34 @@ label.dropdown:after {
 }
 /* ****************************************************** */
 /* ****************************************************** */
+.app-outter-div {
+  margin-top: 10vh;
+  position: relative;
+}
 /* Navigation menu */
 .top-right {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   width: 100%;
   z-index: 1;
   text-align: center;
   background-color: #fcf7e4;
-  /* display: flex; */
   position: fixed;
   top: 0;
   left: 0;
-  /* width: 10em; */
 }
 .top-right p {
   display: inline-block;
   font-weight: bold;
   font-size: 1rem;
   text-transform: uppercase; 
+  margin: 1.5rem 1rem 1.5rem .2rem;
 }
 .top-right > div {
   display: inline-block;
   vertical-align: middle;
+  margin: auto;
 }
 .top-right.go-back {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
@@ -253,7 +258,7 @@ label.dropdown:after {
   width: 3em;
 }
 /* .navbar-name {
-  margin: 25% auto;
+  margin: 0;
 } */
 /* **************** Hover Menu Bar **************** */
 /* https://codepen.io/Calloumi/pen/vndlH */
@@ -322,17 +327,18 @@ label.dropdown:after {
 /* ****************************************************** */
 /* customer cart */
 #cart-image {
-  margin: 1% 2% 0 0;
-  background-color: #fcf7e4;
+  margin: .2rem 1rem .4rem 2rem;
+  background-image: url('./Assets/square_box.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
   width: 3em;
-  /* position: fixed;
-  top: 0;
-  right: 0; */
-  display: inline-block;
-  position: relative;
+  height: 3em;
+  right: 0;
+  position: fixed;
 }
 #cart-number {
-  margin: 1% 2% 0 0;
+  margin: 0;
   position: absolute;
   top: 17px;
   right: 20px;
@@ -574,21 +580,13 @@ input[type="checkbox"] {
 #filter-category {
   margin: 1em 0;
 }
-#color-filter-container {
-  margin-top: 0.5em;
-  display: flex;
-}
-#gender-filter-container {
-  margin-top: 0.5em;
-  display: flex;
-}
-#material-filter-container {
-  margin-top: 0.5em;
-  display: flex;
-}
+#color-filter-container,
+#gender-filter-container,
+#material-filter-container,
 #category-filter-container {
   margin-top: 0.5em;
   display: flex;
+  flex-wrap: wrap;
 }
 .filter {
   margin-left: 0.7em;
@@ -601,6 +599,7 @@ input[type="checkbox"] {
 }
 .filter {
   background-color: #fcf7e4;
+  margin: .2em;
 }
 .filter h6 {
   margin: 0.5em;
