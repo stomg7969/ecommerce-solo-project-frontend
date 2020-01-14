@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 // import { connect } from "react-redux";
 import backImg from "../Assets/go_back.png";
 
-const HookProductShowContainerDisplay = props => {
+const ProductShowContainerDisplayHooks = props => {
   const { name, price, category, color, gender, material, imgBack, imgFront } = props.product;
   const { quantity } = props.userInput;
   return (
@@ -94,4 +94,4 @@ const HookProductShowContainerDisplay = props => {
   );
 }
 
-export default withRouter(HookProductShowContainerDisplay);
+export default withRouter(ProductShowContainerDisplayHooks);

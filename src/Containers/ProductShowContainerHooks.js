@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 // import backImg from "../Assets/go_back.png";
 import { ADD_TO_CART, ADD_ONE } from "../Types";
 
-import HookProductShowContainerDisplay from "./HookProductShowContainerDisplay";
+import ProductShowContainerDisplayHooks from "./ProductShowContainerDisplayHooks";
 
-const HookProductShowContainer = props => {
+const ProductShowContainerHooks = props => {
   const [imgClicked, setImgClicked] = useState(false);
   const [userInput, setUserInput] = useState({
     quantity: 1,
@@ -153,7 +153,7 @@ const HookProductShowContainer = props => {
     props.history.push("/user/login");
   };
 
-  return <HookProductShowContainerDisplay
+  return <ProductShowContainerDisplayHooks
     product={props.product}
     userInput={userInput}
     imgClicked={imgClicked}
@@ -164,4 +164,4 @@ const HookProductShowContainer = props => {
   />;
 }
 
-export default withRouter(HookProductShowContainer);
+export default withRouter(ProductShowContainerHooks);

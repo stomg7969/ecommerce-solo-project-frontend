@@ -10,7 +10,7 @@ import NavBar from "./Components/NavBar";
 import LandingDisplay from "./Components/LandingDisplay";
 import CartContainer from "./Containers/CartContainer";
 import UserContainer from "./Containers/UserContainer";
-import ProductShowContainer from "./Containers/HookProductShowContainer";
+import ProductShowContainer from "./Containers/ProductShowContainerHooks";
 
 class App extends Component {
   state = { mouseOver: false };
