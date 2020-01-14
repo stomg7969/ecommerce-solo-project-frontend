@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import backImg from "../Assets/go_back.png";
 import { SAVE_USER } from "../Types";
@@ -8,16 +8,45 @@ import CartProduct from "../Components/CartProduct";
 
 const HookCartContainer = props => {
   const [ cart, setCart ] = useState({});
-  const [ paid, setPaid ] = useState(false);
+  // const [ paid, setPaid ] = useState(false);
   const [ haveCartInfo, setHaveCartInfo ] = useState(false);
+  const [ compCycle, setCompCycle ] = useState(false);
   const [ shipping, setShipping ] = useState("regular");
 
   const currentUser = useSelector(state => state.currentUser);
   const products = useSelector(state => state.products);
   const userOrder = useSelector(state => state.userOrder);
   const totalAmount = useSelector(state => state.totalAmount);
+  const dispatch = useDispatch();
 
   let foundProduct;
+
+  useEffect(() => {
+    if (currentUser.orders && !haveCartInfo && !compCycle) {
+      const token = localStorage.getItem("user_token");
+      fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(r => r.json())
+        .then(data => dispatch({ type: SAVE_USER, payload: data.user }))
+        .then(() => {
+          const pendingCart = currentUser.orders.filter(
+            order => order.status === "pending"
+          );
+          setCart(pendingCart);
+          setHaveCartInfo(true);
+          setCompCycle(true);
+        });
+    } else if (currentUser.orders && !haveCartInfo && compCycle) {
+      const pendingCart = currentUser.orders.filter(
+        order => order.status === "pending"
+      );
+      setCart(pendingCart);
+    }
+  }, [currentUser.orders, haveCartInfo, compCycle, dispatch]);
 
   const changeListener = e => setShipping(e.target.value);
 
