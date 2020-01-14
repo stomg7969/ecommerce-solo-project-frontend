@@ -1,10 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
-import backImg from "../Assets/go_back.png";
+// import backImg from "../Assets/go_back.png";
 import { SAVE_USER } from "../Types";
-import CartProduct from "../Components/CartProduct";
+// import CartProduct from "../Components/CartProduct";
+import HookCartContainerDisplay from "../Components/HookCartContainerDisplay";
 
 const HookCartContainer = props => {
   const [ cart, setCart ] = useState({});
@@ -14,12 +15,8 @@ const HookCartContainer = props => {
   const [ shipping, setShipping ] = useState("regular");
 
   const currentUser = useSelector(state => state.currentUser);
-  const products = useSelector(state => state.products);
-  const userOrder = useSelector(state => state.userOrder);
   const totalAmount = useSelector(state => state.totalAmount);
   const dispatch = useDispatch();
-
-  let foundProduct;
 
   useEffect(() => {
     if (currentUser.orders && !haveCartInfo && !compCycle) {
@@ -92,80 +89,13 @@ const HookCartContainer = props => {
           .then(window.location.reload());
         });
       });
+    };
 
-    console.log(cart[0]);
-    if (cart[0]) {
-      const sortedCart = cart[0].details.sort(
-        (x, y) => x.product_id - y.product_id
-      );
-      foundProduct = sortedCart.map(detail => {
-        return (
-          <CartProduct
-            key={detail.id}
-            detail={detail}
-            products={products}
-          />
-        );
-      });
-    } else {
-      return (
-        <Fragment>
-          <img
-            src={backImg}
-            alt="go-back button"
-            className="top-right go-back"
-            onClick={() => props.history.push("/")}
-          />
-          <h1>Add items to cart</h1>
-        </Fragment>
-      );
-    }
-    return (
-      <div id="cart">
-        <img
-          src={backImg}
-          alt="go-back button"
-          className="top-right go-back"
-          onClick={() => {
-            props.history.push("/");
-            window.location.reload();
-          }}
-        />
-        {userOrder.id ? (
-          <span>{userOrder.product.name} updated</span>
-        ) : null}
-        <h2>Cart</h2>
-        <div>{foundProduct}</div>
-        <div>
-          <div>
-            <form id="submit-order-form" onSubmit={submitListener}>
-              <strong>Total: ${totalAmount}.00</strong>
-              <br />
-              <div>
-                <span>Choose Shipping: </span>
-                <label className="dropdown">
-                  <select onChange={changeListener}>
-                    <option name="regular" value="regular">
-                      Regular
-                    </option>
-                    <option name="express" value="express">
-                      Express
-                    </option>
-                    <option name="overNight" value="over night">
-                      Over Night
-                    </option>
-                  </select>
-                </label>
-              </div>
-              <div>
-                <button>Pay to order</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
-  };
+    return <HookCartContainerDisplay
+      cart={cart}
+      submitListener={submitListener}
+      changeListener={changeListener}
+     />;
 };
 
 export default withRouter(HookCartContainer);
