@@ -2,9 +2,10 @@ import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import backImg from "../Assets/go_back.png";
-import CartProduct from "../Components/CartProduct";
+// import CartProduct from "../Components/CartProduct";
+import CartProduct from "../Components/CartProductHooks";
 
-const HookCartContainerDisplay = props => {
+const CartContainerDisplayHooks = props => {
   const products = useSelector(state => state.products);
   const userOrder = useSelector(state => state.userOrder);
   const totalAmount = useSelector(state => state.totalAmount);
@@ -86,4 +87,4 @@ const HookCartContainerDisplay = props => {
   );
 };
 
-export default withRouter(HookCartContainerDisplay);
+export default withRouter(CartContainerDisplayHooks);

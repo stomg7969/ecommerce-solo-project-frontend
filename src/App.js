@@ -8,8 +8,10 @@ import "./App.css";
 // import logo from "./Assets/moonya_logo.png";
 import NavBar from "./Components/NavBar";
 import LandingDisplay from "./Components/LandingDisplay";
-import CartContainer from "./Containers/CartContainer";
+// import CartContainer from "./Containers/CartContainer";
+import CartContainer from "./Containers/CartContainerHooks";
 import UserContainer from "./Containers/UserContainer";
+// import ProductShowContainer from "./Containers/ProductShowContainer";
 import ProductShowContainer from "./Containers/ProductShowContainerHooks";
 
 class App extends Component {

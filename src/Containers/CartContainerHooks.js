@@ -5,21 +5,21 @@ import axios from 'axios';
 // import backImg from "../Assets/go_back.png";
 import { SAVE_USER } from "../Types";
 // import CartProduct from "../Components/CartProduct";
-import HookCartContainerDisplay from "../Components/HookCartContainerDisplay";
+import CartContainerDisplayHooks from "./CartContainerDisplayHooks";
 
-const HookCartContainer = props => {
-  const [ cart, setCart ] = useState({});
+const CartContainerHooks = props => {
+  const [cart, setCart] = useState({});
   // const [ paid, setPaid ] = useState(false);
-  const [ haveCartInfo, setHaveCartInfo ] = useState(false);
-  const [ compCycle, setCompCycle ] = useState(false);
-  const [ shipping, setShipping ] = useState("regular");
+  const [haveCartInfo, setHaveCartInfo] = useState(false);
+  const [compCycle, setCompCycle] = useState(false);
+  const [shipping, setShipping] = useState("regular");
 
-  const currentUser = useSelector(state => state.currentUser);
+  const currentUser = useSelector(state => state.activeUser);
   const totalAmount = useSelector(state => state.totalAmount);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentUser.orders && !haveCartInfo && !compCycle) {
+    if (currentUser.orders && !haveCartInfo) {
       const token = localStorage.getItem("user_token");
       fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
         method: "GET",
@@ -35,9 +35,9 @@ const HookCartContainer = props => {
           );
           setCart(pendingCart);
           setHaveCartInfo(true);
-          setCompCycle(true);
+          // setCompCycle(true);
         });
-    } else if (currentUser.orders && !haveCartInfo && compCycle) {
+    } else if (currentUser.orders && !haveCartInfo) {
       const pendingCart = currentUser.orders.filter(
         order => order.status === "pending"
       );
@@ -86,16 +86,16 @@ const HookCartContainer = props => {
           axios.patch(`${process.env.REACT_APP_HOST}/updateinventory/${prodDetail.product.id}`, {
             inventory: prodDetail.product.inventory - prodDetail.quantity
           })
-          .then(window.location.reload());
+            .then(window.location.reload());
         });
       });
-    };
+  };
 
-    return <HookCartContainerDisplay
-      cart={cart}
-      submitListener={submitListener}
-      changeListener={changeListener}
-     />;
+  return <CartContainerDisplayHooks
+    cart={cart}
+    submitListener={submitListener}
+    changeListener={changeListener}
+  />;
 };
 
-export default withRouter(HookCartContainer);
+export default withRouter(CartContainerHooks);
