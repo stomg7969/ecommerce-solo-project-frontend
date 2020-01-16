@@ -7,7 +7,7 @@ import picture3 from "../Assets/moonya landing picture 3.jpg";
 import picture4 from "../Assets/moonya landing picture 4.jpg";
 // import logo from "../Assets/moonya crown.png";
 
-const LandingFrontImg = props => {
+const LandingFrontImg = () => {
   return (
     <Fragment>
       <CarouselProvider
