@@ -10,6 +10,8 @@ import UserInputContainer from "../Containers/UserInputContainer";
 import ProductContainer from "../Containers/ProductContainer";
 import LandingFrontImg from "./LandingFrontImg";
 
+// const { Provider, Consumer } = React.createContext(); <== 'Prop Drilling'
+
 class LandingDisplay extends Component {
   // this component will have states of: [price(asc), price(dsc), color, gender, material-1, ..., material-5 , category]
   // when each tag is clicked, boolean to true, then appear on the new <div>.
