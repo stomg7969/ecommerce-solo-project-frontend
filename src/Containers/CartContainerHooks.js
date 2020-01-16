@@ -11,7 +11,6 @@ const CartContainerHooks = props => {
   const [cart, setCart] = useState({});
   // const [ paid, setPaid ] = useState(false);
   const [haveCartInfo, setHaveCartInfo] = useState(false);
-  const [compCycle, setCompCycle] = useState(false);
   const [shipping, setShipping] = useState("regular");
 
   const currentUser = useSelector(state => state.activeUser);
@@ -19,7 +18,7 @@ const CartContainerHooks = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentUser.orders && !haveCartInfo && !compCycle) {
+    if (currentUser.orders && !haveCartInfo) {
       const token = localStorage.getItem("user_token");
       fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
         method: "GET",
@@ -35,16 +34,15 @@ const CartContainerHooks = props => {
           );
           setCart(pendingCart);
           setHaveCartInfo(true);
-          setCompCycle(true);
         });
-    } else if (currentUser.orders && !haveCartInfo && compCycle) {
+    } else if (currentUser.orders && haveCartInfo) {
       const pendingCart = currentUser.orders.filter(
         order => order.status === "pending"
       );
       setCart(pendingCart);
     }
-  }, [currentUser.orders, haveCartInfo, compCycle, dispatch]);
-
+  }, [currentUser.orders, haveCartInfo, dispatch]);
+  // NEED TO TEST THIS useEffect!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const changeListener = e => setShipping(e.target.value);
 
   const submitListener = e => {
