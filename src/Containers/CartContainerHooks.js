@@ -19,7 +19,7 @@ const CartContainerHooks = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentUser.orders && !haveCartInfo) {
+    if (currentUser.orders && !haveCartInfo && !compCycle) {
       const token = localStorage.getItem("user_token");
       fetch(`${process.env.REACT_APP_HOST}/api/v1/profile`, {
         method: "GET",
@@ -35,9 +35,9 @@ const CartContainerHooks = props => {
           );
           setCart(pendingCart);
           setHaveCartInfo(true);
-          // setCompCycle(true);
+          setCompCycle(true);
         });
-    } else if (currentUser.orders && !haveCartInfo) {
+    } else if (currentUser.orders && !haveCartInfo && compCycle) {
       const pendingCart = currentUser.orders.filter(
         order => order.status === "pending"
       );
