@@ -8,7 +8,7 @@ class CartProduct extends Component {
   state = {
     eachProduct: {}
   };
-  // Using redux, updates total amount in the cart. Calulates quantity too.
+  // Using redux, updates total amount in the cart. Calculates quantity too.
   componentDidMount() {
     const eachProduct = this.props.products.find(
       product => product.id === this.props.detail.product_id
