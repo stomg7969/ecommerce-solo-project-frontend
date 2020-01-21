@@ -86,7 +86,7 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // At click, it will remove searchterm from chosen tag list.
+  // At click, it will remove searchTerm from chosen tag list.
   cancelSearchTag = () => {
     this.setState({
       passingTags: {
@@ -95,7 +95,7 @@ class LandingDisplay extends Component {
       }
     });
   };
-  // Tags coming from Sort component, then call sortPRoduct function
+  // Tags coming from Sort component, then call sortProduct function
   sortClickListener = (pick, unpick) => {
     this.setState(
       prevState => ({
@@ -111,7 +111,7 @@ class LandingDisplay extends Component {
     );
   };
   // Reason of moving methods and state from UserInputContainer to this component is because when clicking magnifier,
-  // ... the state is reset to default that can't happen.
+  // ... the state is reset to default, which can't happen.
   // **************** UNIVERSAL Filter **************** (Accepts color, gender, material, and category)
   allFilterClickListener = (e, filterProp) => {
     console.log("FILTER clicked", e.target.dataset.name);
@@ -126,8 +126,8 @@ class LandingDisplay extends Component {
       }
     }));
   };
-  // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
   // **************** PRICE Sort & Dispatch ****************
+  // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
   sortProducts = sortArgument => {
     if (sortArgument === "lowHigh" && this.state.passingTags.price.lowHigh) {
       const sortedProducts = this.props.products.sort(
