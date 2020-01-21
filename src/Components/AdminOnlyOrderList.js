@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import AdminOnlyOrderCard from "./AdminOnlyOrderCard";
+import AdminOnlyOrderCard from "./AdminOnlyOrderCardHooks";
 import { ADMIN_ORDER_QUANTITY } from "../Types";
 
 const AdminOnlyOrderList = props => {
