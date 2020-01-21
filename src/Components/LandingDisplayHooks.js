@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { useState } from "react";
 // import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import $ from "jquery";
 import magnifier from "../Assets/noun_magnifier.png";
 // import box from "../Assets/square_box.png";
@@ -10,156 +10,120 @@ import UserInputContainer from "../Containers/UserInputContainer";
 import ProductContainer from "../Containers/ProductContainer";
 import LandingFrontImg from "./LandingFrontImg";
 
-class LandingDisplay extends Component {
-  // this component will have states of: [price(asc), price(dsc), color, gender, material-1, ..., material-5 , category]
-  // when each tag is clicked, boolean to true, then appear on the new <div>.
-  state = {
-    userInputContainerClicked: false,
-    searchTerm: "",
-    passingTags: {
-      search: {
-        inputTerm: ""
-      },
-      price: {
-        lowHigh: false,
-        highLow: false
-      },
-      color: {
-        white: false,
-        black: false,
-        brown: false,
-        navy: false,
-        blue: false,
-        yellow: false,
-        pink: false,
-        purple: false,
-        beige: false,
-        red: false,
-        green: false
-      },
-      gender: {
-        girl: false,
-        boy: false
-      },
-      material: {
-        modal: false,
-        cotton: false,
-        spandex: false,
-        tencel: false,
-        rayon: false
-      },
-      category: {
-        innerwear: false,
-        dress: false,
-        robe: false,
-        pajamas: false,
-        sweater: false,
-        pants: false
-      }
+const LandingDisplayHooks = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [passingTags, setPassingTags] = useState({
+    search: {
+      inputTerm: ""
+    },
+    price: {
+      lowHigh: false,
+      highLow: false
+    },
+    color: {
+      white: false,
+      black: false,
+      brown: false,
+      navy: false,
+      blue: false,
+      yellow: false,
+      pink: false,
+      purple: false,
+      beige: false,
+      red: false,
+      green: false
+    },
+    gender: {
+      girl: false,
+      boy: false
+    },
+    material: {
+      modal: false,
+      cotton: false,
+      spandex: false,
+      tencel: false,
+      rayon: false
+    },
+    category: {
+      innerwear: false,
+      dress: false,
+      robe: false,
+      pajamas: false,
+      sweater: false,
+      pants: false
     }
-  };
+  });
+  const products = useSelector(state => state.products);
+  const dispatch = useDispatch();
+
   // toggles User search/filter/sort component when clicked
-  clickListener = () => {
-    // this.setState(
-    //   prevState => ({
-    //     userInputContainerClicked: !prevState.userInputContainerClicked
-    //   }),
-    //   () =>
-    //     this.state.userInputContainerClicked
-    //       ? window.scroll(0, 590)
-    //       : window.scroll(0, 0)
-    // );
-    $("#userInputjQuery").slideToggle();
-  };
+  const clickListener = () => $("#userInputjQuery").slideToggle();
   // receive search term by users and save it to state
-  searchListener = e => {
-    this.setState({ searchTerm: e.target.value });
-  };
+  const searchListener = e => setSearchTerm(e.target.value);
   // Search term, when submitted, sets the state in passingTags to pass down to child component.
-  // Reason is to begin searching for product only onSubmit, NOT onChange.
-  searchSubmitListener = e => {
+  const searchSubmitListener = e => {
     e.preventDefault();
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        search: { inputTerm: this.state.searchTerm }
-      }
+    setPassingTags({
+      ...passingTags,
+      search: { inputTerm: searchTerm }
     });
   };
-  // At click, it will remove searchterm from chosen tag list.
-  cancelSearchTag = () => {
-    this.setState({
-      passingTags: {
-        ...this.state.passingTags,
-        search: { inputTerm: "" }
-      }
+  // At click, it will remove searchTerm from chosen tag list.
+  const cancelSearchTag = () => {
+    setPassingTags({
+      ...passingTags,
+      search: { inputTerm: "" }
     });
   };
-  // Tags coming from Sort component, then call sortPRoduct function
-  sortClickListener = (pick, unpick) => {
-    this.setState(
-      prevState => ({
-        passingTags: {
-          ...this.state.passingTags,
-          price: {
-            [pick]: !prevState.passingTags.price[pick],
-            [unpick]: false
-          }
-        }
-      }),
-      () => this.sortProducts(pick)
-    );
+  // Tags coming from Sort component, then call sortProduct function
+  const sortClickListener = (pick, unpick) => {
+    setPassingTags({
+      ...passingTags,
+      price: {
+        [pick]: !passingTags.price[pick],
+        [unpick]: false
+      }
+    });
+    // Is React Hook state manager Asynchronous? NEED TO TEST.
+    // ********************************************************* 1/21/2020
+    console.log("calling sortProducts");
+    console.log(pick, passingTags.price[pick]);
+    sortProducts(pick);
   };
-  // Reason of moving methods and state from UserInputContainer to this component is because when clicking magnifier,
-  // ... the state is reset to default that can't happen.
-  // **************** UNIVERSAL Filter **************** (Accepts color, gender, material, and category)
-  allFilterClickListener = (e, filterProp) => {
+   // **************** UNIVERSAL Filter **************** (Accepts color, gender, material, and category)
+   const allFilterClickListener = (e, filterProp) => {
     console.log("FILTER clicked", e.target.dataset.name);
     const name = e.target.dataset.name;
-    this.setState(prevState => ({
-      passingTags: {
-        ...prevState.passingTags,
-        [filterProp]: {
-          ...prevState.passingTags[filterProp],
-          [name]: !prevState.passingTags[filterProp][name]
-        }
+    setPassingTags({
+      ...passingTags,
+      [filterProp]: {
+        ...passingTags[filterProp],
+        [name]: !passingTags[filterProp][name]
       }
-    }));
+    });
   };
-  // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
   // **************** PRICE Sort & Dispatch ****************
-  sortProducts = sortArgument => {
-    if (sortArgument === "lowHigh" && this.state.passingTags.price.lowHigh) {
-      const sortedProducts = this.props.products.sort(
-        (x, y) => x.price - y.price
-      );
-      this.props.dispatch({
-        type: STORE_PRODUCTS,
-        payload: [...sortedProducts]
-      });
-    } else if (
-      sortArgument === "highLow" &&
-      this.state.passingTags.price.highLow
-    ) {
-      const sortedProducts = this.props.products.sort(
-        (x, y) => y.price - x.price
-      );
-      this.props.dispatch({
-        type: STORE_PRODUCTS,
-        payload: [...sortedProducts]
-      });
+  // BELOW: FINAL SEARCH FILTER SORT FUNCTIONS
+  const sortProducts = sortArgument => {
+    if (sortArgument === "lowHigh" && passingTags.price.lowHigh) {
+      const sortedProducts = products.sort((x, y) => x.price - y.price);
+      dispatch({ type: STORE_PRODUCTS, payload: [...sortedProducts] });
+
+    } else if (sortArgument === "highLow" && passingTags.price.highLow) {
+      const sortedProducts = products.sort((x, y) => y.price - x.price);
+      dispatch({ type: STORE_PRODUCTS, payload: [...sortedProducts] });
     }
   };
   // **************** Collect all keys and Filter ****************
   // This function collects ALL keys that have true as a value, then create a new obj to compare to filter.
-  filteredCollected = () => {
+  const filteredCollected = () => {
     const collectedTrueKeys = {
       color: [],
       gender: [],
       material: [],
       category: []
     };
-    const { color, gender, material, category } = this.state.passingTags;
+    const { color, gender, material, category } = passingTags;
     for (let colorKey in color) {
       if (color[colorKey]) collectedTrueKeys.color.push(colorKey);
     }
@@ -175,104 +139,68 @@ class LandingDisplay extends Component {
     return collectedTrueKeys;
   };
   // Resource: https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
-  multiPropsFilter = (products, filters) => {
+  const multiPropsFilter = (products, filters) => {
     const filterKeys = Object.keys(filters);
     return products.filter(product => {
       return filterKeys.every(key => {
         if (!filters[key].length) return true;
-        // In addition to the resource, I added below five lines because product[key] is an array for material attribute.
+
         if (Array.isArray(product[key])) {
-          // for (let i = 0; i < product[key].length; i++) {
-          //   return filters[key].includes(product[key][i].toLowerCase());
-          // }
           return product[key].some(keyEle => filters[key].includes(keyEle));
         }
         return filters[key].includes(product[key]);
       });
     });
   };
-
   // **************** SEARCH Filter & Dispatch ****************
-  searchProducts = () => {
-    const filteredProducts = this.multiPropsFilter(
-      this.props.products,
-      this.filteredCollected()
-    );
+  const searchProducts = () => {
+    const filteredProducts = multiPropsFilter(products, filteredCollected());
     return filteredProducts.filter(product => {
       return product.name
         .toLowerCase()
-        .includes(this.state.passingTags.search.inputTerm);
+        .includes(passingTags.search.inputTerm);
     });
   };
 
-  render() {
-    return (
-      <Fragment>
-        {/* <NavBar /> */}
-        {/* <div>
-          <Link to="/cart">
-            <img id="cart-image" src={box} alt="box noun project" />
-            <span id="cart-number">
-              {this.props.itemNum ? this.props.itemNum : 0}
-            </span>
-          </Link>
-        </div> */}
-        <div id="landing-page">
-          <LandingFrontImg />
-          <div className="wrap">
-            <img
-              src="http://image.flaticon.com/icons/svg/3/3907.svg"
-              alt="user navigation animation"
-              id="arrow"
-              className="animated bounce"
-            />
-          </div>
-        </div>
-
-        <div className="magnifier">
+  return (
+    <>
+      <div id="landing-page">
+        <LandingFrontImg />
+        <div className="wrap">
           <img
-            id="magnifier"
-            src={magnifier}
-            alt="magnifier noun project"
-            onClick={this.clickListener}
+            src="http://image.flaticon.com/icons/svg/3/3907.svg"
+            alt="user navigation animation"
+            id="arrow"
+            className="animated bounce"
           />
         </div>
-        {/* this.state.userInputContainerClicked ? (
-          <UserInputContainer
-            tags={this.state.passingTags}
-            cancelSearchTag={this.cancelSearchTag}
-            sortClickListener={this.sortClickListener}
-            allFilterClickListener={this.allFilterClickListener}
-            searchTerm={this.state.searchTerm}
-            searchListener={this.searchListener}
-            searchSubmitListener={this.searchSubmitListener}
-          />
-        ) : null */}
-        <div id="userInputjQuery">
-          {/* purpose of this div is for CSS */}
-          <UserInputContainer
-            tags={this.state.passingTags}
-            cancelSearchTag={this.cancelSearchTag}
-            sortClickListener={this.sortClickListener}
-            allFilterClickListener={this.allFilterClickListener}
-            searchTerm={this.state.searchTerm}
-            searchListener={this.searchListener}
-            searchSubmitListener={this.searchSubmitListener}
-          />
-        </div>
-        {this.props.products.length ? (
-          <ProductContainer products={this.searchProducts()} />
-        ) : null}
-      </Fragment>
-    );
-  }
-}
+      </div>
 
-const mapStateToProps = state => {
-  return {
-    // itemNum: state.numOfCartItems,
-    products: state.products
-  };
+      <div className="magnifier">
+        <img
+          id="magnifier"
+          src={magnifier}
+          alt="magnifier noun project"
+          onClick={clickListener}
+        />
+      </div>
+      <div id="userInputjQuery">
+        {/* purpose of this div is for CSS */}
+        <UserInputContainer
+          tags={passingTags}
+          cancelSearchTag={cancelSearchTag}
+          sortClickListener={sortClickListener}
+          allFilterClickListener={allFilterClickListener}
+          searchTerm={searchTerm}
+          searchListener={searchListener}
+          searchSubmitListener={searchSubmitListener}
+        />
+      </div>
+      {products.length ? (
+        <ProductContainer products={searchProducts()} />
+      ) : null}
+    </>
+  );
 };
 
-export default connect(mapStateToProps)(LandingDisplay);
+export default LandingDisplayHooks;
