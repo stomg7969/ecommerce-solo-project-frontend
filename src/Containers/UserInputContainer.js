@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import Search from "../Components/Search";
 import Sort from "../Components/Sort";
 import Filter from "../Components/Filter";
@@ -16,7 +16,6 @@ const UserInputContainer = props => {
           allFilterClickListener={props.allFilterClickListener}
         />
       </div>
-
       <div className="search-component">
         <Search
           searchTerm={props.searchTerm}
@@ -30,4 +29,5 @@ const UserInputContainer = props => {
   );
 }
 
-export default connect()(UserInputContainer);
+// export default connect()(UserInputContainer);
+export default UserInputContainer;
