@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import $ from "jquery";
@@ -56,6 +56,11 @@ const LandingDisplayHooks = () => {
   const products = useSelector(state => state.products);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (passingTags.price.lowHigh) sortProducts("lowHigh");
+    if (passingTags.price.highLow) sortProducts("highLow");
+  }, [passingTags.price]);
+
   // toggles User search/filter/sort component when clicked
   const clickListener = () => $("#userInputjQuery").slideToggle();
   // receive search term by users and save it to state
@@ -77,21 +82,21 @@ const LandingDisplayHooks = () => {
   };
   // Tags coming from Sort component, then call sortProduct function
   const sortClickListener = (pick, unpick) => {
-    setPassingTags({
-      ...passingTags,
-      price: {
-        [pick]: !passingTags.price[pick],
-        [unpick]: false
-      }
-    });
-    // Is React Hook state manager Asynchronous? NEED TO TEST.
-    // ********************************************************* 1/21/2020
-    console.log("calling sortProducts");
-    console.log(pick, passingTags.price[pick]);
-    sortProducts(pick);
+    setPassingTags(
+      prevState => ({
+        ...passingTags,
+        price: {
+          [pick]: !prevState.price[pick],
+          [unpick]: false
+        }
+      })
+    );
+    // In class component, I trigger sortProduct(pick) as a second argument of setState.
+    // For this hooks, I can use useEffect to update price sorting.
+    // sortProducts(pick);
   };
-   // **************** UNIVERSAL Filter **************** (Accepts color, gender, material, and category)
-   const allFilterClickListener = (e, filterProp) => {
+  // **************** UNIVERSAL Filter **************** (Accepts color, gender, material, and category)
+  const allFilterClickListener = (e, filterProp) => {
     console.log("FILTER clicked", e.target.dataset.name);
     const name = e.target.dataset.name;
     setPassingTags({

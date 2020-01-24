@@ -7,7 +7,7 @@ import "./App.css";
 // import crown from "./Assets/moonya_crown.png";
 // import logo from "./Assets/moonya_logo.png";
 import NavBar from "./Components/NavBar";
-import LandingDisplay from "./Components/LandingDisplay";
+import LandingDisplay from "./Components/LandingDisplayHooks";
 // import CartContainer from "./Containers/CartContainer";
 import CartContainer from "./Containers/CartContainerHooks";
 import UserContainer from "./Containers/UserContainer";
